@@ -1,8 +1,11 @@
+import DashboardLayout from "./layouts/DashboardLayout";
+
 function App() {
   return (
-    <div>
-      <h1>Expense Tracker</h1>
-    </div>
+    <DashboardLayout>
+      <h2>Dashboard</h2>
+      <p>Welcome to Expense Tracker.</p>
+    </DashboardLayout>
   );
 }
 
