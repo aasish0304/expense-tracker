@@ -1,0 +1,5 @@
+name: Local Development
+values:
+  - key: base Url
+    value: ''
+color: 0
