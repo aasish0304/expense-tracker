@@ -20,12 +20,7 @@ function ResetPassword() {
     );
 
     const data = await response.json();
-
     alert(data.message);
-
-    if (response.ok) {
-      window.location.href = "/";
-    }
   };
 
   return (
@@ -39,18 +34,12 @@ function ResetPassword() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <br />
-      <br />
-
       <input
         type="password"
         placeholder="Confirm Password"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
-
-      <br />
-      <br />
 
       <button onClick={handleResetPassword}>
         Reset Password

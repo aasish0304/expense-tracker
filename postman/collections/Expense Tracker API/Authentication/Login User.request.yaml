@@ -1,4 +1,14 @@
 $kind: http-request
-url: ""
-method: GET
+name: Login User
+url: http://127.0.0.1:8000/api/auth/login/
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"username\": \"aasish\",\r
+
+    \    \"password\": \"Leader@123\"\r
+
+    }"
 order: 412242252942288

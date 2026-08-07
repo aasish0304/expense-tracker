@@ -63,3 +63,41 @@ class ProfileView(APIView):
             },
             status=status.HTTP_200_OK,
         )
+
+
+class ForgotPasswordView(APIView):
+
+    def post(self, request):
+
+        email = request.data.get("email")
+
+        return Response(
+            {
+                "message": f"Password reset link sent to {email}"
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
+class ResetPasswordView(APIView):
+
+    def post(self, request):
+
+        password = request.data.get("password")
+        confirm_password = request.data.get("confirm_password")
+
+        if password != confirm_password:
+
+            return Response(
+                {
+                    "message": "Passwords do not match"
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        return Response(
+            {
+                "message": "Password reset successful"
+            },
+            status=status.HTTP_200_OK,
+        )
