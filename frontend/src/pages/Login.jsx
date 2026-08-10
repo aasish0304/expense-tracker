@@ -6,7 +6,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -27,7 +27,7 @@ const Login = () => {
 
       navigate("/dashboard");
     } catch (error) {
-      alert("Invalid Username or Password");
+      alert("Invalid Email or Password");
     }
   };
 
@@ -37,10 +37,10 @@ const Login = () => {
 
       <form onSubmit={handleSubmit}>
         <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
           onChange={handleChange}
         />
 
