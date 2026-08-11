@@ -115,7 +115,7 @@
 
   font-family: "Fredoka", sans-serif;
 
-  font-size: 32px;
+  font-size: 35px;
   font-weight: 600;
 
   letter-spacing: -0.8px;
@@ -139,8 +139,8 @@
 
   font-family: "Fredoka", sans-serif;
 
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 405;
 
   letter-spacing: 0;
 }
@@ -479,7 +479,7 @@ input[type="password"]::-ms-clear {
 
   font-family: "Fredoka", sans-serif;
 
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
 
   cursor: pointer;
@@ -766,4 +766,102 @@ input[type="password"]::-ms-clear {
   .password-rules {
     grid-template-columns: 1fr;
   }
+}
+/* ========================================
+   AUTH ERROR
+======================================== */
+
+.auth-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: -4px;
+
+  padding: 11px 13px;
+
+  border-radius: 10px;
+
+  background: #fff0f0;
+
+  color: #d64545;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  line-height: 1.4;
+}
+
+.error-signup-link {
+  color: #6241ff;
+
+  font-family: "Nunito", sans-serif;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+}
+
+.error-signup-link:hover {
+  text-decoration: underline;
+}
+
+
+/* ========================================
+   AUTH SUCCESS
+======================================== */
+
+.auth-success {
+  margin-top: -4px;
+
+  padding: 11px 13px;
+
+  border-radius: 10px;
+
+  background: #edf9f2;
+
+  color: #19945b;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  line-height: 1.4;
+}
+
+
+/* ========================================
+   BACK BUTTON
+======================================== */
+
+.back-button {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 24px;
+
+  border-radius: 10px;
+
+  color: #111111;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-button:hover {
+  background: #f2efff;
+
+  transform: translateX(-2px);
 }

@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { UserRound, LockKeyhole, Eye, EyeOff } from "lucide-react";
+import {
+  UserRound,
+  LockKeyhole,
+  Eye,
+  EyeOff,
+} from "lucide-react";
+
 import { loginUser } from "../services/authService";
 import "../styles/auth.css";
 
@@ -14,35 +20,66 @@ const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+
+    setErrorMessage("");
+    setSuccessMessage("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setErrorMessage("");
+    setSuccessMessage("");
+
     try {
       const response = await loginUser(formData);
 
-      alert(response.data.message);
+      setSuccessMessage(
+        "Login successful!"
+      );
 
-      navigate("/dashboard");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1200);
+
     } catch (error) {
-      alert("Invalid Email or Password");
+      console.error("Login Error:", error.response?.data);
+
+      if (error.response?.status === 404) {
+        setErrorMessage(
+          "Email not found. Please sign up for a Waku account."
+        );
+      } else if (error.response?.status === 401) {
+        setErrorMessage(
+          "Incorrect password. Please try again."
+        );
+      } else {
+        setErrorMessage(
+          "Something went wrong. Please try again."
+        );
+      }
     }
   };
 
   return (
     <div className="auth-page">
+
       <div className="auth-container">
 
         {/* LEFT - WAKU BRANDING */}
+
         <div className="auth-brand">
 
           <div>
+
             <div className="waku-logo">
               waku<span>.</span>
             </div>
@@ -50,9 +87,11 @@ const Login = () => {
             <div className="brand-tagline">
               Every Rupee Has a Story.
             </div>
+
           </div>
 
           <div className="brand-content">
+
             <h1>
               Your money.
               <br />
@@ -63,6 +102,7 @@ const Login = () => {
               Understand where your money goes,
               stay in control, and make every rupee count.
             </p>
+
           </div>
 
           <div className="brand-footer">
@@ -71,16 +111,21 @@ const Login = () => {
 
         </div>
 
+
         {/* RIGHT - LOGIN */}
+
         <div className="auth-content">
 
           <div className="auth-card">
 
-            <h2>Welcome back 👋</h2>
+            <h2>
+              Welcome back 👋
+            </h2>
 
             <p className="auth-subtitle">
               Sign in to continue your Waku journey.
             </p>
+
 
             <form
               className="auth-form"
@@ -88,9 +133,12 @@ const Login = () => {
             >
 
               {/* EMAIL */}
+
               <div className="input-group">
 
-                <label>Email</label>
+                <label>
+                  Email
+                </label>
 
                 <div className="input-icon-wrapper">
 
@@ -114,10 +162,14 @@ const Login = () => {
 
               </div>
 
+
               {/* PASSWORD */}
+
               <div className="input-group">
 
-                <label>Password</label>
+                <label>
+                  Password
+                </label>
 
                 <div className="input-icon-wrapper">
 
@@ -129,7 +181,11 @@ const Login = () => {
 
                   <input
                     className="auth-input with-icon password-input"
-                    type={showPassword ? "text" : "password"}
+                    type={
+                      showPassword
+                        ? "text"
+                        : "password"
+                    }
                     name="password"
                     placeholder="Enter your password"
                     value={formData.password}
@@ -150,9 +206,15 @@ const Login = () => {
                     }
                   >
                     {showPassword ? (
-                      <EyeOff size={18} strokeWidth={1.8} />
+                      <EyeOff
+                        size={18}
+                        strokeWidth={1.8}
+                      />
                     ) : (
-                      <Eye size={18} strokeWidth={1.8} />
+                      <Eye
+                        size={18}
+                        strokeWidth={1.8}
+                      />
                     )}
                   </button>
 
@@ -160,7 +222,46 @@ const Login = () => {
 
               </div>
 
+
+              {/* ERROR */}
+
+              {errorMessage && (
+
+                <div className="auth-error">
+
+                  <span>
+                    {errorMessage}
+                  </span>
+
+                  {errorMessage.includes("sign up") && (
+
+                    <Link
+                      to="/register"
+                      className="error-signup-link"
+                    >
+                      Sign up
+                    </Link>
+
+                  )}
+
+                </div>
+
+              )}
+
+
+              {/* SUCCESS */}
+
+              {successMessage && (
+
+                <div className="auth-success">
+                  {successMessage}
+                </div>
+
+              )}
+
+
               {/* FORGOT PASSWORD */}
+
               <div className="forgot-link">
 
                 <Link
@@ -172,17 +273,22 @@ const Login = () => {
 
               </div>
 
-              {/* LOGIN BUTTON */}
+
+              {/* LOGIN */}
+
               <button
                 className="auth-button primary"
                 type="submit"
+                disabled={successMessage !== ""}
               >
                 Sign in →
               </button>
 
             </form>
 
+
             {/* REGISTER */}
+
             <div className="auth-footer">
 
               Don't have an account?{" "}
@@ -201,6 +307,7 @@ const Login = () => {
         </div>
 
       </div>
+
     </div>
   );
 };

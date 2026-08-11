@@ -1,5 +1,13 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import {
+  LockKeyhole,
+  Eye,
+  EyeOff,
+  ArrowLeft,
+} from "lucide-react";
+
+import "../styles/auth.css";
 
 function ResetPassword() {
   const [searchParams] = useSearchParams();
@@ -7,19 +15,15 @@ function ResetPassword() {
   const uid = searchParams.get("uid");
   const token = searchParams.get("token");
 
-  const [formData, setFormData] = useState({
-    password: "",
-    confirmPassword: "",
-  });
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const password = formData.password;
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const hasLength = password.length >= 8;
   const hasUpper = /[A-Z]/.test(password);
@@ -36,7 +40,6 @@ function ResetPassword() {
 
   const getPasswordStrength = () => {
     switch (score) {
-      case 0:
       case 1:
         return "Very Weak";
       case 2:
@@ -59,88 +62,392 @@ function ResetPassword() {
     hasNumber &&
     hasSpecial;
 
-  const handleResetPassword = async () => {
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+
+    setErrorMessage("");
+    setSuccessMessage("");
+
     if (!isPasswordValid) {
-      alert("Password does not meet all requirements.");
+      setErrorMessage(
+        "Password must contain 8+ characters, uppercase, lowercase, a number, and a symbol."
+      );
       return;
     }
 
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
       return;
     }
 
-    const response = await fetch(
-      "http://127.0.0.1:8000/api/auth/reset-password/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          uid,
-          token,
-          password: formData.password,
-          confirm_password: formData.confirmPassword,
-        }),
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/auth/reset-password/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            uid,
+            token,
+            password,
+            confirm_password: confirmPassword,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setErrorMessage(
+          data.message || "Unable to update password."
+        );
+        return;
       }
-    );
 
-    const data = await response.json();
+      // Show success message
+      setSuccessMessage(
+        "Password updated successfully! Redirecting to login..."
+      );
 
-    alert(data.message);
+      // Redirect to login after 1.5 seconds
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 1500);
 
-    if (response.ok) {
-      window.location.href = "/";
+    } catch (error) {
+      console.error("Reset Password Error:", error);
+
+      setErrorMessage(
+        "Something went wrong. Please try again."
+      );
     }
   };
 
   return (
-    <div>
-      <h2>Reset Password</h2>
+    <div className="auth-page">
 
-      <input
-        type="password"
-        name="password"
-        placeholder="New Password"
-        value={formData.password}
-        onChange={handleChange}
-      />
+      <div className="auth-container">
 
-      <p>
-        <strong>Password Strength:</strong> {getPasswordStrength()}
-      </p>
+        {/* LEFT - WAKU BRANDING */}
 
-      <div style={{ textAlign: "left", display: "inline-block" }}>
-        <p>{hasLength ? "✅" : "❌"} Minimum 8 characters</p>
-        <p>{hasUpper ? "✅" : "❌"} One uppercase letter</p>
-        <p>{hasLower ? "✅" : "❌"} One lowercase letter</p>
-        <p>{hasNumber ? "✅" : "❌"} One number</p>
-        <p>{hasSpecial ? "✅" : "❌"} One special character</p>
+        <div className="auth-brand">
+
+          <div>
+
+            <div className="waku-logo">
+              waku<span>.</span>
+            </div>
+
+            <div className="brand-tagline">
+              Every Rupee Has a Story.
+            </div>
+
+          </div>
+
+          <div className="brand-content">
+
+            <h1>
+              Keep your
+              <br />
+              <span>money safe.</span>
+            </h1>
+
+            <p>
+              Create a strong new password and
+              get back to managing your money
+              with confidence.
+            </p>
+
+          </div>
+
+          <div className="brand-footer">
+            © 2026 Waku. Your money, your story.
+          </div>
+
+        </div>
+
+
+        {/* RIGHT - RESET PASSWORD */}
+
+        <div className="auth-content">
+
+          <div className="auth-card">
+
+            {/* BACK BUTTON */}
+
+            <button
+              type="button"
+              className="back-button"
+              onClick={() => {
+                window.location.href = "/";
+              }}
+              aria-label="Back to login"
+            >
+              <ArrowLeft
+                size={20}
+                strokeWidth={2}
+              />
+            </button>
+
+
+            <h2>
+              Create a new password
+            </h2>
+
+            <p className="auth-subtitle">
+              Choose a strong password to keep your
+              Waku account secure.
+            </p>
+
+
+            <form
+              className="auth-form"
+              onSubmit={handleResetPassword}
+            >
+
+              {/* NEW PASSWORD */}
+
+              <div className="input-group">
+
+                <label>
+                  New Password
+                </label>
+
+                <div className="input-icon-wrapper">
+
+                  <LockKeyhole
+                    className="input-icon"
+                    size={18}
+                    strokeWidth={1.8}
+                  />
+
+                  <input
+                    className="auth-input with-icon password-input"
+                    type={
+                      showPassword
+                        ? "text"
+                        : "password"
+                    }
+                    placeholder="Enter your new password"
+                    value={password}
+                    onChange={(e) =>
+                      setPassword(e.target.value)
+                    }
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    className="password-toggle"
+                    onClick={() =>
+                      setShowPassword(!showPassword)
+                    }
+                  >
+                    {showPassword ? (
+                      <EyeOff
+                        size={18}
+                        strokeWidth={1.8}
+                      />
+                    ) : (
+                      <Eye
+                        size={18}
+                        strokeWidth={1.8}
+                      />
+                    )}
+                  </button>
+
+                </div>
+
+              </div>
+
+
+              {/* PASSWORD STRENGTH */}
+
+              {password.length > 0 && (
+
+                <div className="password-strength">
+
+                  <div className="strength-header">
+
+                    <span>
+                      Password strength
+                    </span>
+
+                    <span className="strength-label">
+                      {getPasswordStrength()}
+                    </span>
+
+                  </div>
+
+                  <div className="strength-bars">
+
+                    {[1, 2, 3, 4, 5].map((bar) => (
+
+                      <div
+                        key={bar}
+                        className={`strength-bar ${
+                          score >= bar
+                            ? "active"
+                            : ""
+                        }`}
+                      />
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+              )}
+
+
+              {/* PASSWORD REQUIREMENTS */}
+
+              <div className="password-rules">
+
+                <div
+                  className={`password-rule ${
+                    hasLength ? "valid" : ""
+                  }`}
+                >
+                  {hasLength ? "✓" : "○"} 8+ characters
+                </div>
+
+                <div
+                  className={`password-rule ${
+                    hasUpper ? "valid" : ""
+                  }`}
+                >
+                  {hasUpper ? "✓" : "○"} Uppercase letter
+                </div>
+
+                <div
+                  className={`password-rule ${
+                    hasLower ? "valid" : ""
+                  }`}
+                >
+                  {hasLower ? "✓" : "○"} Lowercase letter
+                </div>
+
+                <div
+                  className={`password-rule ${
+                    hasNumber ? "valid" : ""
+                  }`}
+                >
+                  {hasNumber ? "✓" : "○"} Number
+                </div>
+
+                <div
+                  className={`password-rule ${
+                    hasSpecial ? "valid" : ""
+                  }`}
+                >
+                  {hasSpecial ? "✓" : "○"} Special character
+                </div>
+
+              </div>
+
+
+              {/* CONFIRM PASSWORD */}
+
+              <div className="input-group">
+
+                <label>
+                  Confirm Password
+                </label>
+
+                <div className="input-icon-wrapper">
+
+                  <LockKeyhole
+                    className="input-icon"
+                    size={18}
+                    strokeWidth={1.8}
+                  />
+
+                  <input
+                    className="auth-input with-icon password-input"
+                    type={
+                      showConfirmPassword
+                        ? "text"
+                        : "password"
+                    }
+                    placeholder="Confirm your new password"
+                    value={confirmPassword}
+                    onChange={(e) =>
+                      setConfirmPassword(e.target.value)
+                    }
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    className="password-toggle"
+                    onClick={() =>
+                      setShowConfirmPassword(
+                        !showConfirmPassword
+                      )
+                    }
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff
+                        size={18}
+                        strokeWidth={1.8}
+                      />
+                    ) : (
+                      <Eye
+                        size={18}
+                        strokeWidth={1.8}
+                      />
+                    )}
+                  </button>
+
+                </div>
+
+              </div>
+
+
+              {/* ERROR */}
+
+              {errorMessage && (
+                <div className="auth-error">
+                  {errorMessage}
+                </div>
+              )}
+
+
+              {/* SUCCESS */}
+
+              {successMessage && (
+                <div className="auth-success">
+                  {successMessage}
+                </div>
+              )}
+
+
+              {/* UPDATE PASSWORD */}
+
+              <button
+                className="auth-button primary"
+                type="submit"
+                disabled={
+                  !isPasswordValid ||
+                  password !== confirmPassword ||
+                  successMessage !== ""
+                }
+              >
+                Update Password →
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+
       </div>
 
-      <br />
-
-      <input
-        type="password"
-        name="confirmPassword"
-        placeholder="Confirm Password"
-        value={formData.confirmPassword}
-        onChange={handleChange}
-      />
-
-      <br />
-      <br />
-
-      <button
-        onClick={handleResetPassword}
-        disabled={
-          !isPasswordValid ||
-          formData.password !== formData.confirmPassword
-        }
-      >
-        Update Password
-      </button>
     </div>
   );
 }
