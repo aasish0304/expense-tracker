@@ -1,4 +1,0 @@
-$kind: http-request
-url: source venv/Scripts/activate
-method: POST
-order: 3853533023488875
