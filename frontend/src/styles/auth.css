@@ -1,0 +1,769 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap");
+
+/* ========================================
+   WAKU AUTHENTICATION
+   Fredoka = Brand / Headings
+   Nunito = Content / Forms
+======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+.auth-page {
+  min-height: 100vh;
+  width: 100%;
+
+  background: #fffaf0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  font-family: "Nunito", sans-serif;
+  color: #111111;
+}
+
+
+/* ========================================
+   MAIN CONTAINER
+======================================== */
+
+.auth-container {
+  width: 100%;
+  max-width: 1100px;
+  min-height: 680px;
+
+  display: grid;
+  grid-template-columns: 42% 58%;
+
+  background: #ffffff;
+
+  border-radius: 28px;
+  overflow: hidden;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.10);
+}
+
+
+/* ========================================
+   LEFT WAKU BRAND PANEL
+======================================== */
+
+.auth-brand {
+  position: relative;
+
+  background: #ffd83d;
+
+  padding: 48px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  overflow: hidden;
+}
+
+
+/* Large decorative circle */
+
+.auth-brand::before {
+  content: "";
+
+  position: absolute;
+
+  width: 320px;
+  height: 320px;
+
+  border-radius: 50%;
+
+  background: #ffeba0;
+
+  right: -120px;
+  top: 130px;
+}
+
+
+/* Purple decorative circle */
+
+.auth-brand::after {
+  content: "";
+
+  position: absolute;
+
+  width: 190px;
+  height: 190px;
+
+  border-radius: 50%;
+
+  background: #b7a0ff;
+
+  left: -100px;
+  bottom: -80px;
+}
+
+
+/* ========================================
+   WAKU LOGO
+======================================== */
+
+.waku-logo {
+  position: relative;
+  z-index: 2;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 32px;
+  font-weight: 600;
+
+  letter-spacing: -0.8px;
+  line-height: 1;
+}
+
+.waku-logo span {
+  color: #6241ff;
+}
+
+
+/* ========================================
+   TAGLINE
+======================================== */
+
+.brand-tagline {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 8px;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  letter-spacing: 0;
+}
+
+
+/* ========================================
+   BRAND CONTENT
+======================================== */
+
+.brand-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 390px;
+}
+
+.brand-content h1 {
+  margin: 0 0 22px;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 52px;
+  font-weight: 600;
+
+  line-height: 1.05;
+
+  letter-spacing: -1.5px;
+}
+
+.brand-content h1 span {
+  color: #ff5c87;
+}
+
+
+/* Body = Nunito */
+
+.brand-content p {
+  max-width: 350px;
+
+  margin: 0;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 16px;
+  font-weight: 400;
+
+  line-height: 1.7;
+
+  letter-spacing: 0;
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.brand-footer {
+  position: relative;
+  z-index: 2;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 12px;
+  font-weight: 400;
+
+  opacity: 0.7;
+}
+
+
+/* ========================================
+   RIGHT AUTH AREA
+======================================== */
+
+.auth-content {
+  padding: 55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fffdf8;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+}
+
+
+/* ========================================
+   HEADING
+======================================== */
+
+.auth-card h2 {
+  margin: 0 0 8px;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 32px;
+  font-weight: 600;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.8px;
+}
+
+
+/* ========================================
+   SUBTITLE
+======================================== */
+
+.auth-subtitle {
+  margin: 0 0 32px;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  line-height: 1.6;
+
+  color: #777777;
+}
+
+
+/* ========================================
+   FORM
+======================================== */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.input-group label {
+  font-family: "Nunito", sans-serif;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* ========================================
+   INPUT ICON WRAPPER
+======================================== */
+
+.input-icon-wrapper {
+  position: relative;
+
+  width: 100%;
+}
+
+
+/* ========================================
+   INPUT ICON
+======================================== */
+
+.input-icon {
+  position: absolute;
+
+  left: 16px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #6241ff;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+
+/* ========================================
+   INPUT
+======================================== */
+
+.auth-input {
+  width: 100%;
+  height: 52px;
+
+  padding: 0 16px;
+
+  border: 1.5px solid #dedede;
+
+  border-radius: 12px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #111111;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* Inputs containing icons */
+
+.auth-input.with-icon {
+  padding-left: 48px;
+}
+
+
+/* Password input */
+
+.auth-input.password-input {
+  padding-right: 52px;
+}
+
+
+.auth-input::placeholder {
+  color: #999999;
+
+  font-weight: 400;
+}
+
+
+.auth-input:focus {
+  border-color: #6241ff;
+
+  box-shadow:
+    0 0 0 4px rgba(98, 65, 255, 0.10);
+}
+
+
+/* ========================================
+   PASSWORD TOGGLE
+======================================== */
+
+.password-toggle {
+  position: absolute;
+
+  right: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #6241ff;
+
+  cursor: pointer;
+}
+
+.password-toggle:hover {
+  background: #f2efff;
+}
+
+
+/* Hide Edge's built-in password icon */
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+
+/* ========================================
+   FORGOT PASSWORD
+======================================== */
+
+.forgot-link {
+  text-align: right;
+
+  margin-top: -8px;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 13px;
+}
+
+
+/* ========================================
+   LINKS
+======================================== */
+
+.auth-link {
+  color: #6241ff;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: inherit;
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  color: #4b2de0;
+
+  text-decoration: underline;
+}
+
+
+/* ========================================
+   BUTTON
+======================================== */
+
+.auth-button {
+  width: 100%;
+  height: 52px;
+
+  border: none;
+  border-radius: 12px;
+
+  color: #ffffff;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.auth-button.primary {
+  background: linear-gradient(
+    90deg,
+    #6241ff,
+    #9b4dff
+  );
+}
+
+
+.auth-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(98, 65, 255, 0.25);
+}
+
+
+.auth-button:active {
+  transform: translateY(0);
+}
+
+
+.auth-button:disabled {
+  background: #d6d6d6;
+
+  color: #888888;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* ========================================
+   AUTH FOOTER
+======================================== */
+
+.auth-footer {
+  text-align: center;
+
+  margin-top: 25px;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 13px;
+  font-weight: 400;
+
+  color: #777777;
+}
+
+
+/* ========================================
+   PASSWORD STRENGTH
+======================================== */
+
+.password-strength {
+  margin-top: -6px;
+  margin-bottom: -4px;
+}
+
+.strength-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 8px;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.strength-label {
+  font-weight: 600;
+}
+
+.strength-bars {
+  display: flex;
+
+  gap: 5px;
+
+  width: 100%;
+}
+
+.strength-bar {
+  height: 5px;
+
+  flex: 1;
+
+  border-radius: 10px;
+
+  background: #e5e5e5;
+}
+
+.strength-bar.active:nth-child(1) {
+  background: #ff4d4d;
+}
+
+.strength-bar.active:nth-child(2) {
+  background: #ff9f1c;
+}
+
+.strength-bar.active:nth-child(3) {
+  background: #ffd43b;
+}
+
+.strength-bar.active:nth-child(4) {
+  background: #62c370;
+}
+
+.strength-bar.active:nth-child(5) {
+  background: #20a464;
+}
+
+
+/* ========================================
+   PASSWORD RULES
+======================================== */
+
+.password-rules {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 8px 16px;
+
+  padding: 12px 0;
+}
+
+.password-rule {
+  font-family: "Nunito", sans-serif;
+
+  font-size: 12px;
+  font-weight: 400;
+
+  color: #999999;
+}
+
+.password-rule.valid {
+  color: #19945b;
+
+  font-weight: 600;
+}
+
+
+/* ========================================
+   INFO BOX
+======================================== */
+
+.info-box {
+  margin-top: 18px;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  background: #f0ecff;
+
+  color: #5940b7;
+
+  font-family: "Nunito", sans-serif;
+
+  font-size: 13px;
+  font-weight: 400;
+
+  line-height: 1.5;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 850px) {
+
+  .auth-page {
+    padding: 15px;
+  }
+
+  .auth-container {
+    grid-template-columns: 1fr;
+
+    min-height: auto;
+
+    max-width: 520px;
+  }
+
+  .auth-brand {
+    min-height: 270px;
+
+    padding: 32px;
+  }
+
+  .brand-content {
+    margin-top: 45px;
+  }
+
+  .brand-content h1 {
+    font-size: 40px;
+
+    letter-spacing: -1px;
+  }
+
+  .brand-footer {
+    display: none;
+  }
+
+  .auth-content {
+    padding: 40px 30px;
+  }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 500px) {
+
+  .auth-page {
+    padding: 0;
+  }
+
+  .auth-container {
+    min-height: 100vh;
+
+    border-radius: 0;
+
+    box-shadow: none;
+  }
+
+  .auth-brand {
+    min-height: 230px;
+
+    padding: 26px;
+  }
+
+  .waku-logo {
+    font-size: 28px;
+  }
+
+  .brand-tagline {
+    font-size: 12px;
+  }
+
+  .brand-content {
+    margin-top: 35px;
+  }
+
+  .brand-content h1 {
+    font-size: 32px;
+
+    letter-spacing: -0.5px;
+  }
+
+  .brand-content p {
+    font-size: 14px;
+
+    line-height: 1.6;
+  }
+
+  .auth-content {
+    padding: 32px 20px;
+  }
+
+  .auth-card h2 {
+    font-size: 28px;
+  }
+
+  .password-rules {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { UserRound, LockKeyhole, Eye, EyeOff } from "lucide-react";
 import { loginUser } from "../services/authService";
+import "../styles/auth.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -9,6 +11,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -32,47 +36,171 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="auth-page">
+      <div className="auth-container">
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
+        {/* LEFT - WAKU BRANDING */}
+        <div className="auth-brand">
 
-        <br />
-        <br />
+          <div>
+            <div className="waku-logo">
+              waku<span>.</span>
+            </div>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
+            <div className="brand-tagline">
+              Every Rupee Has a Story.
+            </div>
+          </div>
 
-        <br />
-        <br />
+          <div className="brand-content">
+            <h1>
+              Your money.
+              <br />
+              <span>Your way.</span>
+            </h1>
 
-        <Link to="/forgot-password">
-          Forgot Password?
-        </Link>
+            <p>
+              Understand where your money goes,
+              stay in control, and make every rupee count.
+            </p>
+          </div>
 
-        <br />
-        <br />
+          <div className="brand-footer">
+            © 2026 Waku. Your money, your story.
+          </div>
 
-        <button type="submit">Login</button>
-      </form>
+        </div>
 
-      <br />
+        {/* RIGHT - LOGIN */}
+        <div className="auth-content">
 
-      <Link to="/register">
-        Don't have an account? Register
-      </Link>
+          <div className="auth-card">
+
+            <h2>Welcome back 👋</h2>
+
+            <p className="auth-subtitle">
+              Sign in to continue your Waku journey.
+            </p>
+
+            <form
+              className="auth-form"
+              onSubmit={handleSubmit}
+            >
+
+              {/* EMAIL */}
+              <div className="input-group">
+
+                <label>Email</label>
+
+                <div className="input-icon-wrapper">
+
+                  <UserRound
+                    className="input-icon"
+                    size={18}
+                    strokeWidth={1.8}
+                  />
+
+                  <input
+                    className="auth-input with-icon"
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
+
+                </div>
+
+              </div>
+
+              {/* PASSWORD */}
+              <div className="input-group">
+
+                <label>Password</label>
+
+                <div className="input-icon-wrapper">
+
+                  <LockKeyhole
+                    className="input-icon"
+                    size={18}
+                    strokeWidth={1.8}
+                  />
+
+                  <input
+                    className="auth-input with-icon password-input"
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Enter your password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    className="password-toggle"
+                    onClick={() =>
+                      setShowPassword(!showPassword)
+                    }
+                    aria-label={
+                      showPassword
+                        ? "Hide password"
+                        : "Show password"
+                    }
+                  >
+                    {showPassword ? (
+                      <EyeOff size={18} strokeWidth={1.8} />
+                    ) : (
+                      <Eye size={18} strokeWidth={1.8} />
+                    )}
+                  </button>
+
+                </div>
+
+              </div>
+
+              {/* FORGOT PASSWORD */}
+              <div className="forgot-link">
+
+                <Link
+                  className="auth-link"
+                  to="/forgot-password"
+                >
+                  Forgot password?
+                </Link>
+
+              </div>
+
+              {/* LOGIN BUTTON */}
+              <button
+                className="auth-button primary"
+                type="submit"
+              >
+                Sign in →
+              </button>
+
+            </form>
+
+            {/* REGISTER */}
+            <div className="auth-footer">
+
+              Don't have an account?{" "}
+
+              <Link
+                className="auth-link"
+                to="/register"
+              >
+                Create one
+              </Link>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
     </div>
   );
 };
