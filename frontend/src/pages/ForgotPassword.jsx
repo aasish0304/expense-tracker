@@ -93,7 +93,7 @@ function ForgotPassword() {
             </div>
 
             <div className="brand-tagline">
-              Every Rupee Has a Story.
+              Every Rupee has a Story.
             </div>
 
           </div>

@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 
+from rest_framework_simplejwt.tokens import RefreshToken
+
 from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import force_str
 from django.core.mail import send_mail
@@ -46,9 +48,15 @@ class LoginView(APIView):
 
         if serializer.is_valid():
 
+            user = serializer.validated_data["user"]
+
+            refresh = RefreshToken.for_user(user)
+
             return Response(
                 {
-                    "message": "Login successful"
+                    "message": "Login successful",
+                    "access": str(refresh.access_token),
+                    "refresh": str(refresh),
                 },
                 status=status.HTTP_200_OK
             )
