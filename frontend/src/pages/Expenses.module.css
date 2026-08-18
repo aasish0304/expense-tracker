@@ -1,0 +1,378 @@
+.page {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 36px 48px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  color: #aa3bff;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  color: #08060d;
+}
+
+.subtitle {
+  margin-top: 10px;
+  color: #6b6375;
+  font-size: 15px;
+}
+
+.walletCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 170px;
+  padding: 16px 18px;
+  border: 1px solid rgba(170, 59, 255, 0.18);
+  border-radius: 18px;
+  background: rgba(170, 59, 255, 0.07);
+  color: #aa3bff;
+}
+
+.walletCard span {
+  display: block;
+  font-size: 12px;
+  color: #6b6375;
+}
+
+.walletCard strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 20px;
+  color: #08060d;
+}
+
+.filterCard {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  margin-bottom: 22px;
+  background: #fff;
+  border: 1px solid #e5e4e7;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.searchBox {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1px solid #e5e4e7;
+  border-radius: 12px;
+  color: #8c8495;
+}
+
+.searchBox input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  padding: 12px 0;
+  background: transparent;
+  color: #08060d;
+  font: inherit;
+}
+
+.searchBox input::placeholder {
+  color: #aaa4af;
+}
+
+.sortBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid #e5e4e7;
+  border-radius: 12px;
+  color: #6b6375;
+}
+
+.sortBox select {
+  border: 0;
+  outline: 0;
+  padding: 12px 4px;
+  background: transparent;
+  color: #08060d;
+  font: inherit;
+  cursor: pointer;
+}
+
+.categorySection {
+  margin-bottom: 28px;
+}
+
+.sectionLabel {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #6b6375;
+}
+
+.categoryList {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.categoryChip {
+  border: 1px solid #e5e4e7;
+  border-radius: 999px;
+  padding: 9px 15px;
+  background: #fff;
+  color: #6b6375;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.categoryChip:hover {
+  border-color: rgba(170, 59, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+.activeChip {
+  background: #aa3bff;
+  border-color: #aa3bff;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(170, 59, 255, 0.22);
+}
+
+.resultHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.resultHeader h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.resultHeader span {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  color: #8c8495;
+}
+
+.clearButton {
+  border: 0;
+  background: transparent;
+  color: #aa3bff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.expenseList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.expenseCard {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 17px;
+  background: #fff;
+  border: 1px solid #e5e4e7;
+  border-radius: 17px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.expenseCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(170, 59, 255, 0.22);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.expenseIcon {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(170, 59, 255, 0.08);
+  font-size: 21px;
+}
+
+.expenseInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.expenseInfo h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #08060d;
+  font-weight: 700;
+}
+
+.expenseInfo p {
+  margin: 4px 0;
+  font-size: 12px;
+  color: #6b6375;
+}
+
+.expenseInfo span {
+  font-size: 11px;
+  color: #a19aa8;
+}
+
+.expenseAmount {
+  text-align: right;
+}
+
+.expenseAmount strong {
+  display: block;
+  font-size: 16px;
+  color: #08060d;
+}
+
+.expenseAmount small {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #f4f3ec;
+  color: #6b6375;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.emptyState {
+  padding: 55px 20px;
+  text-align: center;
+  border: 1px dashed #d9d5dd;
+  border-radius: 20px;
+  background: rgba(244, 243, 236, 0.45);
+}
+
+.emptyIcon {
+  font-size: 38px;
+  margin-bottom: 12px;
+}
+
+.emptyState h3 {
+  margin: 0 0 6px;
+  color: #08060d;
+}
+
+.emptyState p {
+  color: #6b6375;
+  font-size: 13px;
+}
+
+.emptyState button {
+  margin-top: 16px;
+  padding: 9px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: #aa3bff;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.questCard {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: 18px;
+  padding: 15px 17px;
+  border-radius: 17px;
+  background: linear-gradient(
+    135deg,
+    rgba(170, 59, 255, 0.09),
+    rgba(170, 59, 255, 0.03)
+  );
+  border: 1px solid rgba(170, 59, 255, 0.14);
+}
+
+.questIcon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: #aa3bff;
+  color: #fff;
+}
+
+.questCard strong {
+  font-size: 14px;
+  color: #08060d;
+}
+
+.questCard p {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #6b6375;
+}
+
+@media (max-width: 700px) {
+  .page {
+    padding: 24px 18px 36px;
+  }
+
+  .hero {
+    flex-direction: column;
+  }
+
+  .walletCard {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .filterCard {
+    flex-direction: column;
+  }
+
+  .sortBox {
+    justify-content: space-between;
+  }
+
+  .expenseCard {
+    padding: 13px;
+  }
+
+  .expenseIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .expenseAmount strong {
+    font-size: 14px;
+  }
+}
