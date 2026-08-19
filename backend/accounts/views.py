@@ -1,19 +1,24 @@
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from datetime import timedelta
 
-from rest_framework_simplejwt.tokens import RefreshToken
-
-from django.utils.http import urlsafe_base64_decode
-from django.utils.encoding import force_str
-from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.http import urlsafe_base64_encode
-from django.utils.encoding import force_bytes
+from django.core.mail import send_mail
+from django.utils import timezone
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import (
+    urlsafe_base64_decode,
+    urlsafe_base64_encode,
+)
 
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from rest_framework_simplejwt.tokens import AccessToken
+
+from .models import UserSession
 from .serializers import RegisterSerializer, LoginSerializer
 
 
@@ -50,13 +55,24 @@ class LoginView(APIView):
 
             user = serializer.validated_data["user"]
 
-            refresh = RefreshToken.for_user(user)
+            # Generate JWT access token
+            access_token = AccessToken.for_user(user)
+
+            # Session expires after 8 hours
+            expiry_time = timezone.now() + timedelta(hours=8)
+
+            # Create active user session
+            UserSession.objects.create(
+                user=user,
+                token=str(access_token),
+                expiry_time=expiry_time,
+                is_active=True,
+            )
 
             return Response(
                 {
                     "message": "Login successful",
-                    "access": str(refresh.access_token),
-                    "refresh": str(refresh),
+                    "access": str(access_token),
                 },
                 status=status.HTTP_200_OK
             )
@@ -76,6 +92,55 @@ class LoginView(APIView):
             errors,
             status=status.HTTP_401_UNAUTHORIZED
         )
+
+
+class LogoutView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+
+        authorization = request.headers.get("Authorization", "")
+
+        if not authorization.startswith("Bearer "):
+            return Response(
+                {
+                    "message": "Authorization token required."
+                },
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        token = authorization.split(" ", 1)[1]
+
+        try:
+
+            session = UserSession.objects.get(
+                user=request.user,
+                token=token,
+                is_active=True,
+            )
+
+            session.is_active = False
+
+            session.save(
+                update_fields=["is_active"]
+            )
+
+            return Response(
+                {
+                    "message": "Logout successful."
+                },
+                status=status.HTTP_200_OK,
+            )
+
+        except UserSession.DoesNotExist:
+
+            return Response(
+                {
+                    "message": "Active session not found."
+                },
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
 
 
 class ProfileView(APIView):

@@ -68,7 +68,7 @@ function Expenses() {
     // Category filter
     if (category !== "All") {
       result = result.filter(
-        (expense) => expense.category === category
+        (expense) => expense.category?.name === category
       );
     }
 
@@ -79,7 +79,7 @@ function Expenses() {
       result = result.filter(
         (expense) =>
           expense.story?.toLowerCase().includes(query) ||
-          expense.category?.toLowerCase().includes(query) ||
+          expense.category?.name?.toLowerCase().includes(query) ||
           expense.payment_method?.toLowerCase().includes(query)
       );
     }
@@ -257,49 +257,54 @@ function Expenses() {
         !error &&
         filteredExpenses.length > 0 && (
           <div className={styles.expenseList}>
-            {filteredExpenses.map((expense) => (
-              <article
-                className={styles.expenseCard}
-                key={expense.id}
-              >
-                <div className={styles.expenseIcon}>
-                  {categoryIcons[expense.category] || "💰"}
-                </div>
+            {filteredExpenses.map((expense) => {
+              const categoryName =
+                expense.category?.name || "Other";
 
-                <div className={styles.expenseInfo}>
-                  <h3>
-                    {expense.story || expense.category}
-                  </h3>
+              return (
+                <article
+                  className={styles.expenseCard}
+                  key={expense.id}
+                >
+                  <div className={styles.expenseIcon}>
+                    {categoryIcons[categoryName] || "💰"}
+                  </div>
 
-                  <p>
-                    {expense.category} ·{" "}
-                    {expense.payment_method}
-                  </p>
+                  <div className={styles.expenseInfo}>
+                    <h3>
+                      {expense.story || categoryName}
+                    </h3>
 
-                  <span>
-                    {new Date(
-                      expense.date
-                    ).toLocaleDateString("en-IN", {
-                      day: "numeric",
-                      month: "short",
-                      year: "numeric",
-                    })}
-                  </span>
-                </div>
+                    <p>
+                      {categoryName} ·{" "}
+                      {expense.payment_method}
+                    </p>
 
-                <div className={styles.expenseAmount}>
-                  <strong>
-                    -₹{Number(expense.amount).toFixed(2)}
-                  </strong>
+                    <span>
+                      {new Date(
+                        expense.date
+                      ).toLocaleDateString("en-IN", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </div>
 
-                  <small>
-                    {expense.expense_type === "Want"
-                      ? "Want"
-                      : "Need"}
-                  </small>
-                </div>
-              </article>
-            ))}
+                  <div className={styles.expenseAmount}>
+                    <strong>
+                      -₹{Number(expense.amount).toFixed(2)}
+                    </strong>
+
+                    <small>
+                      {expense.expense_type === "Want"
+                        ? "Want"
+                        : "Need"}
+                    </small>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         )}
 

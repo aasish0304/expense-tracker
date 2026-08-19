@@ -6,6 +6,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Expenses from "./pages/Expenses";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -25,26 +26,27 @@ function App() {
         element={<ResetPassword />}
       />
 
-      {/* Dashboard */}
-      <Route
-        path="/dashboard"
-        element={
-          <DashboardLayout>
-            <h2>Dashboard</h2>
-            <p>Welcome to BrokeCheck.</p>
-          </DashboardLayout>
-        }
-      />
+      {/* Protected Dashboard Routes */}
+      <Route element={<ProtectedRoute />}>
+        <Route
+          path="/dashboard"
+          element={
+            <DashboardLayout>
+              <h2>Dashboard</h2>
+              <p>Welcome to BrokeCheck.</p>
+            </DashboardLayout>
+          }
+        />
 
-      {/* Expenses */}
-      <Route
-        path="/dashboard/expenses"
-        element={
-          <DashboardLayout>
-            <Expenses />
-          </DashboardLayout>
-        }
-      />
+        <Route
+          path="/dashboard/expenses"
+          element={
+            <DashboardLayout>
+              <Expenses />
+            </DashboardLayout>
+          }
+        />
+      </Route>
     </Routes>
   );
 }

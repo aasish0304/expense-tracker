@@ -43,3 +43,12 @@
   color: #aa3bff;
   font-weight: 700;
 }
+.logoutButton {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
