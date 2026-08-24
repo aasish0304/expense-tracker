@@ -6,15 +6,26 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Expenses from "./pages/Expenses";
+import Settings from "./pages/Settings";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <Routes>
-      {/* Authentication */}
-      <Route path="/" element={<Login />} />
 
-      <Route path="/register" element={<Register />} />
+      {/* ==============================
+          AUTHENTICATION ROUTES
+      ============================== */}
+
+      <Route
+        path="/"
+        element={<Login />}
+      />
+
+      <Route
+        path="/register"
+        element={<Register />}
+      />
 
       <Route
         path="/forgot-password"
@@ -26,18 +37,26 @@ function App() {
         element={<ResetPassword />}
       />
 
-      {/* Protected Dashboard Routes */}
+
+      {/* ==============================
+          PROTECTED DASHBOARD ROUTES
+      ============================== */}
+
       <Route element={<ProtectedRoute />}>
+
+        {/* Dashboard */}
         <Route
           path="/dashboard"
           element={
             <DashboardLayout>
               <h2>Dashboard</h2>
-              <p>Welcome to BrokeCheck.</p>
+              <p>Welcome to Waku.</p>
             </DashboardLayout>
           }
         />
 
+
+        {/* Expenses */}
         <Route
           path="/dashboard/expenses"
           element={
@@ -46,7 +65,20 @@ function App() {
             </DashboardLayout>
           }
         />
+
+
+        {/* Settings / Profile */}
+        <Route
+          path="/dashboard/settings"
+          element={
+            <DashboardLayout>
+              <Settings />
+            </DashboardLayout>
+          }
+        />
+
       </Route>
+
     </Routes>
   );
 }

@@ -1,16 +1,767 @@
+/* =====================================================
+   WAKU DASHBOARD LAYOUT
+===================================================== */
+
 .container {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
   min-height: 100vh;
+
+  box-sizing: border-box;
+
+  background: #faf9f5;
+
+  overflow-x: hidden;
 }
 
-.content {
-  display: flex;
-  flex: 1;
-}
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
 
 .main {
+  width: calc(100% - 214px);
+  min-width: 0;
+
+  margin-left: 214px;
+
+  min-height: 100vh;
+
+  box-sizing: border-box;
+
+  padding: 0 28px 40px;
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar {
+  position: sticky;
+  top: 0;
+
+  width: 100%;
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  background: rgba(250, 249, 245, 0.96);
+
+  backdrop-filter: blur(12px);
+
+  z-index: 900;
+}
+
+.topbarSpacer {
   flex: 1;
-  padding: 24px;
-  background-color: #f8fafc;
+  min-width: 0;
+}
+
+.topbarActions {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  flex-shrink: 0;
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+.iconButton {
+  position: relative;
+
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #29251f;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.iconButton:hover {
+  background: #f0ede5;
+
+  transform: translateY(-1px);
+}
+
+.notificationDot {
+  position: absolute;
+
+  top: 7px;
+  right: 7px;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #6241ff;
+
+  border: 2px solid #faf9f5;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profileWrapper {
+  position: relative;
+
+  flex-shrink: 0;
+}
+
+.profileButton {
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 3px 7px 3px 3px;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.profileButton:hover,
+.profileButtonActive {
+  background: #ffffff;
+
+  border-color: #e9e2d7;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #ffd83d;
+
+  color: #171717;
+
+  box-shadow:
+    0 2px 7px rgba(0, 0, 0, 0.08);
+}
+
+.profileButton > svg {
+  color: #70695e;
+
+  transition: transform 0.18s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+
+/* =====================================================
+   PROFILE MENU
+===================================================== */
+
+.profileMenu {
+  position: absolute;
+
+  top: calc(100% + 10px);
+  right: 0;
+
+  width: 245px;
+
+  padding: 10px;
+
+  box-sizing: border-box;
+
+  background: #fffefa;
+
+  border: 1px solid #e7dfd3;
+
+  border-radius: 17px;
+
+  box-shadow:
+    0 18px 45px rgba(35, 28, 15, 0.14),
+    0 4px 12px rgba(35, 28, 15, 0.06);
+
+  z-index: 2000;
+
+  animation: profileMenuIn 0.14s ease-out;
+}
+
+@keyframes profileMenuIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-5px)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+.profileMenuHeader {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 8px 8px 12px;
+}
+
+.profileMenuAvatar {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #fff1a3;
+
+  color: #171717;
+}
+
+.profileMenuHeader > div:last-child {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+
+  min-width: 0;
+}
+
+.profileMenuHeader strong {
+  color: #171717;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.profileMenuHeader span {
+  color: #938b7e;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 10px;
+}
+
+.profileDivider {
+  width: 100%;
+  height: 1px;
+
+  margin: 5px 0;
+
+  background: #eee7dc;
+}
+
+.profileMenuItem {
+  width: 100%;
+  min-height: 40px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 10px;
+
+  box-sizing: border-box;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: transparent;
+
+  color: #29251f;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 11px;
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.16s ease,
+    color 0.16s ease;
+}
+
+.profileMenuItem:hover {
+  background: #fff5c9;
+}
+
+.profileMenuItem span {
+  flex: 1;
+}
+
+.profileMenuItem small {
+  color: #aaa194;
+
+  font-size: 8px;
+}
+
+.logoutItem {
+  color: #d54848;
+}
+
+.logoutItem:hover {
+  background: #fff0ef;
+  color: #c53c3c;
+}
+
+
+/* =====================================================
+   PAGE CONTENT
+===================================================== */
+
+.pageContent {
+  width: 100%;
+  min-width: 0;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+  .main {
+    width: calc(100% - 190px);
+
+    margin-left: 190px;
+
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}
+
+
+/* =====================================================
+   SMALL TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+  .main {
+    width: calc(100% - 82px);
+
+    margin-left: 82px;
+
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .topbar {
+    height: 64px;
+  }
+
+  .profileMenu {
+    width: 230px;
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+  .main {
+    width: calc(100% - 70px);
+
+    margin-left: 70px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .topbar {
+    height: 58px;
+  }
+
+  .iconButton {
+    width: 34px;
+    height: 34px;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .profileButton {
+    height: 38px;
+
+    padding-right: 4px;
+  }
+
+  .profileButton > svg {
+    display: none;
+  }
+
+  .profileMenu {
+    position: fixed;
+
+    top: 64px;
+    right: 10px;
+
+    width: min(245px, calc(100vw - 20px));
+  }
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+  .main {
+    width: calc(100% - 64px);
+
+    margin-left: 64px;
+
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .topbar {
+    height: 54px;
+  }
+
+  .topbarActions {
+    gap: 3px;
+  }
+
+  .profileMenu {
+    top: 59px;
+  }
+}
+/* =========================================
+   WAKU PROFILE AVATAR
+========================================= */
+
+.avatar {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: #ffd83d;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+/* =========================================
+   PROFILE MENU AVATAR
+========================================= */
+
+.profileMenuAvatar {
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: #ffd83d;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileMenuAvatar img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+/* =========================================
+   AVATAR PICKER
+========================================= */
+
+.avatarPicker {
+  padding: 9px 8px 10px;
+}
+
+.avatarPickerTitle {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #77716a;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 10px;
+  font-weight: 500;
+}
+
+
+/* =========================================
+   AVATAR CHOICES
+========================================= */
+
+.avatarChoices {
+  display: flex;
+  gap: 8px;
+}
+
+.avatarChoice {
+  position: relative;
+
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 7px;
+
+  border: 1.5px solid #ebe5dc;
+  border-radius: 12px;
+
+  background: #fff;
+
+  font-family: "Fredoka", sans-serif;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.avatarChoice:hover {
+  background: #fffdf7;
+
+  transform: translateY(-1px);
+}
+
+.avatarChoice img {
+  width: 44px;
+  height: 44px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+}
+
+.avatarChoice span:not(.avatarCheck) {
+  color: #716a61;
+
+  font-size: 9px;
+  font-weight: 500;
+}
+
+
+/* Selected avatar */
+
+.avatarChoiceSelected {
+  border-color: #ffd83d;
+
+  background: #fff9df;
+
+  box-shadow:
+    0 0 0 2px rgba(255, 216, 61, 0.12);
+}
+
+
+/* Check */
+
+.avatarCheck {
+  position: absolute;
+
+  top: 5px;
+  right: 5px;
+
+  width: 17px;
+  height: 17px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ffd83d;
+
+  color: #111;
+}
+/* =====================================================
+   AVATAR PICKER
+===================================================== */
+
+.avatarPickerSection {
+  padding: 8px 0 10px;
+}
+
+.avatarPickerTitle {
+  margin-bottom: 7px;
+
+  color: #777168;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.avatarPicker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.avatarChoice {
+  position: relative;
+
+  min-width: 0;
+
+  height: 65px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 3px;
+
+  padding: 4px;
+
+  border: 1px solid #e5ddd1;
+  border-radius: 9px;
+
+  background: #fff;
+
+  cursor: pointer;
+
+  font-family: "Fredoka", sans-serif;
+}
+
+.avatarChoice:hover {
+  border-color: #ffd83d;
+  background: #fffdf1;
+}
+
+.avatarChoiceSelected {
+  border-color: #ffd83d;
+  background: #fff8d7;
+}
+
+.avatarChoice img {
+  width: 38px !important;
+  height: 38px !important;
+
+  min-width: 38px !important;
+  min-height: 38px !important;
+
+  max-width: 38px !important;
+  max-height: 38px !important;
+
+  display: block;
+
+  border-radius: 50%;
+
+  object-fit: cover !important;
+}
+
+.avatarChoice span:not(.avatarCheck) {
+  font-size: 7px;
+  font-weight: 600;
+}
+
+.avatarCheck {
+  position: absolute;
+
+  top: 4px;
+  right: 4px;
+
+  width: 15px;
+  height: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ffd83d;
+
+  color: #111;
 }

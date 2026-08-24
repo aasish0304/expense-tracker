@@ -1,0 +1,117 @@
+.waku-doodles {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+  overflow: hidden;
+
+  z-index: 0;
+}
+
+.doodle {
+  position: absolute;
+
+  width: 110px;
+  height: 90px;
+
+  overflow: visible;
+
+  opacity: 0.65;
+}
+
+
+/* ==============================
+   PINK / RED DOODLE
+============================== */
+
+.doodlePink {
+  right: 7%;
+  top: 42%;
+
+  color: #f05a72;
+
+  transform: rotate(-8deg);
+}
+
+
+/* ==============================
+   YELLOW DOODLE
+============================== */
+
+.doodleYellow {
+  right: 15%;
+  top: 62%;
+
+  color: #f4bd24;
+
+  transform: rotate(8deg);
+}
+
+
+/* ==============================
+   MEDIUM SCREEN
+============================== */
+
+@media (max-width: 1200px) {
+
+  .doodlePink {
+    right: 5%;
+    top: 43%;
+  }
+
+  .doodleYellow {
+    right: 10%;
+    top: 63%;
+  }
+}
+
+
+/* ==============================
+   TABLET
+============================== */
+
+@media (max-width: 900px) {
+
+  .doodle {
+    width: 80px;
+    height: 65px;
+  }
+
+  .doodlePink {
+    right: 3%;
+    top: 45%;
+  }
+
+  .doodleYellow {
+    right: 6%;
+    top: 65%;
+  }
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 600px) {
+
+  .doodle {
+    width: 60px;
+    height: 50px;
+
+    opacity: 0.45;
+  }
+
+  .doodlePink {
+    right: 2%;
+    top: 48%;
+  }
+
+  .doodleYellow {
+    right: 3%;
+    top: 68%;
+  }
+}

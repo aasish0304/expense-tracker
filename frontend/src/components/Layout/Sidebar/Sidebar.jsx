@@ -1,61 +1,108 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import {
+  LayoutDashboard,
+  ArrowDownUp,
+  WalletCards,
+  Target,
+  BarChart3,
+  Settings,
+} from "lucide-react";
+
 import styles from "./Sidebar.module.css";
-import { logoutUser } from "../../../services/authservice";
 
 const Sidebar = () => {
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      await logoutUser();
-    } catch (error) {
-      console.error("Logout error:", error);
-    } finally {
-      navigate("/");
-    }
-  };
-
   return (
     <aside className={styles.sidebar}>
-      <nav>
-        <ul>
-          <li>
-            <NavLink
-              to="/dashboard"
-              className={({ isActive }) =>
-                isActive ? styles.active : ""
-              }
-            >
-              Dashboard
-            </NavLink>
-          </li>
 
-          <li>
-            <NavLink
-              to="/dashboard/expenses"
-              className={({ isActive }) =>
-                isActive ? styles.active : ""
-              }
-            >
-              Expenses
-            </NavLink>
-          </li>
+      {/* Logo */}
+      <div className={styles.logo}>
+        waku<span>.</span>
+      </div>
 
-          <li>Budget</li>
 
-          <li>Analytics</li>
+      {/* Navigation */}
+      <nav className={styles.nav}>
 
-          <li>
-            <button
-              type="button"
-              onClick={handleLogout}
-              className={styles.logoutButton}
-            >
-              Logout
-            </button>
-          </li>
-        </ul>
+        <NavLink
+          to="/dashboard"
+          end
+          className={({ isActive }) =>
+            `${styles.navItem} ${
+              isActive ? styles.active : ""
+            }`
+          }
+        >
+          <LayoutDashboard size={18} />
+          <span>Dashboard</span>
+        </NavLink>
+
+
+        <NavLink
+          to="/dashboard/expenses"
+          className={({ isActive }) =>
+            `${styles.navItem} ${
+              isActive ? styles.active : ""
+            }`
+          }
+        >
+          <ArrowDownUp size={18} />
+          <span>Transactions</span>
+        </NavLink>
+
+
+        <NavLink
+          to="/dashboard/budgets"
+          className={({ isActive }) =>
+            `${styles.navItem} ${
+              isActive ? styles.active : ""
+            }`
+          }
+        >
+          <WalletCards size={18} />
+          <span>Budgets</span>
+        </NavLink>
+
+
+        <NavLink
+          to="/dashboard/goals"
+          className={({ isActive }) =>
+            `${styles.navItem} ${
+              isActive ? styles.active : ""
+            }`
+          }
+        >
+          <Target size={18} />
+          <span>Goals</span>
+        </NavLink>
+
+
+        <NavLink
+          to="/dashboard/reports"
+          className={({ isActive }) =>
+            `${styles.navItem} ${
+              isActive ? styles.active : ""
+            }`
+          }
+        >
+          <BarChart3 size={18} />
+          <span>Reports</span>
+        </NavLink>
+
+
+        <NavLink
+          to="/dashboard/settings"
+          className={({ isActive }) =>
+            `${styles.navItem} ${
+              isActive ? styles.active : ""
+            }`
+          }
+        >
+          <Settings size={18} />
+          <span>Settings</span>
+        </NavLink>
+
       </nav>
+
     </aside>
   );
 };

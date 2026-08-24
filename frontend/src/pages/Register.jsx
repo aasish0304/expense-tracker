@@ -6,6 +6,7 @@ import {
   Eye,
   EyeOff,
   ArrowLeft,
+  UsersRound,
 } from "lucide-react";
 
 import { registerUser } from "../services/authService";
@@ -14,10 +15,16 @@ import "../styles/auth.css";
 const Register = () => {
   const navigate = useNavigate();
 
+  /* ================================
+     FORM DATA
+  ================================= */
+
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
+    gender: "",
     password: "",
-    confirmPassword: "",
+    confirm_password: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -96,6 +103,20 @@ const Register = () => {
     setErrorMessage("");
     setSuccessMessage("");
 
+    /* Name validation */
+
+    if (!formData.name.trim()) {
+      setErrorMessage("Please enter your name.");
+      return;
+    }
+
+    /* Gender validation */
+
+    if (!formData.gender) {
+      setErrorMessage("Please select your gender.");
+      return;
+    }
+
     /* Password validation */
 
     if (!isPasswordValid) {
@@ -108,19 +129,24 @@ const Register = () => {
 
     /* Confirm password */
 
-    if (formData.password !== formData.confirmPassword) {
+    if (formData.password !== formData.confirm_password) {
       setErrorMessage("Passwords do not match.");
 
       return;
     }
 
     try {
+      /* Send all registration details */
+
       const userData = {
-        email: formData.email,
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        gender: formData.gender,
         password: formData.password,
+        confirm_password: formData.confirm_password,
       };
 
-      const response = await registerUser(userData);
+      await registerUser(userData);
 
       /* Show success message */
 
@@ -133,7 +159,6 @@ const Register = () => {
       setTimeout(() => {
         navigate("/");
       }, 1500);
-
     } catch (error) {
       console.error(
         "Registration Error:",
@@ -146,14 +171,24 @@ const Register = () => {
             ? error.response.data.email[0]
             : error.response.data.email
         );
-
       } else if (error.response?.data?.password) {
         setErrorMessage(
           Array.isArray(error.response.data.password)
             ? error.response.data.password[0]
             : error.response.data.password
         );
-
+      } else if (error.response?.data?.gender) {
+        setErrorMessage(
+          Array.isArray(error.response.data.gender)
+            ? error.response.data.gender[0]
+            : error.response.data.gender
+        );
+      } else if (error.response?.data?.name) {
+        setErrorMessage(
+          Array.isArray(error.response.data.name)
+            ? error.response.data.name[0]
+            : error.response.data.name
+        );
       } else {
         setErrorMessage(
           "Registration failed. Please try again."
@@ -164,7 +199,6 @@ const Register = () => {
 
   return (
     <div className="auth-page">
-
       <div className="auth-container">
 
         {/* ========================================
@@ -174,7 +208,6 @@ const Register = () => {
         <div className="auth-brand">
 
           <div>
-
             <div className="waku-logo">
               waku<span>.</span>
             </div>
@@ -182,12 +215,9 @@ const Register = () => {
             <div className="brand-tagline">
               Every Rupee has a Story.
             </div>
-
           </div>
 
-
           <div className="brand-content">
-
             <h1>
               Start your
               <br />
@@ -198,16 +228,13 @@ const Register = () => {
               Create your Waku account, understand
               your spending, and make every rupee count.
             </p>
-
           </div>
-
 
           <div className="brand-footer">
             © 2026 Waku. Your money, your story.
           </div>
 
         </div>
-
 
         {/* ========================================
             RIGHT - REGISTER
@@ -230,7 +257,6 @@ const Register = () => {
               />
             </Link>
 
-
             {/* HEADING */}
 
             <h2>
@@ -241,7 +267,6 @@ const Register = () => {
               Start your journey with Waku today.
             </p>
 
-
             {/* FORM */}
 
             <form
@@ -250,12 +275,97 @@ const Register = () => {
             >
 
               {/* ====================================
+                  NAME
+              ==================================== */}
+
+              <div className="input-group">
+
+                <label htmlFor="name">
+                  Name
+                </label>
+
+                <div className="input-icon-wrapper">
+
+                  <UserRound
+                    className="input-icon"
+                    size={18}
+                    strokeWidth={1.8}
+                  />
+
+                  <input
+                    className="auth-input with-icon"
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    autoComplete="name"
+                    required
+                  />
+
+                </div>
+
+              </div>
+
+              {/* ====================================
+                  GENDER
+              ==================================== */}
+
+              <div className="input-group">
+
+                <label htmlFor="gender">
+                  Gender
+                </label>
+
+                <div className="input-icon-wrapper">
+
+                  <UsersRound
+                    className="input-icon"
+                    size={18}
+                    strokeWidth={1.8}
+                  />
+
+                  <select
+                    className="auth-input with-icon gender-select"
+                    id="gender"
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="" disabled>
+                      Select your gender
+                    </option>
+
+                    <option value="male">
+                      Male
+                    </option>
+
+                    <option value="female">
+                      Female
+                    </option>
+
+                    <option value="other">
+                      Other
+                    </option>
+
+                    <option value="prefer_not_to_say">
+                      Prefer not to say
+                    </option>
+                  </select>
+
+                </div>
+
+              </div>
+
+              {/* ====================================
                   EMAIL
               ==================================== */}
 
               <div className="input-group">
 
-                <label>
+                <label htmlFor="email">
                   Email
                 </label>
 
@@ -270,10 +380,12 @@ const Register = () => {
                   <input
                     className="auth-input with-icon"
                     type="email"
+                    id="email"
                     name="email"
                     placeholder="Enter your email"
                     value={formData.email}
                     onChange={handleChange}
+                    autoComplete="email"
                     required
                   />
 
@@ -281,14 +393,13 @@ const Register = () => {
 
               </div>
 
-
               {/* ====================================
                   PASSWORD
               ==================================== */}
 
               <div className="input-group">
 
-                <label>
+                <label htmlFor="password">
                   Password
                 </label>
 
@@ -307,10 +418,12 @@ const Register = () => {
                         ? "text"
                         : "password"
                     }
+                    id="password"
                     name="password"
                     placeholder="Create a password"
                     value={formData.password}
                     onChange={handleChange}
+                    autoComplete="new-password"
                     required
                   />
 
@@ -326,7 +439,6 @@ const Register = () => {
                         : "Show password"
                     }
                   >
-
                     {showPassword ? (
                       <EyeOff
                         size={18}
@@ -338,20 +450,17 @@ const Register = () => {
                         strokeWidth={1.8}
                       />
                     )}
-
                   </button>
 
                 </div>
 
               </div>
 
-
               {/* ====================================
                   PASSWORD STRENGTH
               ==================================== */}
 
               {formData.password.length > 0 && (
-
                 <div className="password-strength">
 
                   <div className="strength-header">
@@ -366,11 +475,9 @@ const Register = () => {
 
                   </div>
 
-
                   <div className="strength-bars">
 
                     {[1, 2, 3, 4, 5].map((bar) => (
-
                       <div
                         key={bar}
                         className={`strength-bar ${
@@ -379,15 +486,12 @@ const Register = () => {
                             : ""
                         }`}
                       />
-
                     ))}
 
                   </div>
 
                 </div>
-
               )}
-
 
               {/* ====================================
                   PASSWORD REQUIREMENTS
@@ -403,7 +507,6 @@ const Register = () => {
                   {hasLength ? "✓" : "○"} 8+ characters
                 </div>
 
-
                 <div
                   className={`password-rule ${
                     hasUpper ? "valid" : ""
@@ -411,7 +514,6 @@ const Register = () => {
                 >
                   {hasUpper ? "✓" : "○"} Uppercase letter
                 </div>
-
 
                 <div
                   className={`password-rule ${
@@ -421,7 +523,6 @@ const Register = () => {
                   {hasLower ? "✓" : "○"} Lowercase letter
                 </div>
 
-
                 <div
                   className={`password-rule ${
                     hasNumber ? "valid" : ""
@@ -429,7 +530,6 @@ const Register = () => {
                 >
                   {hasNumber ? "✓" : "○"} Number
                 </div>
-
 
                 <div
                   className={`password-rule ${
@@ -441,14 +541,13 @@ const Register = () => {
 
               </div>
 
-
               {/* ====================================
                   CONFIRM PASSWORD
               ==================================== */}
 
               <div className="input-group">
 
-                <label>
+                <label htmlFor="confirm_password">
                   Confirm Password
                 </label>
 
@@ -467,10 +566,12 @@ const Register = () => {
                         ? "text"
                         : "password"
                     }
-                    name="confirmPassword"
+                    id="confirm_password"
+                    name="confirm_password"
                     placeholder="Confirm your password"
-                    value={formData.confirmPassword}
+                    value={formData.confirm_password}
                     onChange={handleChange}
+                    autoComplete="new-password"
                     required
                   />
 
@@ -488,7 +589,6 @@ const Register = () => {
                         : "Show password"
                     }
                   >
-
                     {showConfirmPassword ? (
                       <EyeOff
                         size={18}
@@ -500,39 +600,31 @@ const Register = () => {
                         strokeWidth={1.8}
                       />
                     )}
-
                   </button>
 
                 </div>
 
               </div>
 
-
               {/* ====================================
                   ERROR MESSAGE
               ==================================== */}
 
               {errorMessage && (
-
                 <div className="auth-error">
                   {errorMessage}
                 </div>
-
               )}
-
 
               {/* ====================================
                   SUCCESS MESSAGE
               ==================================== */}
 
               {successMessage && (
-
                 <div className="auth-success">
                   {successMessage}
                 </div>
-
               )}
-
 
               {/* ====================================
                   REGISTER BUTTON
@@ -542,9 +634,11 @@ const Register = () => {
                 className="auth-button primary"
                 type="submit"
                 disabled={
+                  !formData.name.trim() ||
+                  !formData.gender ||
                   !isPasswordValid ||
                   formData.password !==
-                    formData.confirmPassword ||
+                    formData.confirm_password ||
                   successMessage !== ""
                 }
               >
@@ -552,7 +646,6 @@ const Register = () => {
               </button>
 
             </form>
-
 
             {/* ====================================
                 LOGIN LINK
@@ -576,7 +669,6 @@ const Register = () => {
         </div>
 
       </div>
-
     </div>
   );
 };

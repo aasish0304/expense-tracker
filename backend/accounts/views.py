@@ -10,7 +10,7 @@ from django.utils.http import (
     urlsafe_base64_decode,
     urlsafe_base64_encode,
 )
-
+from django.contrib.auth.models import User, Group
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -18,7 +18,7 @@ from rest_framework.views import APIView
 
 from rest_framework_simplejwt.tokens import AccessToken
 
-from .models import UserSession
+from .models import UserSession, UserProfile
 from .serializers import RegisterSerializer, LoginSerializer
 
 
@@ -149,10 +149,149 @@ class ProfileView(APIView):
 
     def get(self, request):
 
+        profile, created = UserProfile.objects.get_or_create(
+            user=request.user,
+            defaults={
+                "display_name": request.user.first_name or request.user.username,
+                "avatar": "male",
+            },
+        )
+
         return Response(
             {
-                "username": request.user.username,
+                "name": profile.display_name,
                 "email": request.user.email,
+                "avatar": profile.avatar,
+            },
+            status=status.HTTP_200_OK,
+        )
+
+    def patch(self, request):
+
+        profile, created = UserProfile.objects.get_or_create(
+            user=request.user,
+            defaults={
+                "display_name": request.user.first_name or request.user.username,
+                "avatar": "male",
+            },
+        )
+
+        if "name" in request.data:
+            profile.display_name = request.data["name"]
+
+        if "avatar" in request.data:
+            profile.avatar = request.data["avatar"]
+
+        profile.save()
+
+        return Response(
+            {
+                "message": "Profile updated successfully.",
+                "name": profile.display_name,
+                "email": request.user.email,
+                "avatar": profile.avatar,
+            },
+            status=status.HTTP_200_OK,
+        )
+# ============================================================
+# CHANGE PASSWORD
+# ============================================================
+
+class ChangePasswordView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+
+        current_password = request.data.get(
+            "current_password"
+        )
+
+        new_password = request.data.get(
+            "new_password"
+        )
+
+        confirm_password = request.data.get(
+            "confirm_password"
+        )
+
+        # ==========================================
+        # REQUIRED FIELDS
+        # ==========================================
+
+        if not current_password:
+            return Response(
+                {
+                    "message": "Please enter your current password."
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if not new_password:
+            return Response(
+                {
+                    "message": "Please enter a new password."
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if not confirm_password:
+            return Response(
+                {
+                    "message": "Please confirm your new password."
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # ==========================================
+        # CHECK CURRENT PASSWORD
+        # ==========================================
+
+        if not request.user.check_password(
+            current_password
+        ):
+            return Response(
+                {
+                    "message": "Current password is incorrect."
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # ==========================================
+        # CHECK NEW PASSWORD MATCH
+        # ==========================================
+
+        if new_password != confirm_password:
+            return Response(
+                {
+                    "message": "New passwords do not match."
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # ==========================================
+        # PREVENT SAME PASSWORD
+        # ==========================================
+
+        if current_password == new_password:
+            return Response(
+                {
+                    "message": "New password must be different from your current password."
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # ==========================================
+        # SAVE NEW PASSWORD
+        # ==========================================
+
+        request.user.set_password(new_password)
+
+        request.user.save()
+
+        return Response(
+            {
+                "message": "Password changed successfully."
             },
             status=status.HTTP_200_OK,
         )
@@ -284,6 +423,239 @@ class ResetPasswordView(APIView):
         return Response(
             {
                 "message": "Password reset successful."
+            },
+            status=status.HTTP_200_OK,
+        )
+from .permissions import IsAdmin
+from django.contrib.auth.models import Group
+
+
+class AdminUserListView(APIView):
+
+    permission_classes = [
+        IsAuthenticated,
+        IsAdmin,
+    ]
+
+    def get(self, request):
+
+        users = User.objects.all().order_by(
+            "id"
+        )
+
+        data = []
+
+        for user in users:
+
+            if user.is_superuser:
+
+                role = "Admin"
+
+            elif user.groups.filter(
+                name="Admin"
+            ).exists():
+
+                role = "Admin"
+
+            else:
+
+                role = "User"
+
+            data.append(
+                {
+                    "id": user.id,
+                    "username": user.username,
+                    "email": user.email,
+                    "role": role,
+                    "is_active": user.is_active,
+                }
+            )
+
+        return Response(
+            data,
+            status=status.HTTP_200_OK,
+        )
+
+
+class AdminAssignRoleView(APIView):
+
+    permission_classes = [
+        IsAuthenticated,
+        IsAdmin,
+    ]
+
+    def post(self, request):
+
+        user_id = request.data.get(
+            "user_id"
+        )
+
+        role = request.data.get(
+            "role"
+        )
+
+        if not user_id:
+
+            return Response(
+                {
+                    "message": "User ID is required."
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if role not in [
+            "Admin",
+            "User",
+        ]:
+
+            return Response(
+                {
+                    "message": (
+                        "Role must be either "
+                        "Admin or User."
+                    )
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        try:
+
+            user = User.objects.get(
+                id=user_id
+            )
+
+        except User.DoesNotExist:
+
+            return Response(
+                {
+                    "message": "User not found."
+                },
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
+        admin_group, _ = Group.objects.get_or_create(
+            name="Admin"
+        )
+
+        user_group, _ = Group.objects.get_or_create(
+            name="User"
+        )
+
+        # Remove both roles first
+        user.groups.remove(
+            admin_group,
+            user_group,
+        )
+
+        # Assign selected role
+        if role == "Admin":
+
+            user.groups.add(
+                admin_group
+            )
+
+        else:
+
+            user.groups.add(
+                user_group
+            )
+
+        return Response(
+            {
+                "message": (
+                    f"{user.email} "
+                    f"is now an {role}."
+                    if role == "Admin"
+                    else
+                    f"{user.email} "
+                    f"is now a {role}."
+                ),
+                "user_id": user.id,
+                "role": role,
+            },
+            status=status.HTTP_200_OK,
+        )
+# ============================================================
+# ADMIN USER MANAGEMENT
+# ============================================================
+
+class AdminUserUpdateView(APIView):
+
+    permission_classes = [IsAuthenticated, IsAdmin]
+
+    def patch(self, request, user_id):
+
+        try:
+            user = User.objects.get(id=user_id)
+
+        except User.DoesNotExist:
+            return Response(
+                {
+                    "detail": "User not found."
+                },
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
+        # ----------------------------------------------------
+        # CHANGE ROLE
+        # ----------------------------------------------------
+
+        role = request.data.get("role")
+
+        if role is not None:
+
+            if role not in ["Admin", "User"]:
+                return Response(
+                    {
+                        "detail": "Role must be either Admin or User."
+                    },
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            if role == "Admin":
+                user.groups.add(
+                    Group.objects.get(name="Admin")
+                )
+
+                user.groups.remove(
+                    Group.objects.get(name="User")
+                )
+
+            else:
+                user.groups.add(
+                    Group.objects.get(name="User")
+                )
+
+                user.groups.remove(
+                    Group.objects.get(name="Admin")
+                )
+
+        # ----------------------------------------------------
+        # CHANGE ACTIVE STATUS
+        # ----------------------------------------------------
+
+        if "is_active" in request.data:
+
+            user.is_active = request.data["is_active"]
+
+        user.save()
+
+        # ----------------------------------------------------
+        # RETURN UPDATED USER
+        # ----------------------------------------------------
+
+        if user.groups.filter(name="Admin").exists():
+            current_role = "Admin"
+        else:
+            current_role = "User"
+
+        return Response(
+            {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email,
+                "role": current_role,
+                "is_active": user.is_active,
             },
             status=status.HTTP_200_OK,
         )

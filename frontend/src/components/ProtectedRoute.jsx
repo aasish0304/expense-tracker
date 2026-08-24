@@ -1,10 +1,21 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { isTokenValid } from "../services/authService";
 
 const ProtectedRoute = () => {
-  const token = localStorage.getItem("access");
+  const location = useLocation();
 
-  if (!token) {
-    return <Navigate to="/" replace />;
+  const authenticated = isTokenValid();
+
+  if (!authenticated) {
+    return (
+      <Navigate
+        to="/"
+        replace
+        state={{
+          from: location.pathname,
+        }}
+      />
+    );
   }
 
   return <Outlet />;

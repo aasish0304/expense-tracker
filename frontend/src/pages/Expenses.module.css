@@ -1,230 +1,798 @@
 .page {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 32px 36px 48px;
+  padding: 34px 38px 60px;
   box-sizing: border-box;
-  text-align: left;
+
+  color: #111111;
+  font-family: "Nunito", sans-serif;
 }
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 24px;
+  gap: 28px;
   margin-bottom: 28px;
 }
 
 .eyebrow {
+  display: block;
+
   margin: 0 0 8px;
-  font-size: 12px;
+  padding: 0;
+
+  font-size: 13px;
+  line-height: 1.2;
   font-weight: 800;
-  letter-spacing: 1.6px;
-  color: #aa3bff;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-family: "Fredoka", sans-serif;
+
+  color: #7057ff;
 }
+
+.eyebrow::after {
+  content: "";
+
+  display: block;
+
+  width: 42px;
+  height: 2px;
+
+  margin-top: 7px;
+
+  border-radius: 999px;
+
+  
+}
+
+
+
 
 .hero h1 {
   margin: 0;
-  font-size: 36px;
-  line-height: 1.15;
-  letter-spacing: -1px;
-  color: #08060d;
+  color: #111111;
+  font-family: "Fredoka", sans-serif;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.7px;
 }
 
 .subtitle {
-  margin-top: 10px;
-  color: #6b6375;
-  font-size: 15px;
+  margin: 10px 0 0;
+  color: #716b61;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
 }
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* =========================
+   WALLET
+========================= */
 
 .walletCard {
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: 170px;
-  padding: 16px 18px;
-  border: 1px solid rgba(170, 59, 255, 0.18);
+
+  min-width: 175px;
+  padding: 13px 17px;
+  box-sizing: border-box;
+
+  border: 1px solid #f0d65b;
   border-radius: 18px;
-  background: rgba(170, 59, 255, 0.07);
-  color: #aa3bff;
+
+  background: #fff8c9;
+
+  box-shadow: 0 8px 22px rgba(255, 214, 52, 0.12);
+}
+
+.walletCard svg {
+  width: 19px;
+  height: 19px;
+  padding: 7px;
+
+  border-radius: 12px;
+
+  background: #ffd83d;
+  color: #111111;
 }
 
 .walletCard span {
   display: block;
-  font-size: 12px;
-  color: #6b6375;
+  color: #756f61;
+  font-size: 10px;
+  font-weight: 600;
 }
 
 .walletCard strong {
   display: block;
   margin-top: 2px;
-  font-size: 20px;
-  color: #08060d;
+
+  color: #111111;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 19px;
+  font-weight: 600;
 }
 
-.filterCard {
-  display: flex;
-  gap: 12px;
-  padding: 14px;
-  margin-bottom: 22px;
-  background: #fff;
-  border: 1px solid #e5e4e7;
-  border-radius: 18px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-}
+/* =========================
+   ADD EXPENSE BUTTON
+========================= */
 
-.searchBox {
-  flex: 1;
+.addButton {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 0 14px;
-  border: 1px solid #e5e4e7;
+  justify-content: center;
+  gap: 7px;
+
+  padding: 12px 17px;
+
+  border: 0;
   border-radius: 12px;
-  color: #8c8495;
+
+  background: #111111;
+  color: #ffffff;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.addButton:hover {
+  background: #6241ff;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   SEARCH / DATE / SORT BAR
+========================= */
+
+.filterCard {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) 165px 165px 155px;
+
+  align-items: stretch;
+  gap: 9px;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 12px;
+  margin-bottom: 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #e8e3d9;
+  border-radius: 18px;
+
+  box-shadow: 0 8px 25px rgba(24, 20, 10, 0.045);
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.searchBox {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 0 14px;
+
+  border: 1px solid #e5dfd4;
+  border-radius: 13px;
+
+  background: #fffefa;
+  color: #777064;
+
+  transition: 0.2s ease;
+}
+
+.searchBox:focus-within {
+  border-color: #ffd83d;
+  box-shadow: 0 0 0 3px rgba(255, 216, 61, 0.16);
 }
 
 .searchBox input {
   width: 100%;
+  min-width: 0;
+
+  padding: 12px 0;
+
   border: 0;
   outline: 0;
-  padding: 12px 0;
+
   background: transparent;
-  color: #08060d;
-  font: inherit;
+  color: #111111;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .searchBox input::placeholder {
-  color: #aaa4af;
+  color: #aaa398;
 }
 
-.sortBox {
+/* =========================
+   DATE FILTER
+========================= */
+
+.dateFilter {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0 12px;
-  border: 1px solid #e5e4e7;
-  border-radius: 12px;
-  color: #6b6375;
+
+  min-width: 0;
+
+  padding: 7px 11px;
+
+  border: 1px solid #e5dfd4;
+  border-radius: 13px;
+
+  background: #fffefa;
+  color: #6f685e;
+
+  transition: 0.2s ease;
 }
 
-.sortBox select {
+.dateFilter:focus-within {
+  border-color: #ffd83d;
+  box-shadow: 0 0 0 3px rgba(255, 216, 61, 0.16);
+}
+
+.dateFilter > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.dateFilter span {
+  margin-bottom: 1px;
+
+  color: #938c80;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.dateFilter input {
+  width: 100%;
+  min-width: 0;
+
+  padding: 0;
+
   border: 0;
   outline: 0;
-  padding: 12px 4px;
+
   background: transparent;
-  color: #08060d;
-  font: inherit;
+  color: #111111;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+
   cursor: pointer;
 }
 
+/* =========================
+   SORT
+========================= */
+
+.sortBox {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  width: 100%;
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  padding: 0 11px;
+
+  border: 1px solid #e5dfd4;
+  border-radius: 13px;
+
+  background: #fffefa;
+  color: #6f685e;
+
+  transition: 0.2s ease;
+}
+
+.sortBox:focus-within {
+  border-color: #ffd83d;
+  box-shadow: 0 0 0 3px rgba(255, 216, 61, 0.16);
+}
+
+.sortBox select {
+  width: 100%;
+  min-width: 0;
+
+  padding: 12px 28px 12px 2px;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+  color: #111111;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.sortBox > svg:last-child {
+  position: absolute;
+  right: 9px;
+  pointer-events: none;
+}
+
+/* =========================
+   ACTIVE DATE FILTER
+========================= */
+
+.activeDateFilter {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  margin: 0 0 20px;
+  padding: 7px 10px;
+
+  border: 1px solid rgba(98, 65, 255, 0.18);
+  border-radius: 999px;
+
+  background: rgba(98, 65, 255, 0.06);
+  color: #6241ff;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.activeDateFilter button {
+  width: 19px;
+  height: 19px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(98, 65, 255, 0.12);
+  color: #6241ff;
+
+  cursor: pointer;
+}
+
+.activeDateFilter button:hover {
+  background: #6241ff;
+  color: #ffffff;
+}
+
+/* =========================
+   CATEGORY SECTION
+========================= */
+
 .categorySection {
+  display: block;
+  width: 100%;
+
+  margin-top: 5px;
   margin-bottom: 28px;
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  gap: 15px;
+  margin-bottom: 12px;
 }
 
 .sectionLabel {
   display: flex;
   align-items: center;
   gap: 7px;
-  margin-bottom: 12px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #6b6375;
+
+  color: #70695d;
+
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .categoryList {
   display: flex;
-  gap: 9px;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 9px;
+
+  width: 100%;
 }
 
+/* =========================
+   CATEGORY CHIP
+========================= */
+
 .categoryChip {
-  border: 1px solid #e5e4e7;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 8px 13px;
+
+  border: 1px solid #e5e0d5;
   border-radius: 999px;
-  padding: 9px 15px;
-  background: #fff;
-  color: #6b6375;
-  font: inherit;
-  font-size: 13px;
+
+  background: #ffffff;
+  color: #5f5a51;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+
   cursor: pointer;
-  transition: 0.2s ease;
+
+  transition: 0.18s ease;
 }
 
 .categoryChip:hover {
-  border-color: rgba(170, 59, 255, 0.45);
+  border-color: #e5c82f;
+  background: #fffbea;
   transform: translateY(-1px);
 }
 
 .activeChip {
-  background: #aa3bff;
-  border-color: #aa3bff;
-  color: #fff;
-  box-shadow: 0 6px 16px rgba(170, 59, 255, 0.22);
+  background: #ffd83d;
+  border-color: #ffd83d;
+  color: #111111;
+
+  box-shadow: 0 6px 15px rgba(255, 216, 61, 0.24);
 }
+
+/* =========================
+   ADD CATEGORY
+========================= */
+
+.addCategoryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 8px 13px;
+
+  border: 1px solid rgba(98, 65, 255, 0.25);
+  border-radius: 10px;
+
+  background: rgba(98, 65, 255, 0.06);
+  color: #6241ff;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.addCategoryButton:hover {
+  background: #6241ff;
+  border-color: #6241ff;
+  color: #ffffff;
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 6px 16px rgba(98, 65, 255, 0.2);
+}
+
+/* =========================
+   CATEGORY 3 DOT MENU
+========================= */
+
+.categoryWrapper {
+  position: relative;
+
+  display: inline-flex;
+}
+
+.categoryMenuButton {
+  position: absolute;
+
+  top: -8px;
+  right: -8px;
+
+  width: 24px;
+  height: 24px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 1px solid #e3ded3;
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: #6c665d;
+
+  cursor: pointer;
+
+  opacity: 0;
+
+  z-index: 200;
+
+  transition: 0.18s ease;
+}
+
+.categoryWrapper:hover .categoryMenuButton,
+.categoryMenuButton:focus {
+  opacity: 1;
+}
+
+.categoryMenuButton:hover {
+  background: #ffd83d;
+  border-color: #ffd83d;
+  color: #111111;
+}
+
+.categoryMenu {
+  position: absolute;
+
+  top: calc(100% + 8px);
+  right: 0;
+
+  z-index: 500;
+
+  width: 175px;
+
+  padding: 6px;
+
+  border: 1px solid #e5e0d5;
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  box-shadow: 0 14px 35px rgba(24, 20, 10, 0.15);
+}
+
+.categoryMenu button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 9px 10px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: transparent;
+  color: #403c35;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.categoryMenu button:hover {
+  background: #fff8d7;
+}
+
+.categoryMenu .categoryDeleteOption {
+  color: #d93636;
+}
+
+.categoryMenu .categoryDeleteOption:hover {
+  background: #fff0f0;
+}
+
+/* =========================
+   RESULTS HEADER
+========================= */
 
 .resultHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+
+  margin-bottom: 19px;
 }
 
 .resultHeader h2 {
   margin: 0;
-  font-size: 20px;
+
+  color: #111111;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 21px;
+  font-weight: 600;
 }
 
 .resultHeader span {
   display: block;
-  margin-top: 3px;
-  font-size: 12px;
-  color: #8c8495;
+
+  margin-top: 4px;
+
+  color: #8b8478;
+
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .clearButton {
+  padding: 7px 11px;
+
   border: 0;
-  background: transparent;
-  color: #aa3bff;
-  font-size: 13px;
-  font-weight: 700;
+  border-radius: 9px;
+
+  background: #fff5b7;
+  color: #111111;
+
+  font-size: 11px;
+  font-weight: 600;
+
   cursor: pointer;
 }
+
+.clearButton:hover {
+  background: #ffd83d;
+}
+
+/* =========================
+   DAY GROUP
+========================= */
+
+.dayGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.dayGroup {
+  width: 100%;
+}
+
+.dayHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  margin-bottom: 10px;
+  padding: 0 2px;
+}
+
+.dayHeader h3 {
+  margin: 0;
+
+  color: #111111;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.dayHeader span {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #918a7d;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.dayTotal {
+  color: #111111;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =========================
+   EXPENSE LIST
+========================= */
 
 .expenseList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
 }
 
 .expenseCard {
+  position: relative;
+
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 17px;
-  background: #fff;
-  border: 1px solid #e5e4e7;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  min-height: 82px;
+
+  padding: 15px 17px;
+
+  border: 1px solid #e9e5dc;
   border-radius: 17px;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+
+  background: #ffffff;
+
+  transition: 0.2s ease;
 }
 
 .expenseCard:hover {
   transform: translateY(-2px);
-  border-color: rgba(170, 59, 255, 0.22);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+
+  border-color: #f0d55b;
+
+  box-shadow: 0 12px 28px rgba(24, 20, 10, 0.07);
 }
 
 .expenseIcon {
-  width: 46px;
-  height: 46px;
+  width: 47px;
+  height: 47px;
+
   flex-shrink: 0;
+
   display: grid;
   place-items: center;
+
   border-radius: 14px;
-  background: rgba(170, 59, 255, 0.08);
+
+  background: #fff0a0;
+
   font-size: 21px;
+}
+
+.expenseCard:nth-child(3n + 2) .expenseIcon {
+  background: #eee9ff;
+}
+
+.expenseCard:nth-child(3n) .expenseIcon {
+  background: #e7f7ef;
 }
 
 .expenseInfo {
@@ -234,145 +802,1679 @@
 
 .expenseInfo h3 {
   margin: 0;
-  font-size: 15px;
-  color: #08060d;
-  font-weight: 700;
+
+  overflow: hidden;
+
+  color: #111111;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .expenseInfo p {
-  margin: 4px 0;
-  font-size: 12px;
-  color: #6b6375;
+  margin: 4px 0 3px;
+
+  color: #6e685e;
+
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .expenseInfo span {
-  font-size: 11px;
-  color: #a19aa8;
+  color: #9a9388;
+
+  font-size: 10px;
+  font-weight: 600;
 }
 
+/* =========================
+   AMOUNT
+========================= */
+
 .expenseAmount {
+  flex-shrink: 0;
+
+  min-width: 100px;
+
   text-align: right;
 }
 
 .expenseAmount strong {
   display: block;
+
+  color: #111111;
+
+  font-family: "Fredoka", sans-serif;
   font-size: 16px;
-  color: #08060d;
+  font-weight: 600;
 }
 
 .expenseAmount small {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 34px;
+
   margin-top: 5px;
-  padding: 3px 8px;
+  padding: 4px 9px;
+
   border-radius: 999px;
-  background: #f4f3ec;
-  color: #6b6375;
-  font-size: 10px;
-  font-weight: 700;
+
+  background: #f3f1ea;
+  color: #656057;
+
+  font-size: 9px;
+  font-weight: 600;
 }
 
+/* =========================
+   EXPENSE ACTIONS
+========================= */
+
+.expenseActions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  opacity: 0;
+
+  transition: opacity 0.18s ease;
+}
+
+.expenseCard:hover .expenseActions {
+  opacity: 1;
+}
+
+.expenseActions button {
+  width: 31px;
+  height: 31px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 1px solid #e7e2d7;
+  border-radius: 9px;
+
+  background: #fffdf8;
+  color: #6d675d;
+
+  cursor: pointer;
+
+  transition: 0.18s ease;
+}
+
+.expenseActions button:hover {
+  background: #fff3b0;
+  border-color: #f0d55b;
+  color: #111111;
+}
+
+.expenseActions button:last-child:hover {
+  background: #fff0f0;
+  border-color: #ffb8b8;
+  color: #d93636;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
 .emptyState {
-  padding: 55px 20px;
+  padding: 58px 20px;
+
   text-align: center;
-  border: 1px dashed #d9d5dd;
+
+  border: 1px dashed #ddd6c9;
   border-radius: 20px;
-  background: rgba(244, 243, 236, 0.45);
+
+  background: #fffdf8;
 }
 
 .emptyIcon {
-  font-size: 38px;
-  margin-bottom: 12px;
+  display: grid;
+  place-items: center;
+
+  width: 62px;
+  height: 62px;
+
+  margin: 0 auto 13px;
+
+  border-radius: 20px;
+
+  background: #fff1a3;
+
+  font-size: 31px;
 }
 
 .emptyState h3 {
   margin: 0 0 6px;
-  color: #08060d;
+
+  color: #111111;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .emptyState p {
-  color: #6b6375;
+  margin: 0;
+
+  color: #777064;
+
   font-size: 13px;
+  font-weight: 600;
 }
 
 .emptyState button {
-  margin-top: 16px;
-  padding: 9px 16px;
+  margin-top: 17px;
+
+  padding: 10px 17px;
+
   border: 0;
-  border-radius: 10px;
-  background: #aa3bff;
-  color: #fff;
-  font-weight: 700;
+  border-radius: 11px;
+
+  background: #111111;
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+
   cursor: pointer;
 }
 
-.questCard {
+/* =========================
+   MODAL OVERLAY
+========================= */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
   display: flex;
   align-items: center;
-  gap: 13px;
-  margin-top: 18px;
-  padding: 15px 17px;
-  border-radius: 17px;
-  background: linear-gradient(
-    135deg,
-    rgba(170, 59, 255, 0.09),
-    rgba(170, 59, 255, 0.03)
-  );
-  border: 1px solid rgba(170, 59, 255, 0.14);
+  justify-content: center;
+
+  padding: 25px;
+
+  background: rgba(17, 17, 17, 0.42);
+
+  backdrop-filter: blur(6px);
 }
 
-.questIcon {
-  width: 42px;
-  height: 42px;
+/* =========================
+   MAIN MODAL
+========================= */
+
+.modal {
+  width: 100%;
+  max-width: 560px;
+
+  max-height: calc(100vh - 50px);
+
+  overflow-y: auto;
+
+  box-sizing: border-box;
+
+  padding: 30px;
+
+  border: 1px solid rgba(255, 216, 61, 0.25);
+  border-radius: 25px;
+
+  background: #fffdf8;
+
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
+}
+
+/* =========================
+   MODAL HEADER
+========================= */
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  margin-bottom: 27px;
+}
+
+.modalEyebrow {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #6241ff;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+.modalHeader h2 {
+  margin: 0;
+
+  color: #111111;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 29px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.closeButton {
+  width: 38px;
+  height: 38px;
+
   display: grid;
   place-items: center;
-  border-radius: 13px;
-  background: #aa3bff;
-  color: #fff;
+
+  flex-shrink: 0;
+
+  border: 1px solid #e5dfd4;
+  border-radius: 11px;
+
+  background: #ffffff;
+  color: #6d675d;
+
+  cursor: pointer;
+
+  transition: 0.18s ease;
 }
 
-.questCard strong {
-  font-size: 14px;
-  color: #08060d;
+.closeButton:hover {
+  background: #ffd83d;
+  border-color: #ffd83d;
+  color: #111111;
 }
 
-.questCard p {
-  margin-top: 3px;
+/* =========================
+   FORM
+========================= */
+
+.expenseForm {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+}
+
+.expenseForm label,
+.categoryForm label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  color: #3f3a33;
+
   font-size: 12px;
-  color: #6b6375;
+  font-weight: 600;
 }
 
-@media (max-width: 700px) {
+/* =========================
+   INPUTS
+========================= */
+
+.expenseForm input,
+.categoryForm input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  min-height: 48px;
+
+  padding: 12px 14px;
+
+  border: 1px solid #ded8cd;
+  border-radius: 12px;
+
+  outline: 0;
+
+  background: #ffffff;
+  color: #111111;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: 0.18s ease;
+}
+
+.expenseForm input::placeholder,
+.categoryForm input::placeholder {
+  color: #aaa398;
+  font-weight: 600;
+}
+
+.expenseForm input:focus,
+.categoryForm input:focus {
+  border-color: #ffd83d;
+
+  box-shadow: 0 0 0 3px rgba(255, 216, 61, 0.16);
+}
+
+/* =========================
+   SELECT WRAPPER
+========================= */
+
+.selectWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.selectWrapper select {
+  width: 100%;
+
+  min-height: 48px;
+
+  box-sizing: border-box;
+
+  padding: 12px 42px 12px 14px;
+
+  border: 1px solid #ded8cd;
+  border-radius: 12px;
+
+  outline: 0;
+
+  background: #ffffff;
+  color: #111111;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  transition: 0.18s ease;
+}
+
+.selectWrapper select:hover {
+  border-color: #cfc7b8;
+}
+
+.selectWrapper select:focus {
+  border-color: #ffd83d;
+
+  box-shadow: 0 0 0 3px rgba(255, 216, 61, 0.16);
+}
+
+.selectArrow {
+  position: absolute;
+
+  top: 50%;
+  right: 14px;
+
+  transform: translateY(-50%);
+
+  pointer-events: none;
+
+  color: #6c665d;
+}
+
+/* =========================
+   AMOUNT
+========================= */
+
+.amountInput {
+  display: flex;
+  align-items: center;
+
+  min-height: 48px;
+
+  border: 1px solid #ded8cd;
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  transition: 0.18s ease;
+}
+
+.amountInput:focus-within {
+  border-color: #ffd83d;
+
+  box-shadow: 0 0 0 3px rgba(255, 216, 61, 0.16);
+}
+
+.amountInput span {
+  padding-left: 14px;
+
+  color: #111111;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.amountInput input {
+  min-height: 46px;
+
+  border: 0;
+  box-shadow: none;
+}
+
+.amountInput input:focus {
+  box-shadow: none;
+}
+
+/* =========================
+   NEED / WANT
+========================= */
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* =========================
+   DATE INPUT
+========================= */
+
+.dateInput {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  min-height: 48px;
+
+  padding-left: 14px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #ded8cd;
+  border-radius: 12px;
+
+  background: #ffffff;
+  color: #6d675d;
+
+  transition: 0.18s ease;
+}
+
+.dateInput:focus-within {
+  border-color: #ffd83d;
+
+  box-shadow: 0 0 0 3px rgba(255, 216, 61, 0.16);
+}
+
+.dateInput input {
+  min-height: 46px;
+
+  padding-left: 0;
+
+  border: 0;
+  box-shadow: none;
+}
+
+.dateInput input:focus {
+  box-shadow: none;
+}
+
+/* =========================
+   MODAL ACTIONS
+========================= */
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 8px;
+}
+
+.cancelButton,
+.saveButton,
+.deleteButton {
+  min-height: 44px;
+
+  padding: 10px 19px;
+
+  border-radius: 11px;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.18s ease;
+}
+
+.cancelButton {
+  border: 1px solid #ded8cd;
+
+  background: #ffffff;
+  color: #5f594f;
+}
+
+.cancelButton:hover {
+  background: #f5f1e8;
+}
+
+.saveButton {
+  border: 0;
+
+  background: #111111;
+  color: #ffffff;
+}
+
+.saveButton:hover {
+  background: #6241ff;
+  transform: translateY(-1px);
+}
+
+.saveButton:disabled,
+.deleteButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* =========================
+   CATEGORY MODAL
+========================= */
+
+.categoryModal {
+  max-width: 480px;
+}
+
+.categoryForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =========================
+   DELETE MODAL
+========================= */
+
+.deleteModal {
+  max-width: 440px;
+  text-align: center;
+}
+
+.deleteIcon {
+  width: 56px;
+  height: 56px;
+
+  display: grid;
+  place-items: center;
+
+  margin: 0 auto 17px;
+
+  border-radius: 17px;
+
+  background: #fff0f0;
+  color: #d93636;
+}
+
+.deleteModal h2 {
+  margin: 0;
+
+  color: #111111;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.deleteModal p {
+  max-width: 350px;
+
+  margin: 11px auto 0;
+
+  color: #716b61;
+
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.deleteWarning {
+  margin-top: 7px !important;
+
+  color: #8c8495 !important;
+
+  font-size: 11px !important;
+}
+
+.deleteModal .modalActions {
+  justify-content: center;
+  margin-top: 23px;
+}
+
+.deleteButton {
+  border: 0;
+
+  background: #d93636;
+  color: #ffffff;
+}
+
+.deleteButton:hover {
+  background: #b92727;
+}
+
+/* =========================
+   CATEGORY DELETE ERROR
+========================= */
+
+.categoryDeleteError {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  margin-top: 17px;
+  padding: 13px 14px;
+
+  border: 1px solid #f0c5c5;
+  border-radius: 12px;
+
+  background: #fff4f4;
+
+  text-align: left;
+}
+
+.categoryDeleteErrorIcon {
+  width: 24px;
+  height: 24px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: #ef6b6b;
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.categoryDeleteError strong {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #8f2525;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.categoryDeleteError p {
+  margin: 0;
+
+  color: #9f5555;
+
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+  .filterCard {
+    grid-template-columns: minmax(220px, 1fr) 145px 145px 145px;
+  }
+}
+
+@media (max-width: 950px) {
+  .filterCard {
+    grid-template-columns: 1fr 150px 150px;
+  }
+
+  .searchBox {
+    grid-column: 1 / -1;
+  }
+
+  .sortBox {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 800px) {
   .page {
-    padding: 24px 18px 36px;
+    padding: 28px 24px 48px;
   }
 
   .hero {
     flex-direction: column;
+    gap: 20px;
+  }
+
+  .hero > div:first-child {
+    margin: 0;
+    padding: 0;
+  }
+
+  .heroActions {
+    width: 100%;
+    justify-content: flex-start;
   }
 
   .walletCard {
+    min-width: 170px;
+  }
+}
+
+@media (max-width: 700px) {
+  .page {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 32px 40px 60px;
+  box-sizing: border-box;
+}
+
+  .hero h1 {
+    font-size: 31px;
+  }
+
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .walletCard,
+  .addButton {
     width: 100%;
-    box-sizing: border-box;
   }
 
   .filterCard {
+    display: flex;
     flex-direction: column;
+    gap: 9px;
   }
 
+  .searchBox,
+  .dateFilter,
   .sortBox {
-    justify-content: space-between;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .categoryHeader {
+    align-items: flex-start;
+  }
+
+  .categoryList {
+    gap: 8px;
   }
 
   .expenseCard {
+    min-height: 72px;
+    gap: 11px;
     padding: 13px;
   }
 
   .expenseIcon {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
+
+    border-radius: 12px;
+
+    font-size: 18px;
+  }
+
+  .expenseInfo h3 {
+    font-size: 14px;
   }
 
   .expenseAmount strong {
     font-size: 14px;
   }
+
+  .expenseActions {
+    opacity: 1;
+  }
+
+  .expenseActions button {
+    width: 29px;
+    height: 29px;
+  }
+}
+
+@media (max-width: 600px) {
+  .modalOverlay {
+    align-items: flex-end;
+    padding: 10px;
+  }
+
+  .modal {
+    max-height: calc(100vh - 20px);
+
+    padding: 23px;
+
+    border-radius: 22px 22px 15px 15px;
+  }
+
+  .modalHeader h2 {
+    font-size: 26px;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .modalActions {
+    width: 100%;
+  }
+
+  .cancelButton,
+  .saveButton,
+  .deleteButton {
+    flex: 1;
+  }
+}
+
+@media (max-width: 420px) {
+  .page {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .expenseInfo h3 {
+    max-width: 145px;
+  }
+
+  .expenseAmount strong {
+    font-size: 13px;
+  }
+
+  .expenseAmount small {
+    font-size: 8px;
+  }
+}
+
+/* =====================================================
+   WAKU CUSTOM DROPDOWNS + DATE PICKERS
+   Replaces browser-native popup styling
+===================================================== */
+
+.page,
+.page * {
+  font-family: "Fredoka", sans-serif;
+}
+
+.filterCard {
+  position: relative;
+  z-index: 20;
+  overflow: visible;
+}
+
+.sortBox {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.customDropdown {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  z-index: 100;
+}
+
+.dropdownTrigger {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 13px;
+  box-sizing: border-box;
+  border: 1px solid #e2dbcf;
+  border-radius: 13px;
+  background: #fffefa;
+  color: #171717;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.dropdownTrigger:hover,
+.dropdownTrigger.dropdownOpen {
+  border-color: #ffd83d;
+  background: #fffdf4;
+  box-shadow: 0 0 0 3px rgba(255, 216, 61, .14);
+}
+
+.dropdownIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #70695d;
+}
+
+.dropdownValue {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dropdownChevron {
+  flex-shrink: 0;
+  color: #777064;
+  transition: transform .18s ease;
+}
+
+.dropdownChevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  min-width: 180px;
+  padding: 7px;
+  box-sizing: border-box;
+  border: 1px solid #e8e0d3;
+  border-radius: 14px;
+  background: #fffefa;
+  box-shadow: 0 18px 42px rgba(31, 25, 12, .16);
+  z-index: 1000;
+  animation: wakuDropdownIn .14s ease-out;
+}
+
+@keyframes wakuDropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dropdownOption {
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #3e3931;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+
+.dropdownOption:hover {
+  background: #fff4bd;
+  color: #111111;
+}
+
+.dropdownOptionActive {
+  background: #fff8d8;
+  color: #111111;
+  font-weight: 600;
+}
+
+.dropdownOptionIcon {
+  width: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+
+.dropdownCheck {
+  margin-left: auto;
+  color: #6241ff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.selectWrapper {
+  position: relative;
+  width: 100%;
+  z-index: 40;
+}
+
+.selectWrapper .customDropdown {
+  width: 100%;
+}
+
+/* =====================================================
+   CUSTOM DATE PICKER
+===================================================== */
+
+.customDatePicker {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  z-index: 80;
+}
+
+.datePickerTrigger {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 11px;
+  box-sizing: border-box;
+  border: 1px solid #e2dbcf;
+  border-radius: 13px;
+  background: #fffefa;
+  color: #6f685e;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.datePickerTrigger:hover,
+.datePickerOpen {
+  border-color: #ffd83d;
+  background: #fffdf4;
+  box-shadow: 0 0 0 3px rgba(255, 216, 61, .14);
+}
+
+.datePickerTrigger > span {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.datePickerTrigger small {
+  color: #938c80;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.datePickerTrigger strong {
+  color: #171717;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.datePickerTrigger svg:first-child {
+  flex-shrink: 0;
+}
+
+.datePlaceholder {
+  color: #9c9487 !important;
+}
+
+.datePickerChevron {
+  flex-shrink: 0;
+  transition: transform .18s ease;
+}
+
+.datePickerChevronOpen {
+  transform: rotate(180deg);
+}
+
+.calendarPopup {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: auto;
+  bottom: auto;
+
+  width: 286px;
+  padding: 13px;
+  box-sizing: border-box;
+
+  transform: none;
+
+  border: 1px solid #e8e0d3;
+  border-radius: 17px;
+  background: #fffefa;
+
+  box-shadow: 0 20px 50px rgba(31, 25, 12, .18);
+  z-index: 1200;
+
+  animation: wakuCalendarDown .15s ease-out;
+}
+
+@keyframes wakuCalendarDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px) scale(.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Filter calendars open below their From / To fields. */
+.filterDatePicker .calendarPopup {
+  top: calc(100% + 10px);
+  left: 0;
+  right: auto;
+  bottom: auto;
+  transform: none;
+  animation: wakuCalendarDown .15s ease-out;
+}
+
+/* Add Expense calendar opens to the right of the Date field. */
+.expenseDatePicker .calendarPopup {
+  top: 0;
+  left: calc(100% + 12px);
+  right: auto;
+  bottom: auto;
+  transform: none;
+  animation: wakuCalendarSide .15s ease-out;
+}
+
+@keyframes wakuCalendarSide {
+  from {
+    opacity: 0;
+    transform: translateX(-5px) scale(.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.calendarHeader {
+  display: grid;
+  grid-template-columns: 34px 1fr 34px;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.calendarHeader strong {
+  color: #111111;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.calendarHeader button {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #5f594f;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+
+.calendarHeader button:hover {
+  background: #fff1a3;
+  color: #111111;
+}
+
+.calendarWeekdays,
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.calendarWeekdays {
+  margin-bottom: 4px;
+}
+
+.calendarWeekdays span {
+  padding: 4px 0;
+  color: #91897d;
+  font-size: 9px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.calendarDay {
+  width: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #2f2b25;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .14s ease, color .14s ease, transform .14s ease;
+}
+
+.calendarDay:hover:not(:disabled) {
+  background: #fff1a3;
+  color: #111111;
+  transform: translateY(-1px);
+}
+
+.calendarDayMuted {
+  color: #c0b9ad;
+}
+
+.calendarDaySelected {
+  background: #ffd83d !important;
+  color: #111111 !important;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(255, 216, 61, .28);
+}
+
+.calendarDayToday:not(.calendarDaySelected) {
+  box-shadow: inset 0 0 0 1px #6241ff;
+  color: #6241ff;
+  font-weight: 700;
+}
+
+.calendarDay:disabled {
+  color: #d8d1c5;
+  cursor: not-allowed;
+}
+
+.calendarFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #eee7dc;
+}
+
+.calendarFooter button {
+  padding: 5px 7px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #6241ff;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.calendarFooter button:hover {
+  background: #f1edff;
+}
+
+/* Form date picker should occupy the complete field width. */
+.expenseForm .customDatePicker {
+  width: 100%;
+}
+
+/* Keep popup inside the modal without clipping. */
+.modal,
+.expenseForm,
+.formRow,
+.categoryForm {
+  overflow: visible;
+}
+
+/* =====================================================
+   FONT + FORM POLISH
+===================================================== */
+
+.expenseForm input,
+.categoryForm input,
+.searchBox input,
+.cancelButton,
+.saveButton,
+.deleteButton,
+.addButton,
+.addCategoryButton,
+.categoryChip,
+.categoryMenu button,
+.clearButton {
+  font-family: "Fredoka", sans-serif;
+}
+
+.expenseForm label,
+.categoryForm label {
+  font-family: "Fredoka", sans-serif;
+  font-size: 12px;
+}
+
+
+
+/* =====================================================
+   DROPDOWN STACKING FIX
+   Only one popup opens at a time and open menus always
+   appear above the fields below them.
+===================================================== */
+
+.expenseForm {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+.expenseForm > label,
+.expenseForm > .formRow,
+.formRow > label {
+  position: relative;
+  z-index: 1;
+}
+
+.formRow {
+  position: relative;
+  z-index: 50;
+  overflow: visible;
+}
+
+.selectWrapper {
+  position: relative;
+  z-index: 200;
+  overflow: visible;
+}
+
+.selectWrapper .customDropdown {
+  position: relative;
+  z-index: 300;
+}
+
+.selectWrapper:has(.dropdownOpen) {
+  z-index: 1000;
+}
+
+.selectWrapper:has(.dropdownOpen) .customDropdown {
+  z-index: 1001;
+}
+
+.dropdownMenu {
+  z-index: 10000;
+  max-height: 220px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.expenseForm > label:has(.customDatePicker) {
+  position: relative;
+  z-index: 10;
+}
+
+.customDatePicker {
+  position: relative;
+  z-index: 10;
+}
+
+.customDatePicker:has(.datePickerOpen),
+.expenseForm > label:has(.customDatePicker:has(.datePickerOpen)) {
+  z-index: 1000;
+}
+
+.calendarPopup {
+  z-index: 10000;
+}
+
+.dropdownMenu::-webkit-scrollbar {
+  width: 5px;
+}
+
+.dropdownMenu::-webkit-scrollbar-thumb {
+  background: #ddd4c4;
+  border-radius: 999px;
+}
+
+.dropdownMenu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* =====================================================
+   FINAL POPUP STACKING FIX
+   Only the actively opened popup gets the highest layer.
+===================================================== */
+
+.expenseForm > label,
+.expenseForm > .formRow,
+.formRow > label {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+.expenseForm > label:has(.dropdownLayerOpen),
+.formRow:has(.dropdownLayerOpen),
+.formRow > label:has(.dropdownLayerOpen) {
+  z-index: 5000;
+}
+
+.expenseForm > label:has(.datePickerLayerOpen) {
+  z-index: 5000;
+}
+
+.customDropdown {
+  position: relative;
+  z-index: 1;
+}
+
+.dropdownLayerOpen {
+  z-index: 10000;
+}
+
+.dropdownLayerOpen .dropdownMenu {
+  z-index: 11000;
+}
+
+.customDatePicker {
+  position: relative;
+  z-index: 1;
+}
+
+.datePickerLayerOpen {
+  z-index: 10000;
+}
+
+.datePickerLayerOpen .calendarPopup {
+  z-index: 11000;
+}
+
+/* Never allow an unopened date field to cover an open dropdown. */
+.expenseForm > label:has(.customDatePicker) {
+  z-index: 1;
+}
+
+.expenseForm > label:has(.customDatePicker.datePickerLayerOpen) {
+  z-index: 5000;
+}
+
+/* Keep the modal itself behind its controls but allow popups to escape. */
+.modal {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+/* Popup shadows should remain clean and rounded. */
+.dropdownMenu,
+.calendarPopup {
+  isolation: isolate;
+}
+
+
+/* =====================================================
+   DATE PICKER RESPONSIVE POSITIONING
+===================================================== */
+
+@media (max-width: 950px) {
+  .filterDatePicker .calendarPopup {
+    left: 0;
+    right: auto;
+    top: calc(100% + 8px);
+    width: 286px;
+    transform: none;
+    animation: wakuCalendarDown .15s ease-out;
+  }
+
+  .expenseDatePicker .calendarPopup {
+    left: auto;
+    right: 0;
+    top: auto;
+    bottom: calc(100% + 8px);
+    width: 286px;
+    transform: none;
+    animation: wakuCalendarUp .15s ease-out;
+  }
+
+  @keyframes wakuCalendarUp {
+    from {
+      opacity: 0;
+      transform: translateY(5px) scale(.985);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .filterDatePicker .calendarPopup,
+  .expenseDatePicker .calendarPopup {
+    width: min(286px, calc(100vw - 32px));
+    left: 50%;
+    right: auto;
+    top: calc(100% + 8px);
+    bottom: auto;
+    transform: translateX(-50%);
+  }
+}
+
+
+/* FINAL: portal calendars are fixed to the viewport and open below the field. */
+.portalCalendarPopup {
+  position: fixed !important;
+  z-index: 99999 !important;
+  transform: none !important;
+}
+/* =====================================================
+   FIX DOUBLE BORDER AROUND FROM / TO DATE PICKERS
+===================================================== */
+
+.dateFilter:has(.customDatePicker) {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.dateFilter:has(.customDatePicker):focus-within {
+  border: 0;
+  box-shadow: none;
+}
+
+.dateFilter:has(.customDatePicker) > .customDatePicker {
+  width: 100%;
+  height: 100%;
+}
+/* =====================================================
+   PORTAL DROPDOWN FONT FIX
+   Dropdowns are rendered outside .page using a portal
+===================================================== */
+
+.portalDropdownMenu,
+.portalDropdownMenu * {
+  font-family: "Fredoka", sans-serif !important;
+}
+
+.portalDropdownMenu button {
+  font-family: "Fredoka", sans-serif !important;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Selected dropdown option */
+.portalDropdownMenu .dropdownOptionActive {
+  font-family: "Fredoka", sans-serif !important;
+  font-weight: 600;
+}
+
+/* Dropdown text */
+.portalDropdownMenu .dropdownOption {
+  font-family: "Fredoka", sans-serif !important;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Check mark */
+.portalDropdownMenu .dropdownCheck {
+  font-family: "Fredoka", sans-serif !important;
+  font-size: 13px;
+  font-weight: 700;
+}
+/* =====================================================
+   PORTAL DROPDOWN + CALENDAR FONT FIX
+===================================================== */
+
+.portalDropdownMenu,
+.portalDropdownMenu * {
+  font-family: "Fredoka", sans-serif !important;
+}
+
+.portalDropdownMenu button {
+  font-family: "Fredoka", sans-serif !important;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.portalDropdownMenu .dropdownOption {
+  font-family: "Fredoka", sans-serif !important;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.portalDropdownMenu .dropdownOptionActive {
+  font-family: "Fredoka", sans-serif !important;
+  font-weight: 600;
+}
+
+.portalDropdownMenu .dropdownCheck {
+  font-family: "Fredoka", sans-serif !important;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+.portalCalendarPopup,
+.portalCalendarPopup * {
+  font-family: "Fredoka", sans-serif !important;
+}
+
+.portalCalendarPopup button {
+  font-family: "Fredoka", sans-serif !important;
 }

@@ -1,6 +1,7 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
+
 from rest_framework import serializers
 
 
@@ -14,10 +15,17 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["email", "password"]
+        fields = [
+            "email",
+            "password",
+        ]
 
     def validate_email(self, value):
-        if User.objects.filter(email=value).exists():
+
+        if User.objects.filter(
+            email=value
+        ).exists():
+
             raise serializers.ValidationError(
                 "An account with this email already exists."
             )
@@ -34,13 +42,26 @@ class RegisterSerializer(serializers.ModelSerializer):
             password=validated_data["password"],
         )
 
+        # -------------------------------------------------
+        # Every newly registered account is a normal User
+        # -------------------------------------------------
+
+        user_group, created = Group.objects.get_or_create(
+            name="User"
+        )
+
+        user.groups.add(user_group)
+
         return user
 
 
 class LoginSerializer(serializers.Serializer):
 
     email = serializers.EmailField()
-    password = serializers.CharField(write_only=True)
+
+    password = serializers.CharField(
+        write_only=True
+    )
 
     def validate(self, data):
 
@@ -48,18 +69,25 @@ class LoginSerializer(serializers.Serializer):
         password = data["password"]
 
         try:
-            user = User.objects.get(email=email)
+
+            user = User.objects.get(
+                email=email
+            )
+
         except User.DoesNotExist:
 
             raise serializers.ValidationError(
                 {
-                    "email": "Email not found. Please sign up for a Waku account."
+                    "email": (
+                        "Email not found. "
+                        "Please sign up for a Waku account."
+                    )
                 }
             )
 
         user = authenticate(
             username=user.username,
-            password=password
+            password=password,
         )
 
         if not user:

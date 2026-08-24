@@ -5,12 +5,21 @@ from .views import (
     LoginView,
     LogoutView,
     ProfileView,
+    ChangePasswordView,
     ForgotPasswordView,
     ResetPasswordView,
+    AdminUserListView,
+    AdminAssignRoleView,
+    AdminUserUpdateView,
 )
 
 
 urlpatterns = [
+
+    # =====================================================
+    # AUTHENTICATION
+    # =====================================================
+
     path(
         "register/",
         RegisterView.as_view(),
@@ -24,9 +33,31 @@ urlpatterns = [
     ),
 
     path(
+        "logout/",
+        LogoutView.as_view(),
+        name="logout",
+    ),
+
+
+    # =====================================================
+    # PROFILE
+    # =====================================================
+
+    path(
         "profile/",
         ProfileView.as_view(),
         name="profile",
+    ),
+
+
+    # =====================================================
+    # PASSWORD
+    # =====================================================
+
+    path(
+        "change-password/",
+        ChangePasswordView.as_view(),
+        name="change-password",
     ),
 
     path(
@@ -41,9 +72,25 @@ urlpatterns = [
         name="reset-password",
     ),
 
+
+    # =====================================================
+    # ADMIN / RBAC
+    # =====================================================
+
     path(
-        "logout/",
-        LogoutView.as_view(),
-        name="logout",
+        "admin/users/",
+        AdminUserListView.as_view(),
+        name="admin-users",
     ),
+path(
+    "admin/users/<int:user_id>/",
+    AdminUserUpdateView.as_view(),
+    name="admin-user-update",
+),
+    path(
+        "admin/users/assign-role/",
+        AdminAssignRoleView.as_view(),
+        name="admin-assign-role",
+    ),
+
 ]
