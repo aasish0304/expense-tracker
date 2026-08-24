@@ -152,16 +152,33 @@ class ProfileView(APIView):
         profile, created = UserProfile.objects.get_or_create(
             user=request.user,
             defaults={
-                "display_name": request.user.first_name or request.user.username,
+                "display_name": (
+                    request.user.first_name
+                    or request.user.username
+                ),
                 "avatar": "male",
             },
         )
+
+        # Determine role from Django's staff/superuser status
+        # and Admin group membership.
+
+        is_admin = (
+            request.user.is_superuser
+            or request.user.is_staff
+            or request.user.groups.filter(
+                name="Admin"
+            ).exists()
+        )
+
+        role = "Admin" if is_admin else "User"
 
         return Response(
             {
                 "name": profile.display_name,
                 "email": request.user.email,
                 "avatar": profile.avatar,
+                "role": role,
             },
             status=status.HTTP_200_OK,
         )
@@ -171,7 +188,10 @@ class ProfileView(APIView):
         profile, created = UserProfile.objects.get_or_create(
             user=request.user,
             defaults={
-                "display_name": request.user.first_name or request.user.username,
+                "display_name": (
+                    request.user.first_name
+                    or request.user.username
+                ),
                 "avatar": "male",
             },
         )
@@ -184,12 +204,23 @@ class ProfileView(APIView):
 
         profile.save()
 
+        is_admin = (
+            request.user.is_superuser
+            or request.user.is_staff
+            or request.user.groups.filter(
+                name="Admin"
+            ).exists()
+        )
+
+        role = "Admin" if is_admin else "User"
+
         return Response(
             {
                 "message": "Profile updated successfully.",
                 "name": profile.display_name,
                 "email": request.user.email,
                 "avatar": profile.avatar,
+                "role": role,
             },
             status=status.HTTP_200_OK,
         )

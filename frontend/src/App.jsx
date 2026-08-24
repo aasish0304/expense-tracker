@@ -7,7 +7,9 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Expenses from "./pages/Expenses";
 import Settings from "./pages/Settings";
+import Admin from "./pages/Admin";
 import ProtectedRoute from "./components/ProtectedRoute";
+
 
 function App() {
   return (
@@ -45,6 +47,7 @@ function App() {
       <Route element={<ProtectedRoute />}>
 
         {/* Dashboard */}
+
         <Route
           path="/dashboard"
           element={
@@ -57,6 +60,7 @@ function App() {
 
 
         {/* Expenses */}
+
         <Route
           path="/dashboard/expenses"
           element={
@@ -68,6 +72,7 @@ function App() {
 
 
         {/* Settings / Profile */}
+
         <Route
           path="/dashboard/settings"
           element={
@@ -77,10 +82,29 @@ function App() {
           }
         />
 
+
+        {/* ==============================
+            ADMIN ONLY ROUTES
+        ============================== */}
+
+        <Route element={<ProtectedRoute adminOnly />}>
+
+          <Route
+            path="/dashboard/admin"
+            element={
+              <DashboardLayout>
+                <Admin />
+              </DashboardLayout>
+            }
+          />
+
+        </Route>
+
       </Route>
 
     </Routes>
   );
 }
+
 
 export default App;
