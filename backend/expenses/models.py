@@ -74,6 +74,80 @@ class Expense(models.Model):
     )
 
     def __str__(self):
-        category_name = self.category.name if self.category else "No Category"
 
-        return f"{self.user.email} - ₹{self.amount} - {category_name}"
+        category_name = (
+            self.category.name
+            if self.category
+            else "No Category"
+        )
+
+        return (
+            f"{self.user.email} - "
+            f"₹{self.amount} - "
+            f"{category_name}"
+        )
+
+
+# ============================================================
+# BUDGET
+# ============================================================
+
+class Budget(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="budgets",
+    )
+
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.PROTECT,
+        related_name="budgets",
+    )
+
+    amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+    )
+
+    month = models.PositiveSmallIntegerField()
+
+    year = models.PositiveIntegerField()
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+
+        ordering = [
+            "-year",
+            "-month",
+            "category__name",
+        ]
+
+        constraints = [
+            models.UniqueConstraint(
+                fields=[
+                    "user",
+                    "category",
+                    "month",
+                    "year",
+                ],
+                name="unique_user_category_budget_month",
+            )
+        ]
+
+    def __str__(self):
+
+        return (
+            f"{self.user.email} - "
+            f"{self.category.name} - "
+            f"{self.month}/{self.year} - "
+            f"₹{self.amount}"
+        )

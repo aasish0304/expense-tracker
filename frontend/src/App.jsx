@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-
+import Budgets from "./pages/Budgets";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import DashboardLayout from "./layouts/DashboardLayout";
@@ -82,7 +82,14 @@ function App() {
           }
         />
 
-
+<Route
+  path="/dashboard/budgets"
+  element={
+    <DashboardLayout>
+      <Budgets />
+    </DashboardLayout>
+  }
+/>
         {/* ==============================
             ADMIN ONLY ROUTES
         ============================== */}

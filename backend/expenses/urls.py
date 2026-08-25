@@ -5,11 +5,16 @@ from .views import (
     ExpenseDetailView,
     CategoryListCreateView,
     CategoryDetailView,
+    BudgetListCreateView,
+    BudgetDetailView,
 )
 
 
 urlpatterns = [
-    # Expense APIs
+
+    # =====================================================
+    # EXPENSE APIs
+    # =====================================================
 
     path(
         "",
@@ -23,7 +28,10 @@ urlpatterns = [
         name="expense-detail",
     ),
 
-    # Category APIs
+
+    # =====================================================
+    # CATEGORY APIs
+    # =====================================================
 
     path(
         "categories/",
@@ -35,5 +43,22 @@ urlpatterns = [
         "categories/<int:pk>/",
         CategoryDetailView.as_view(),
         name="category-detail",
+    ),
+
+
+    # =====================================================
+    # BUDGET APIs
+    # =====================================================
+
+    path(
+        "budgets/",
+        BudgetListCreateView.as_view(),
+        name="budget-list-create",
+    ),
+
+    path(
+        "budgets/<int:pk>/",
+        BudgetDetailView.as_view(),
+        name="budget-detail",
     ),
 ]

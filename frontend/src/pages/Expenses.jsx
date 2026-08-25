@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import Doodles from "../components/layout/Doodles";
 import {
   ArrowDownUp,
   CalendarDays,
@@ -35,6 +34,325 @@ const categoryIcons = {
   Education: "📚",
   Other: "💰",
 };
+
+
+/* =====================================================
+   WAKU DECORATIVE DOODLES
+   Visual only — does not affect expense/category logic.
+===================================================== */
+
+function WakuDoodles() {
+  return (
+    <div
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        pointerEvents: "none",
+        zIndex: 0,
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          left: "-45px",
+          bottom: "-105px",
+          width: "310px",
+          height: "205px",
+          background: "#FFF4CF",
+          borderRadius: "62% 38% 0 0",
+          transform: "rotate(-7deg)",
+          opacity: 0.82,
+        }}
+      />
+
+      <div
+        style={{
+          position: "absolute",
+          right: "-55px",
+          bottom: "-75px",
+          width: "355px",
+          height: "225px",
+          background: "#DED6FF",
+          borderRadius: "72% 28% 0 0",
+          transform: "rotate(-8deg)",
+          opacity: 0.82,
+        }}
+      />
+
+      {/* Yellow upper-right doodle */}
+      <div
+        style={{
+          position: "absolute",
+          right: "55px",
+          top: "92px",
+          width: "125px",
+          height: "82px",
+          transform: "rotate(-7deg)",
+        }}
+      >
+        <span
+          style={{
+            position: "absolute",
+            left: "4px",
+            top: "4px",
+            color: "#FFBF00",
+            fontSize: "15px",
+            fontWeight: 700,
+          }}
+        >
+          ✦
+        </span>
+
+        <span
+          style={{
+            position: "absolute",
+            left: "27px",
+            top: "25px",
+            width: "75px",
+            height: "33px",
+            borderTop: "2px solid #FFBF00",
+            borderRadius: "50%",
+            transform: "rotate(-12deg)",
+          }}
+        />
+
+        <span
+          style={{
+            position: "absolute",
+            left: "82px",
+            top: "18px",
+            width: "32px",
+            height: "20px",
+            borderTop: "2px solid #FFBF00",
+            borderRadius: "50%",
+            transform: "rotate(24deg)",
+          }}
+        />
+      </div>
+
+      {/* Purple lower-left doodle */}
+      <div
+        style={{
+          position: "absolute",
+          left: "300px",
+          bottom: "34px",
+          width: "125px",
+          height: "82px",
+          transform: "rotate(-8deg)",
+        }}
+      >
+        <span
+          style={{
+            position: "absolute",
+            left: "7px",
+            top: "26px",
+            width: "72px",
+            height: "35px",
+            borderTop: "2px solid #8B6CFF",
+            borderRadius: "55%",
+            transform: "rotate(-15deg)",
+          }}
+        />
+
+        <span
+          style={{
+            position: "absolute",
+            left: "43px",
+            top: "10px",
+            width: "53px",
+            height: "38px",
+            borderTop: "2px solid #8B6CFF",
+            borderRadius: "50%",
+            transform: "rotate(18deg)",
+          }}
+        />
+
+        <span
+          style={{
+            position: "absolute",
+            right: "5px",
+            top: "7px",
+            color: "#FFBF00",
+            fontSize: "13px",
+          }}
+        >
+          ✦
+        </span>
+      </div>
+
+      {/* Small purple sparkle — upper left of content */}
+      <div
+        style={{
+          position: "absolute",
+          left: "255px",
+          top: "155px",
+          color: "#8B6CFF",
+          fontSize: "12px",
+          transform: "rotate(18deg)",
+        }}
+      >
+        ✦
+      </div>
+
+      {/* Yellow hand-drawn arrow — beside filters */}
+      <div
+        style={{
+          position: "absolute",
+          right: "175px",
+          top: "300px",
+          width: "85px",
+          height: "55px",
+          transform: "rotate(-10deg)",
+        }}
+      >
+        <span
+          style={{
+            position: "absolute",
+            left: "5px",
+            top: "27px",
+            width: "62px",
+            borderTop: "2px solid #FFBF00",
+            transform: "rotate(-8deg)",
+          }}
+        />
+        <span
+          style={{
+            position: "absolute",
+            right: "10px",
+            top: "19px",
+            width: "14px",
+            height: "14px",
+            borderTop: "2px solid #FFBF00",
+            borderRight: "2px solid #FFBF00",
+            transform: "rotate(25deg)",
+          }}
+        />
+      </div>
+
+      {/* Purple curved doodle — right side */}
+      <div
+        style={{
+          position: "absolute",
+          right: "30px",
+          top: "430px",
+          width: "90px",
+          height: "75px",
+          transform: "rotate(12deg)",
+        }}
+      >
+        <span
+          style={{
+            position: "absolute",
+            left: "12px",
+            top: "15px",
+            width: "55px",
+            height: "38px",
+            borderTop: "2px solid #8B6CFF",
+            borderRadius: "50%",
+            transform: "rotate(-18deg)",
+          }}
+        />
+        <span
+          style={{
+            position: "absolute",
+            left: "42px",
+            top: "7px",
+            color: "#8B6CFF",
+            fontSize: "13px",
+          }}
+        >
+          ✦
+        </span>
+      </div>
+
+      {/* Tiny yellow star — around transaction area */}
+      <div
+        style={{
+          position: "absolute",
+          left: "215px",
+          top: "475px",
+          color: "#FFBF00",
+          fontSize: "10px",
+          transform: "rotate(-15deg)",
+        }}
+      >
+        ✦
+      </div>
+
+      {/* Pink mini sparkle — lower middle */}
+      <div
+        style={{
+          position: "absolute",
+          right: "285px",
+          bottom: "115px",
+          color: "#FF4F91",
+          fontSize: "13px",
+          transform: "rotate(15deg)",
+        }}
+      >
+        ✦
+      </div>
+
+      {/* Little yellow loop — lower right */}
+      <div
+        style={{
+          position: "absolute",
+          right: "115px",
+          bottom: "150px",
+          width: "58px",
+          height: "32px",
+          borderTop: "2px solid #FFBF00",
+          borderRadius: "50%",
+          transform: "rotate(-18deg)",
+        }}
+      />
+
+      {/* Pink curved stroke — near bottom-right */}
+      <div
+        style={{
+          position: "absolute",
+          right: "185px",
+          bottom: "72px",
+          width: "55px",
+          height: "25px",
+          borderTop: "2px solid #FF4F91",
+          borderRadius: "50%",
+          transform: "rotate(22deg)",
+        }}
+      />
+
+      {/* Pink lower-right star */}
+      <div
+        style={{
+          position: "absolute",
+          right: "46px",
+          bottom: "34px",
+          color: "#FF4F91",
+          fontSize: "31px",
+          lineHeight: 1,
+          fontWeight: 300,
+          transform: "rotate(-12deg)",
+        }}
+      >
+        ☆
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          right: "255px",
+          bottom: "42px",
+          color: "#FFBF00",
+          fontSize: "11px",
+        }}
+      >
+        ✦
+      </div>
+    </div>
+  );
+}
 
 
 /* =====================================================
@@ -1127,7 +1445,18 @@ if (categories.length === 0 && expenseData.length > 0) {
 
   return (
 
-    <section className={styles.page}>
+    <section
+      className={styles.page}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        isolation: "isolate",
+      }}
+    >
+
+      <WakuDoodles />
+
+      <div style={{ position: "relative", zIndex: 1 }}>
 
 
       {/* =================================================
@@ -2705,6 +3034,8 @@ if (categories.length === 0 && expenseData.length > 0) {
         </div>
 
       )}
+
+      </div>
 
     </section>
 

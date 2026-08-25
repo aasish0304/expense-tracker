@@ -1,0 +1,1613 @@
+/* ============================================================
+   PAGE
+============================================================ */
+
+.page {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 34px 38px 60px;
+  box-sizing: border-box;
+
+  color: #111111;
+  font-family: "Fredoka", sans-serif;
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+
+  margin-bottom: 25px;
+}
+
+.headerText h1 {
+  margin: 0;
+
+  color: #111111;
+  font-family: "Fredoka", sans-serif;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.8px;
+}
+
+.headerText p {
+  margin: 9px 0 0;
+
+  color: #777064;
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  position: relative;
+  z-index: 500;
+}
+
+/* ============================================================
+   CUSTOM DROPDOWN
+============================================================ */
+
+.customDropdown {
+  position: relative;
+  width: 100%;
+
+  font-family: "Fredoka", sans-serif;
+}
+
+.periodDropdown {
+  width: 174px;
+  z-index: 600;
+}
+
+.categoryDropdown {
+  width: 100%;
+  margin-bottom: 20px;
+  z-index: 2000;
+}
+
+.customDropdownButton {
+  width: 100%;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 14px;
+
+  border: 1px solid #ded8cf;
+  border-radius: 12px;
+
+  background: #ffffff;
+  color: #25211d;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.customDropdownButton:hover {
+  border-color: #c9c0b5;
+  background: #fffdfa;
+}
+
+.customDropdownButtonOpen {
+  border-color: #f0c928;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 216, 61, 0.18);
+}
+
+.dropdownSelectedText {
+  color: #25211d;
+}
+
+.dropdownPlaceholder {
+  color: #8d877e;
+}
+
+.dropdownChevron {
+  color: #77716a;
+
+  transform: rotate(90deg);
+
+  transition:
+    transform 0.18s ease,
+    color 0.18s ease;
+}
+
+.dropdownChevronOpen {
+  color: #22201d;
+
+  transform: rotate(-90deg);
+
+  transition:
+    transform 0.18s ease,
+    color 0.18s ease;
+}
+
+/* ============================================================
+   DROPDOWN MENU
+============================================================ */
+
+.customDropdownMenu {
+  position: absolute;
+
+  top: calc(100% + 7px);
+  left: 0;
+
+  width: 100%;
+  min-width: 100%;
+
+  padding: 6px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #e2ddd4;
+  border-radius: 14px;
+
+  box-shadow:
+    0 16px 35px rgba(25, 20, 10, 0.13),
+    0 4px 10px rgba(25, 20, 10, 0.05);
+
+  z-index: 99999;
+
+  animation: dropdownAppear 0.14s ease-out;
+}
+
+.periodDropdown .customDropdownMenu {
+  width: 174px;
+  min-width: 174px;
+}
+
+.categoryDropdown .customDropdownMenu {
+  max-height: 235px;
+  overflow-y: auto;
+}
+
+/* ============================================================
+   DROPDOWN OPTIONS
+============================================================ */
+
+.customDropdownOption,
+.customDropdownOptionActive {
+  width: 100%;
+  min-height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 11px;
+
+  border: 0;
+  border-radius: 9px;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.13s ease,
+    color 0.13s ease;
+}
+
+.customDropdownOption {
+  background: transparent;
+  color: #403b35;
+}
+
+.customDropdownOption:hover {
+  background: #fff4c5;
+  color: #111111;
+}
+
+.customDropdownOptionActive {
+  background: #ffd83d;
+  color: #111111;
+  font-weight: 500;
+}
+
+.customDropdownOptionActive:hover {
+  background: #ffd43c;
+}
+
+.dropdownCheck {
+  color: #171717;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ============================================================
+   DROPDOWN SCROLLBAR
+============================================================ */
+
+.categoryDropdown
+  .customDropdownMenu::-webkit-scrollbar {
+  width: 5px;
+}
+
+.categoryDropdown
+  .customDropdownMenu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.categoryDropdown
+  .customDropdownMenu::-webkit-scrollbar-thumb {
+  background: #ded7cc;
+  border-radius: 999px;
+}
+
+/* ============================================================
+   NEW BUDGET BUTTON
+============================================================ */
+
+.newBudgetButton {
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  padding: 0 18px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: #111111;
+  color: #ffffff;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease;
+}
+
+.newBudgetButton:hover {
+  background: #292929;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   TABS
+============================================================ */
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 27px;
+
+  height: 45px;
+
+  border-bottom: 1px solid #e8e2d9;
+}
+
+.tab,
+.activeTab {
+  height: 45px;
+
+  padding: 0;
+
+  border: 0;
+  border-bottom: 2px solid transparent;
+
+  background: transparent;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+.tab {
+  color: #928b81;
+}
+
+.tab:hover {
+  color: #403b35;
+}
+
+.activeTab {
+  color: #111111;
+  font-weight: 600;
+  border-bottom-color: #111111;
+}
+
+/* ============================================================
+   BUDGET CARD
+============================================================ */
+
+.budgetCard {
+  width: 100%;
+
+  overflow: visible;
+
+  border: 1px solid #e6e0d7;
+  border-top: 0;
+
+  border-radius: 0 0 17px 17px;
+
+  background: #ffffff;
+}
+
+/* ============================================================
+   BUDGET ROW
+============================================================ */
+
+.budgetRow {
+  min-height: 82px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 0 16px;
+
+  border-bottom: 1px solid #eee9e1;
+
+  background: #ffffff;
+
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.budgetRow:last-child {
+  border-bottom: 0;
+}
+
+.budgetRow:hover {
+  background: #fffdfa;
+}
+
+/* ============================================================
+   CATEGORY ICON
+============================================================ */
+
+.categoryIcon {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 11px;
+
+  background: #eee9ff;
+  color: #7b4df5;
+}
+
+.budgetRow:nth-child(3n + 2)
+  .categoryIcon {
+  background: #fff1a8;
+  color: #b18a00;
+}
+
+.budgetRow:nth-child(3n)
+  .categoryIcon {
+  background: #e7f7ef;
+  color: #4baf73;
+}
+
+/* ============================================================
+   CATEGORY DETAILS
+============================================================ */
+
+.categoryDetails {
+  flex: 1;
+  min-width: 100px;
+}
+
+.categoryName {
+  margin-bottom: 9px;
+
+  color: #171513;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ============================================================
+   PROGRESS
+============================================================ */
+
+.progressTrack {
+  width: 100%;
+  height: 5px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #ebe8e2;
+}
+
+.progressBar {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #ff5264;
+
+  transition: width 0.3s ease;
+}
+
+/* ============================================================
+   AMOUNT
+============================================================ */
+
+.amountSection {
+  min-width: 145px;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 4px;
+
+  white-space: nowrap;
+
+  font-family: "Fredoka", sans-serif;
+}
+
+.amountSection strong {
+  color: #171513;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.amountSection span {
+  color: #928b82;
+
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* ============================================================
+   PERCENTAGE
+============================================================ */
+
+.percentage {
+  width: 42px;
+
+  color: #25211e;
+
+  text-align: right;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ============================================================
+   ARROW
+============================================================ */
+
+.arrowButton {
+  width: 35px;
+  height: 35px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 1px solid #e6e0d7;
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: #777169;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.arrowButton:hover {
+  background: #ffd83d;
+  border-color: #ffd83d;
+  color: #111111;
+
+  transform: translateX(2px);
+}
+
+/* ============================================================
+   EMPTY STATE
+============================================================ */
+
+.emptyState {
+  min-height: 250px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 20px;
+
+  text-align: center;
+
+  background: #ffffff;
+}
+
+.emptyIcon {
+  width: 52px;
+  height: 52px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 13px;
+
+  border-radius: 15px;
+
+  background: #fff3b3;
+  color: #9b7c00;
+}
+
+.emptyState h3 {
+  margin: 0 0 6px;
+
+  color: #171513;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.emptyState p {
+  max-width: 420px;
+
+  margin: 0;
+
+  color: #888077;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.emptyButton {
+  margin-top: 17px;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 10px 17px;
+
+  border: 0;
+  border-radius: 11px;
+
+  background: #111111;
+  color: #ffffff;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+/* ============================================================
+   PRO TIP
+============================================================ */
+
+.tipCard {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  min-height: 112px;
+
+  margin-top: 30px;
+  padding: 20px 26px;
+
+  overflow: hidden;
+
+  border-radius: 17px;
+
+  background: #f0edff;
+}
+
+.tipIcon {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  color: #25222e;
+}
+
+.tipLabel {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #18151d;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tipCard p {
+  margin: 0;
+
+  color: #716a7e;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.tipDecor {
+  position: absolute;
+
+  right: 25px;
+  top: 28px;
+
+  color: #8b6cff;
+
+  font-size: 34px;
+
+  transform: rotate(15deg);
+}
+
+/* ============================================================
+   MODAL OVERLAY
+============================================================ */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 5000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(17, 17, 17, 0.42);
+
+  backdrop-filter: blur(6px);
+}
+
+/* ============================================================
+   MAIN MODAL
+============================================================ */
+
+.modal {
+  position: relative;
+
+  width: 100%;
+  max-width: 480px;
+
+  max-height: calc(100vh - 40px);
+
+  overflow: visible;
+
+  box-sizing: border-box;
+
+  padding: 28px;
+
+  border: 1px solid #eee4c8;
+  border-radius: 22px;
+
+  background: #fffdf8;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.22);
+}
+
+/* ============================================================
+   DETAILS MODAL
+============================================================ */
+
+.detailsModal {
+  width: 100%;
+  max-width: 510px;
+
+  box-sizing: border-box;
+
+  padding: 28px;
+
+  border-radius: 22px;
+
+  background: #fffdf8;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.22);
+}
+
+/* ============================================================
+   MODAL HEADER
+============================================================ */
+
+.modalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 25px;
+}
+
+.modalHeader h2 {
+  margin: 0;
+
+  color: #111111;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 27px;
+  font-weight: 600;
+}
+
+.modalHeader p {
+  margin: 6px 0 0;
+
+  color: #81796e;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* ============================================================
+   CLOSE BUTTON
+============================================================ */
+
+.closeButton {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 1px solid #e3ddd4;
+  border-radius: 11px;
+
+  background: #ffffff;
+  color: #686159;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.closeButton:hover {
+  background: #ffd83d;
+  border-color: #ffd83d;
+  color: #111111;
+}
+
+/* ============================================================
+   FORM
+============================================================ */
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal form label {
+  margin-bottom: 8px;
+
+  color: #3f3932;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.formInput {
+  width: 100%;
+  height: 48px;
+
+  box-sizing: border-box;
+
+  margin-bottom: 20px;
+
+  padding: 0 14px;
+
+  border: 1px solid #ded8cd;
+  border-radius: 12px;
+
+  outline: none;
+
+  background: #ffffff;
+  color: #111111;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+}
+
+.formInput:focus {
+  border-color: #ffd83d;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 216, 61, 0.16);
+}
+
+.formInput:disabled {
+  background: #f6f3ed;
+  color: #777064;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   CREATE / SAVE BUTTON
+============================================================ */
+
+.createButton {
+  width: 100%;
+  height: 48px;
+
+  margin-top: 3px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: #111111;
+  color: #ffffff;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.createButton:hover {
+  background: #292929;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   DETAILS PROGRESS
+============================================================ */
+
+.detailsProgress {
+  margin-bottom: 24px;
+}
+
+.detailsProgressTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 9px;
+}
+
+.detailsProgressTop span {
+  color: #756e65;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 12px;
+}
+
+.detailsProgressTop strong {
+  color: #171513;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+}
+
+.detailsProgressTrack {
+  width: 100%;
+  height: 8px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #eae6df;
+}
+
+.detailsProgressBar {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #ff5264;
+}
+
+/* ============================================================
+   DETAILS GRID
+============================================================ */
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+
+  margin-bottom: 24px;
+}
+
+.detailBox {
+  padding: 15px;
+
+  border: 1px solid #e7e0d6;
+  border-radius: 13px;
+
+  background: #ffffff;
+}
+
+.detailBox span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #8b8379;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 11px;
+}
+
+.detailBox strong {
+  color: #171513;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+/* ============================================================
+   DETAILS ACTIONS
+============================================================ */
+
+.detailsActions {
+  display: flex;
+  gap: 10px;
+}
+
+.editButton,
+.deleteButton {
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  flex: 1;
+
+  border-radius: 11px;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.editButton {
+  border: 1px solid #ddd6cc;
+
+  background: #ffffff;
+  color: #403a33;
+}
+
+.editButton:hover {
+  background: #fff4c4;
+  border-color: #ffd83d;
+}
+
+.deleteButton {
+  border: 1px solid #ffd0d0;
+
+  background: #fff2f2;
+  color: #d93636;
+}
+
+.deleteButton:hover {
+  background: #ffe3e3;
+  border-color: #ffb5b5;
+}
+
+/* ============================================================
+   DELETE CONFIRMATION MODAL
+============================================================ */
+
+.deleteModal {
+  width: 100%;
+  max-width: 420px;
+
+  box-sizing: border-box;
+
+  padding: 30px;
+
+  border-radius: 22px;
+
+  background: #fffdf8;
+
+  text-align: center;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.24);
+}
+
+.deleteIcon {
+  width: 56px;
+  height: 56px;
+
+  display: grid;
+  place-items: center;
+
+  margin: 0 auto 17px;
+
+  border-radius: 17px;
+
+  background: #fff0f0;
+  color: #d93636;
+}
+
+.deleteModal h2 {
+  margin: 0;
+
+  color: #111111;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.deleteModal p {
+  max-width: 340px;
+
+  margin: 12px auto 0;
+
+  color: #716b61;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+
+  line-height: 1.6;
+}
+
+.deleteWarning {
+  color: #999187 !important;
+  font-size: 11px !important;
+}
+
+.deleteModalActions {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 24px;
+}
+
+.cancelDeleteButton,
+.confirmDeleteButton {
+  flex: 1;
+
+  height: 44px;
+
+  border-radius: 11px;
+
+  font-family: "Fredoka", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.cancelDeleteButton {
+  border: 1px solid #ded8cd;
+
+  background: #ffffff;
+  color: #5f594f;
+}
+
+.cancelDeleteButton:hover {
+  background: #f5f1e8;
+}
+
+.confirmDeleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  border: 0;
+
+  background: #d93636;
+  color: #ffffff;
+}
+
+.confirmDeleteButton:hover {
+  background: #b92727;
+}
+
+/* ============================================================
+   ANIMATION
+============================================================ */
+
+@keyframes dropdownAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 900px) {
+  .page {
+    padding: 28px 24px 50px;
+  }
+
+  .headerText h1 {
+    font-size: 34px;
+  }
+
+  .amountSection {
+    min-width: 125px;
+  }
+}
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 700px) {
+  .page {
+    padding: 24px 16px 40px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .headerActions {
+    width: 100%;
+  }
+
+  .periodDropdown {
+    flex: 1;
+    width: auto;
+  }
+
+  .newBudgetButton {
+    flex-shrink: 0;
+  }
+
+  .budgetRow {
+    gap: 9px;
+    min-height: 76px;
+    padding: 0 10px;
+  }
+
+  .categoryIcon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .categoryName {
+    font-size: 13px;
+  }
+
+  .amountSection {
+    min-width: auto;
+
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+  }
+
+  .amountSection strong {
+    font-size: 12px;
+  }
+
+  .amountSection span {
+    font-size: 10px;
+  }
+
+  .percentage {
+    width: 32px;
+    font-size: 11px;
+  }
+
+  .arrowButton {
+    width: 31px;
+    height: 31px;
+  }
+
+  .tipCard {
+    padding: 18px;
+  }
+
+  .tipDecor {
+    right: 15px;
+  }
+}
+
+/* ============================================================
+   SMALL MOBILE
+============================================================ */
+
+@media (max-width: 480px) {
+  .headerText h1 {
+    font-size: 30px;
+  }
+
+  .headerActions {
+    gap: 7px;
+  }
+
+  .periodDropdown {
+    width: 150px;
+  }
+
+  .newBudgetButton {
+    padding: 0 13px;
+    font-size: 12px;
+  }
+
+  .budgetRow {
+    gap: 7px;
+  }
+
+  .categoryDetails {
+    min-width: 70px;
+  }
+
+  .amountSection {
+    display: none;
+  }
+
+  .percentage {
+    margin-left: auto;
+  }
+
+  .detailsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .detailsActions {
+    flex-direction: column;
+  }
+
+  .deleteModalActions {
+    flex-direction: column;
+  }
+
+  .modal {
+    padding: 23px;
+  }
+}
+/* ============================================================
+   WAKU BUDGET PAGE DECORATIVE BACKGROUND
+   ============================================================ */
+
+.page {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Keep actual page content above decorations */
+.page > *:not(.backgroundDecor) {
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================================
+   DECORATION CONTAINER
+   ============================================================ */
+
+.backgroundDecor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* ============================================================
+   BOTTOM LEFT SOFT CREAM SHAPE
+   ============================================================ */
+
+.decorBottomLeft {
+  position: absolute;
+  left: 255px;
+  bottom: -95px;
+
+  width: 250px;
+  height: 180px;
+
+  background: #fff4cf;
+
+  border-radius: 58% 42% 0 0;
+
+  transform: rotate(-7deg);
+
+  opacity: 0.85;
+}
+
+/* ============================================================
+   BOTTOM RIGHT LAVENDER SHAPE
+   ============================================================ */
+
+.decorBottomRight {
+  position: absolute;
+  right: -45px;
+  bottom: -65px;
+
+  width: 330px;
+  height: 210px;
+
+  background: #ddd4ff;
+
+  border-radius: 72% 28% 0 0;
+
+  transform: rotate(-8deg);
+
+  opacity: 0.9;
+}
+
+/* ============================================================
+   TOP RIGHT YELLOW DOODLE
+   ============================================================ */
+
+.yellowDoodle {
+  position: absolute;
+
+  right: 55px;
+  top: 95px;
+
+  width: 115px;
+  height: 75px;
+
+  transform: rotate(-8deg);
+}
+
+/* Yellow star */
+.doodleStar {
+  position: absolute;
+
+  left: 0;
+  top: 4px;
+
+  color: #ffca28;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Curved yellow line */
+.doodleCurve {
+  position: absolute;
+
+  left: 22px;
+  top: 22px;
+
+  width: 70px;
+  height: 30px;
+
+  border-top: 2px solid #ffbf00;
+  border-radius: 50%;
+
+  transform: rotate(-12deg);
+}
+
+/* Small extension to make it hand-drawn */
+.doodleCurve::after {
+  content: "";
+
+  position: absolute;
+
+  right: -8px;
+  top: -8px;
+
+  width: 28px;
+  height: 18px;
+
+  border-top: 2px solid #ffbf00;
+  border-radius: 50%;
+
+  transform: rotate(25deg);
+}
+
+/* ============================================================
+   BOTTOM LEFT PURPLE DOODLE
+   ============================================================ */
+
+.purpleDoodle {
+  position: absolute;
+
+  left: 390px;
+  bottom: 30px;
+
+  width: 105px;
+  height: 70px;
+
+  transform: rotate(-8deg);
+}
+
+/* Purple curved line */
+.purpleCurve {
+  position: absolute;
+
+  left: 10px;
+  top: 20px;
+
+  width: 60px;
+  height: 35px;
+
+  border-top: 2px solid #8b6cff;
+  border-left: 2px solid transparent;
+
+  border-radius: 55%;
+
+  transform: rotate(-15deg);
+}
+
+/* Second purple curve */
+.purpleCurve::after {
+  content: "";
+
+  position: absolute;
+
+  left: 28px;
+  top: -12px;
+
+  width: 45px;
+  height: 32px;
+
+  border-top: 2px solid #8b6cff;
+
+  border-radius: 50%;
+
+  transform: rotate(20deg);
+}
+
+/* Small yellow sparkle */
+.smallYellowStar {
+  position: absolute;
+
+  right: 4px;
+  top: 10px;
+
+  color: #ffbf00;
+
+  font-size: 12px;
+}
+
+/* ============================================================
+   BOTTOM RIGHT STAR
+   ============================================================ */
+
+.bottomStar {
+  position: absolute;
+
+  right: 45px;
+  bottom: 35px;
+
+  color: #ff4f91;
+
+  font-size: 31px;
+  font-weight: 300;
+
+  transform: rotate(-12deg);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+  .decorBottomLeft {
+    left: 180px;
+  }
+
+  .purpleDoodle {
+    left: 300px;
+  }
+
+  .yellowDoodle {
+    right: 30px;
+  }
+}
+
+@media (max-width: 800px) {
+
+  .decorBottomLeft {
+    left: 80px;
+    bottom: -110px;
+  }
+
+  .decorBottomRight {
+    right: -100px;
+  }
+
+  .yellowDoodle {
+    right: 20px;
+    top: 80px;
+    transform: scale(0.8) rotate(-8deg);
+  }
+
+  .purpleDoodle {
+    left: 170px;
+    bottom: 20px;
+    transform: scale(0.8) rotate(-8deg);
+  }
+
+  .bottomStar {
+    right: 25px;
+    bottom: 25px;
+  }
+}

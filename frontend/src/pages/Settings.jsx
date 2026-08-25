@@ -756,34 +756,181 @@ const Settings = () => {
 
   return (
 
-    <div className={styles.page}>
+    <div
+      className={styles.page}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
 
       {/* =================================================
-          DECORATIONS
+          WAKU DECORATIONS
+          Decorative only — does not affect functionality.
       ================================================= */}
 
       <div
-        className={`${styles.doodle} ${styles.doodleTop}`}
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          overflow: "hidden",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
       >
-        ↗
-      </div>
+        {/* Soft yellow bottom-left shape */}
+        <div
+          style={{
+            position: "absolute",
+            left: "-55px",
+            bottom: "-75px",
+            width: "235px",
+            height: "165px",
+            background: "#FFF4CC",
+            borderRadius: "58% 42% 0 0",
+            transform: "rotate(-8deg)",
+            opacity: 0.9,
+          }}
+        />
 
-      <div
-        className={`${styles.doodle} ${styles.doodleRed}`}
-      >
-        ◯
-      </div>
+        {/* Soft lavender bottom-right shape */}
+        <div
+          style={{
+            position: "absolute",
+            right: "-55px",
+            bottom: "-70px",
+            width: "230px",
+            height: "160px",
+            background: "#E8DEFF",
+            borderRadius: "45% 55% 0 0",
+            transform: "rotate(8deg)",
+            opacity: 0.95,
+          }}
+        />
 
-      <div
-        className={`${styles.doodle} ${styles.doodleYellow}`}
-      >
-        〰
-      </div>
+        {/* Yellow hand-drawn style doodle — top right */}
+        <div
+          style={{
+            position: "absolute",
+            top: "105px",
+            right: "35px",
+            width: "95px",
+            height: "70px",
+            color: "#F4B800",
+            transform: "rotate(-7deg)",
+            fontFamily: "cursive",
+            fontSize: "48px",
+            lineHeight: 1,
+          }}
+        >
+          <span
+            style={{
+              position: "absolute",
+              left: "4px",
+              top: "14px",
+              width: "58px",
+              height: "28px",
+              borderTop: "2px solid #F4B800",
+              borderRight: "2px solid #F4B800",
+              borderRadius: "50%",
+              transform: "rotate(-20deg)",
+            }}
+          />
+          <span
+            style={{
+              position: "absolute",
+              right: "4px",
+              top: "5px",
+              fontSize: "24px",
+              transform: "rotate(15deg)",
+            }}
+          >
+            ✦
+          </span>
+        </div>
 
-      <div
-        className={`${styles.doodle} ${styles.doodlePurple}`}
-      >
-        ☆
+        {/* Purple loose curve — right side */}
+        <div
+          style={{
+            position: "absolute",
+            top: "205px",
+            right: "10px",
+            width: "65px",
+            height: "45px",
+            borderBottom: "2px solid #8B6CFF",
+            borderLeft: "2px solid #8B6CFF",
+            borderRadius: "0 0 0 60%",
+            transform: "rotate(-18deg)",
+            opacity: 0.9,
+          }}
+        />
+
+        {/* Purple doodle — bottom left */}
+        <div
+          style={{
+            position: "absolute",
+            left: "145px",
+            bottom: "28px",
+            width: "90px",
+            height: "65px",
+            color: "#8B6CFF",
+            transform: "rotate(-8deg)",
+          }}
+        >
+          <span
+            style={{
+              position: "absolute",
+              left: "8px",
+              top: "16px",
+              width: "55px",
+              height: "32px",
+              border: "2px solid #8B6CFF",
+              borderLeftColor: "transparent",
+              borderRadius: "50%",
+              transform: "rotate(-18deg)",
+            }}
+          />
+          <span
+            style={{
+              position: "absolute",
+              left: "42px",
+              top: "0",
+              fontSize: "18px",
+            }}
+          >
+            ✦
+          </span>
+        </div>
+
+        {/* Pink star — bottom right */}
+        <div
+          style={{
+            position: "absolute",
+            right: "55px",
+            bottom: "28px",
+            color: "#FF5C8A",
+            fontSize: "30px",
+            transform: "rotate(-12deg)",
+            fontFamily: "cursive",
+          }}
+        >
+          ☆
+        </div>
+
+        {/* Small yellow spark */}
+        <div
+          style={{
+            position: "absolute",
+            right: "105px",
+            bottom: "90px",
+            color: "#F4B800",
+            fontSize: "18px",
+            transform: "rotate(12deg)",
+          }}
+        >
+          ✦
+        </div>
       </div>
 
 
