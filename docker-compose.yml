@@ -1,0 +1,41 @@
+services:
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    container_name: expense-tracker-backend
+
+    env_file:
+      - ./backend/.env
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./backend/db.sqlite3:/app/db.sqlite3
+      - ./backend/goal_images:/app/goal_images
+      - ./backend/media:/app/media
+
+    restart: unless-stopped
+
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    container_name: expense-tracker-frontend
+
+    ports:
+      - "8080:80"
+
+    depends_on:
+      - backend
+
+    volumes:
+      # Give Nginx access to Django uploaded media
+      - ./backend/media:/usr/share/nginx/media:ro
+
+    restart: unless-stopped

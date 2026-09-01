@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path, include
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -8,20 +8,37 @@ from rest_framework_simplejwt.views import (
 
 
 urlpatterns = [
+
+    # ============================================================
+    # ADMIN
+    # ============================================================
+
     path(
         "admin/",
         admin.site.urls,
     ),
+
+    # ============================================================
+    # AUTH
+    # ============================================================
 
     path(
         "api/auth/",
         include("accounts.urls"),
     ),
 
+    # ============================================================
+    # EXPENSES
+    # ============================================================
+
     path(
         "api/expenses/",
         include("expenses.urls"),
     ),
+
+    # ============================================================
+    # JWT
+    # ============================================================
 
     path(
         "api/token/",

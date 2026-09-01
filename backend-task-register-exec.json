@@ -1,0 +1,36 @@
+{
+  "family": "expense-tracker-backend",
+  "taskRoleArn": "arn:aws:iam::523741416022:role/expense-tracker-ecs-exec-task-role",
+  "executionRoleArn": "arn:aws:iam::523741416022:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "containerDefinitions": [
+    {
+      "name": "backend",
+      "image": "523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-backend:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "SECRET_KEY",
+          "value": "5pPGFSruw3O3-i5tOm-8zWyZRbBXjk9oFIvtgudolXEt_epxdT1cLnIghw6zgIKKe4s"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "//ecs/expense-tracker-backend",
+          "awslogs-region": "eu-north-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

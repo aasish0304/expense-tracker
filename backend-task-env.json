@@ -1,0 +1,44 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "backend",
+      "image": "523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-backend:latest",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "hostPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "SECRET_KEY",
+          "value": "5pPGFSruw3O3-i5tOm-8zWyZRbBXjk9oFIvtgudolXEt_epxdT1cLnIghw6zgIKKe4s"
+        }
+      ],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "//ecs/expense-tracker-backend",
+          "awslogs-region": "eu-north-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "systemControls": []
+    }
+  ],
+  "family": "expense-tracker-backend",
+  "executionRoleArn": "arn:aws:iam::523741416022:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "volumes": [],
+  "placementConstraints": [],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "512",
+  "memory": "1024"
+}

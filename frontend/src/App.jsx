@@ -1,13 +1,20 @@
 import { Routes, Route } from "react-router-dom";
+
 import Budgets from "./pages/Budgets";
+import Goals from "./pages/Goals";
+
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+
 import DashboardLayout from "./layouts/DashboardLayout";
+
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+
 import Expenses from "./pages/Expenses";
 import Settings from "./pages/Settings";
 import Admin from "./pages/Admin";
+
 import ProtectedRoute from "./components/ProtectedRoute";
 
 
@@ -46,7 +53,9 @@ function App() {
 
       <Route element={<ProtectedRoute />}>
 
-        {/* Dashboard */}
+        {/* ============================
+            DASHBOARD
+        ============================ */}
 
         <Route
           path="/dashboard"
@@ -59,7 +68,9 @@ function App() {
         />
 
 
-        {/* Expenses */}
+        {/* ============================
+            EXPENSES
+        ============================ */}
 
         <Route
           path="/dashboard/expenses"
@@ -71,7 +82,37 @@ function App() {
         />
 
 
-        {/* Settings / Profile */}
+        {/* ============================
+            BUDGETS
+        ============================ */}
+
+        <Route
+          path="/dashboard/budgets"
+          element={
+            <DashboardLayout>
+              <Budgets />
+            </DashboardLayout>
+          }
+        />
+
+
+        {/* ============================
+            GOALS
+        ============================ */}
+
+        <Route
+          path="/dashboard/goals"
+          element={
+            <DashboardLayout>
+              <Goals />
+            </DashboardLayout>
+          }
+        />
+
+
+        {/* ============================
+            SETTINGS / PROFILE
+        ============================ */}
 
         <Route
           path="/dashboard/settings"
@@ -82,14 +123,7 @@ function App() {
           }
         />
 
-<Route
-  path="/dashboard/budgets"
-  element={
-    <DashboardLayout>
-      <Budgets />
-    </DashboardLayout>
-  }
-/>
+
         {/* ==============================
             ADMIN ONLY ROUTES
         ============================== */}

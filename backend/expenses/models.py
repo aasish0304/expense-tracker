@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+# ============================================================
+# CATEGORY
+# ============================================================
+
 class Category(models.Model):
 
     name = models.CharField(
@@ -12,6 +16,10 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
+# ============================================================
+# EXPENSE
+# ============================================================
 
 class Expense(models.Model):
 
@@ -150,4 +158,87 @@ class Budget(models.Model):
             f"{self.category.name} - "
             f"{self.month}/{self.year} - "
             f"₹{self.amount}"
+        )
+
+
+# ============================================================
+# GOAL
+# ============================================================
+
+class Goal(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="goals",
+    )
+
+    name = models.CharField(
+        max_length=150,
+    )
+
+    target_amount = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+    )
+
+    current_amount = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0,
+    )
+
+    target_date = models.DateField(
+        null=True,
+        blank=True,
+    )
+
+    description = models.TextField(
+        blank=True,
+        default="",
+    )
+
+    image = models.ImageField(
+        upload_to="goal_images/",
+        null=True,
+        blank=True,
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+
+        ordering = [
+            "target_date",
+            "-created_at",
+        ]
+
+    def __str__(self):
+
+        return (
+            f"{self.user.email} - "
+            f"{self.name} - "
+            f"₹{self.target_amount}"
+        )
+
+    @property
+    def progress_percentage(self):
+
+        if self.target_amount <= 0:
+            return 0
+
+        percentage = (
+            float(self.current_amount)
+            / float(self.target_amount)
+        ) * 100
+
+        return min(
+            round(percentage, 2),
+            100,
         )

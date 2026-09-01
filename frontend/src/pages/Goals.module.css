@@ -1,0 +1,2391 @@
+/* ============================================================
+   WAKU GOALS
+============================================================ */
+
+.page {
+  position: relative;
+  min-height: 100%;
+  padding: 30px 34px 50px;
+  box-sizing: border-box;
+
+  background: #fcfbf8;
+  color: #17151b;
+
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   PAGE HEADER
+============================================================ */
+
+.header {
+  position: relative;
+  z-index: 5;
+
+  max-width: 1080px;
+  margin: 0 auto 22px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.header h1 {
+  margin: 0 0 12px;
+
+  font-size: 26px;
+  line-height: 1;
+
+  font-weight: 600;
+  letter-spacing: -0.7px;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.tabs button {
+  position: relative;
+
+  border: 0;
+  background: transparent;
+
+  padding: 0 0 8px;
+
+  color: #817c85;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+.tabs button.activeTab {
+  color: #19171b;
+  font-weight: 500;
+}
+
+.tabs button.activeTab::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 2px;
+
+  border-radius: 5px;
+
+  background: #171717;
+}
+
+
+/* ============================================================
+   NEW GOAL BUTTON
+============================================================ */
+
+.newGoalButton {
+  height: 38px;
+
+  padding: 0 15px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: #171717;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: transform 0.18s ease;
+}
+
+.newGoalButton:hover {
+  transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   CONTENT
+============================================================ */
+
+.content {
+  position: relative;
+  z-index: 3;
+
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+
+/* ============================================================
+   GOAL GRID
+============================================================ */
+
+.goalGrid {
+  display: grid;
+
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   GOAL CARD
+============================================================ */
+
+.goalCard {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 365px;
+  height: auto;
+  box-sizing: border-box;
+
+  padding: 16px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #e8e3dc;
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 4px 15px rgba(30, 24, 18, 0.035);
+
+  overflow: hidden;
+}
+
+.goalCard:hover {
+  box-shadow:
+    0 8px 22px rgba(30, 24, 18, 0.055);
+}
+
+
+/* ============================================================
+   CARD HEADER
+============================================================ */
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+}
+
+.goalIdentity {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.goalIcon {
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: #eee8ff;
+  color: #765ce3;
+}
+
+.goalIdentity h2 {
+  margin: 0;
+
+  max-width: 250px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: 14px;
+  line-height: 1.2;
+
+  font-weight: 550;
+
+  letter-spacing: -0.2px;
+}
+
+.goalIdentity p {
+  margin: 4px 0 0;
+
+  color: #89838c;
+
+  font-size: 9px;
+  font-weight: 400;
+}
+
+
+/* ============================================================
+   ACTIONS
+============================================================ */
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.cardActions button {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #aaa4ad;
+
+  cursor: pointer;
+}
+
+.cardActions button:hover {
+  background: #f5f2f7;
+  color: #716a75;
+}
+
+
+/* ============================================================
+   IMAGE / ILLUSTRATION AREA
+============================================================ */
+
+.goalVisual {
+  position: relative;
+
+  width: 100%;
+  height: 165px;
+
+  margin-bottom: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: #eee8ff;
+
+  overflow: hidden;
+}
+
+/* Uploaded-image mode: the photo fills the complete visual panel. */
+.goalVisual:has(.goalImage) {
+  background: #ffffff;
+}
+
+.goalVisual:has(.goalImage) .goalImage {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+.goalVisual:has(.goalImage) .doodleOne,
+.goalVisual:has(.goalImage) .doodleTwo,
+.goalVisual:has(.goalImage) .doodleThree,
+.goalVisual:has(.goalImage) .doodleCircle {
+  display: none;
+}
+
+
+/*
+   IMPORTANT:
+   Entire uploaded image remains visible.
+*/
+
+.goalImage {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  object-fit: cover;
+  object-position: center;
+
+  display: block;
+
+  /*
+     Don't use mix-blend-mode.
+     It can make uploaded product images look washed out.
+  */
+
+  transition: transform 0.2s ease;
+}
+
+.goalCard:hover .goalImage {
+  transform: scale(1.025);
+}
+
+
+/* ============================================================
+   PLACEHOLDER
+============================================================ */
+
+.imagePlaceholder {
+  position: relative;
+  z-index: 2;
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  color: #765ce3;
+
+  box-shadow:
+    0 5px 15px rgba(72, 53, 145, 0.08);
+}
+
+
+/* ============================================================
+   VERY SUBTLE DOODLES
+   Only 3 decorative elements.
+============================================================ */
+
+.doodleOne,
+.doodleTwo,
+.doodleThree,
+.doodleCircle {
+  position: absolute;
+
+  pointer-events: none;
+}
+
+
+/* yellow little stroke */
+
+.doodleOne {
+  left: 25px;
+  top: 24px;
+
+  width: 14px;
+  height: 14px;
+
+  z-index: 4;
+
+  transform: rotate(20deg);
+}
+
+.doodleOne::before,
+.doodleOne::after {
+  content: "";
+
+  position: absolute;
+
+  background: #f4b900;
+
+  border-radius: 20px;
+}
+
+.doodleOne::before {
+  width: 14px;
+  height: 2px;
+
+  top: 6px;
+  left: 0;
+}
+
+.doodleOne::after {
+  width: 2px;
+  height: 14px;
+
+  top: 0;
+  left: 6px;
+}
+
+
+/* purple sparkle */
+
+.doodleTwo {
+  right: 22px;
+  top: 21px;
+
+  z-index: 4;
+}
+
+.doodleTwo::before {
+  content: "✦";
+
+  color: #795fe4;
+
+  font-size: 17px;
+}
+
+
+/* pink tiny sparkle */
+
+.doodleThree {
+  right: 42px;
+  bottom: 15px;
+
+  z-index: 4;
+}
+
+.doodleThree::before {
+  content: "✧";
+
+  color: #ee7188;
+
+  font-size: 17px;
+}
+
+
+/*
+   Hide the old large circle completely.
+   The screenshot showed it becoming visual clutter.
+*/
+
+.doodleCircle {
+  display: none;
+}
+
+
+/* ============================================================
+   AMOUNT
+============================================================ */
+
+.amountRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+
+  margin-bottom: 7px;
+}
+
+.amountRow > div {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.amountRow strong {
+  font-size: 13px;
+  font-weight: 550;
+}
+
+.amountRow span {
+  color: #928c94;
+
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.amountRow > strong {
+  font-size: 11px;
+  font-weight: 550;
+}
+
+
+/* ============================================================
+   PROGRESS
+============================================================ */
+
+.progressTrack {
+  width: 100%;
+  height: 6px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #e9e6e3;
+}
+
+.progressBar {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    #765ce3,
+    #a28cef
+  );
+
+  transition: width 0.4s ease;
+}
+
+
+/* ============================================================
+   META
+============================================================ */
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 7px;
+  margin-bottom: 10px;
+
+  color: #85808a;
+
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.metaRow span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+/* ============================================================
+   MILESTONE
+============================================================ */
+
+.milestone {
+  min-height: 46px;
+
+  padding: 7px 10px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  border-radius: 11px;
+
+  background: #f0eaff;
+}
+
+.milestoneIcon {
+  width: 29px;
+  height: 29px;
+
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #e6dcff;
+
+  color: #7358df;
+}
+
+.milestone strong {
+  display: block;
+
+  color: #7357dc;
+
+  font-size: 9.5px;
+  font-weight: 550;
+}
+
+.milestone span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #817a89;
+
+  font-size: 8px;
+  font-weight: 400;
+}
+
+
+/* ============================================================
+   ADD GOAL CARD
+============================================================ */
+
+.addGoalCard {
+  position: relative;
+
+  min-height: 365px;
+  height: auto;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #e1d9f5;
+  border-radius: 18px;
+
+  background: #f0eaff;
+
+  color: #17151b;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  font-family: inherit;
+}
+
+.addGoalCard:hover {
+  background: #eee7ff;
+}
+
+
+/* plus */
+
+.addPlus {
+  position: relative;
+  z-index: 2;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 9px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.addGoalCard strong {
+  position: relative;
+  z-index: 2;
+
+  font-size: 11px;
+  font-weight: 550;
+}
+
+.addGoalCard > span:not(
+  .addDoodleOne
+):not(
+  .addDoodleTwo
+):not(
+  .addDoodleThree
+) {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 4px;
+
+  color: #817a89;
+
+  font-size: 8.5px;
+  font-weight: 400;
+}
+
+
+/* ============================================================
+   ADD CARD DOODLES
+============================================================ */
+
+.addDoodleOne,
+.addDoodleTwo,
+.addDoodleThree {
+  position: absolute;
+
+  pointer-events: none;
+}
+
+
+/* coral curved line */
+
+.addDoodleOne {
+  left: 25px;
+  bottom: 28px;
+
+  width: 37px;
+  height: 15px;
+
+  border-top: 2px solid #ed7188;
+
+  border-radius: 50%;
+
+  transform: rotate(-12deg);
+}
+
+
+/* yellow star */
+
+.addDoodleTwo {
+  right: 25px;
+  top: 25px;
+}
+
+.addDoodleTwo::before {
+  content: "☆";
+
+  color: #f4b900;
+
+  font-size: 26px;
+}
+
+
+/* purple sparkle */
+
+.addDoodleThree {
+  left: 28px;
+  top: 28px;
+}
+
+.addDoodleThree::before {
+  content: "✦";
+
+  color: #795fe4;
+
+  font-size: 14px;
+}
+
+
+/* ============================================================
+   MOTIVATION
+============================================================ */
+
+.motivation {
+  position: relative;
+
+  min-height: 72px;
+
+  margin-top: 14px;
+
+  border-radius: 16px;
+
+  background: #eee8ff;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+}
+
+.motivationShape {
+  position: absolute;
+
+  left: 0;
+  bottom: -24px;
+
+  width: 105px;
+  height: 82px;
+
+  background: #765ce3;
+
+  clip-path: polygon(
+    0 100%,
+    0 42%,
+    27% 63%,
+    48% 17%,
+    68% 50%,
+    100% 5%,
+    100% 100%
+  );
+}
+
+.motivationContent {
+  position: relative;
+  z-index: 2;
+
+  margin-left: 130px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.motivationContent strong {
+  font-size: 11px;
+  font-weight: 550;
+}
+
+.motivationContent span {
+  color: #817a89;
+
+  font-size: 8.5px;
+  font-weight: 400;
+}
+
+.motivationDoodle {
+  position: absolute;
+
+  right: 40px;
+  top: 16px;
+
+  width: 35px;
+  height: 27px;
+
+  border: 2px solid #ed7188;
+
+  border-radius: 50%;
+
+  transform: rotate(-20deg);
+}
+
+.motivationDoodle::after {
+  content: "";
+
+  position: absolute;
+
+  width: 25px;
+  height: 14px;
+
+  left: -5px;
+  top: 17px;
+
+  border-top: 2px solid #ed7188;
+
+  border-radius: 50%;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+============================================================ */
+
+.emptyState {
+  min-height: 240px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px dashed #ddd6e9;
+  border-radius: 18px;
+
+  background: #faf8ff;
+
+  text-align: center;
+}
+
+.emptyIcon {
+  width: 44px;
+  height: 44px;
+
+  margin-bottom: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #eee8ff;
+  color: #765ce3;
+}
+
+.emptyState strong {
+  font-size: 12px;
+  font-weight: 550;
+}
+
+.emptyState span {
+  margin-top: 5px;
+
+  color: #8c8690;
+
+  font-size: 9px;
+  font-weight: 400;
+}
+
+
+/* ============================================================
+   MODAL
+============================================================ */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(27, 23, 31, 0.32);
+
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  width: min(500px, 100%);
+  max-height: calc(100vh - 40px);
+
+  overflow-y: auto;
+
+  padding: 22px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #e5dfe9;
+  border-radius: 19px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 25px 65px rgba(30, 22, 40, 0.16);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  margin-bottom: 18px;
+}
+
+.modalHeader h2 {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.modalHeader p {
+  margin: 5px 0 0;
+
+  color: #89838c;
+
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.modalHeader > button {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: #f5f2f6;
+  color: #77717b;
+
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   FORM
+============================================================ */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  color: #39343b;
+
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+
+  min-height: 38px;
+
+  box-sizing: border-box;
+
+  padding: 9px 11px;
+
+  border: 1px solid #dfd9e2;
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #ffffff;
+  color: #28242a;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 400;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.form input:focus,
+.form textarea:focus {
+  border-color: #8068e5;
+
+  box-shadow:
+    0 0 0 3px rgba(128, 104, 229, 0.08);
+}
+
+.form textarea {
+  min-height: 75px;
+  resize: vertical;
+}
+
+
+/* ============================================================
+   DATE INPUT
+============================================================ */
+
+/*
+   Edge does not allow the actual calendar popup to be
+   completely redesigned with CSS.
+
+   We CAN make the date field itself match Waku.
+*/
+
+.form input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 100%;
+  height: 40px;
+
+  padding: 0 11px;
+
+  border: 1px solid #dfd9e2;
+  border-radius: 9px;
+
+  background-color: #ffffff;
+
+  color: #37323a;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 400;
+
+  cursor: pointer;
+
+  outline: none;
+}
+
+.form input[type="date"]:hover {
+  border-color: #cfc6da;
+}
+
+.form input[type="date"]:focus {
+  border-color: #8068e5;
+
+  box-shadow:
+    0 0 0 3px rgba(128, 104, 229, 0.08);
+}
+
+
+/*
+   Calendar icon.
+*/
+
+.form input[type="date"]::-webkit-calendar-picker-indicator {
+  width: 18px;
+  height: 18px;
+
+  margin-right: 2px;
+
+  opacity: 0.55;
+
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   WAKU CUSTOM DATE PICKER
+   Used by WakuDatePicker in Goals.jsx
+============================================================ */
+
+.datePicker {
+  position: relative;
+  width: 100%;
+}
+
+.dateInput {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  border: 1px solid #dfd9e2;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #37323a;
+
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 400;
+
+  cursor: pointer;
+
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dateInput:hover {
+  border-color: #cfc5dc;
+}
+
+.dateInput:focus {
+  outline: none;
+  border-color: #8068e5;
+  box-shadow: 0 0 0 3px rgba(128, 104, 229, 0.08);
+}
+
+.dateInput svg {
+  flex: 0 0 auto;
+  color: #8068e5;
+}
+
+.dateValue {
+  color: #37323a;
+}
+
+.datePlaceholder {
+  color: #aaa4ad;
+}
+
+.calendarPopup {
+  position: absolute;
+  top: calc(100% + 7px);
+  left: 0;
+  z-index: 500;
+
+  width: 285px;
+  padding: 14px;
+  box-sizing: border-box;
+
+  border: 1px solid #e2dced;
+  border-radius: 15px;
+
+  background: #ffffff;
+
+  box-shadow: 0 16px 40px rgba(40, 30, 65, 0.14);
+}
+
+.calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 13px;
+}
+
+.calendarHeader strong {
+  color: #28242d;
+  font-size: 11px;
+  font-weight: 550;
+}
+
+.calendarHeader button {
+  width: 29px;
+  height: 29px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: #f0eaff;
+  color: #765ce3;
+
+  font-family: inherit;
+  font-size: 20px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.calendarHeader button:hover {
+  background: #e7deff;
+}
+
+.weekDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 5px;
+}
+
+.weekDays span {
+  height: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #9b95a0;
+
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.calendarDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.calendarDay,
+.selectedDay {
+  width: 32px;
+  height: 32px;
+  margin: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 9px;
+
+  font-family: inherit;
+  font-size: 9px;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+.calendarDay {
+  background: transparent;
+  color: #49434d;
+}
+
+.calendarDay:hover {
+  background: #f0eaff;
+  color: #765ce3;
+}
+
+.selectedDay {
+  background: #765ce3;
+  color: #ffffff;
+  font-weight: 500;
+  box-shadow: 0 4px 9px rgba(118, 92, 227, 0.20);
+}
+
+.calendarDay:disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   TWO COLUMNS
+============================================================ */
+
+
+
+.twoColumns {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+
+/* ============================================================
+   IMAGE UPLOAD
+============================================================ */
+
+.uploadSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldLabel {
+  color: #39343b;
+
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.fileInput {
+  display: none;
+}
+
+.uploadArea {
+  min-height: 125px;
+
+  padding: 14px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 1.5px dashed #d8d0e7;
+  border-radius: 12px;
+
+  background: #faf8ff;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.uploadArea:hover {
+  background: #f5f1ff;
+  border-color: #927de1;
+}
+
+.uploadIcon {
+  width: 34px;
+  height: 34px;
+
+  margin-bottom: 7px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #eee8ff;
+  color: #765ce3;
+}
+
+.uploadArea strong {
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.uploadArea span {
+  margin-top: 4px;
+
+  color: #8b858e;
+
+  font-size: 8.5px;
+  font-weight: 400;
+}
+
+.uploadArea small {
+  margin-top: 4px;
+
+  color: #aaa3ad;
+
+  font-size: 7.5px;
+}
+
+
+/* ============================================================
+   PREVIEW
+============================================================ */
+
+.previewWrapper {
+  position: relative;
+
+  width: 100%;
+  height: 145px;
+
+  border-radius: 11px;
+
+  overflow: hidden;
+
+  background: #eee8ff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uploadPreview {
+  width: 100%;
+  height: 100%;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  object-fit: cover;
+  object-position: center;
+  object-position: center;
+}
+
+.previewOverlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(30, 25, 37, 0.38);
+
+  color: white;
+
+  opacity: 0;
+
+  transition: opacity 0.15s ease;
+}
+
+.previewWrapper:hover .previewOverlay {
+  opacity: 1;
+}
+
+.previewOverlay span {
+  color: white;
+  font-size: 9px;
+}
+
+.removeImage {
+  align-self: flex-start;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #d75e75;
+
+  font-family: inherit;
+  font-size: 8.5px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   FORM ERROR
+============================================================ */
+
+.formError {
+  padding: 9px 10px;
+
+  border-radius: 8px;
+
+  background: #fff1f3;
+
+  color: #c65369;
+
+  font-size: 9px;
+}
+
+
+/* ============================================================
+   MODAL BUTTONS
+============================================================ */
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+
+  margin-top: 3px;
+}
+
+.cancelButton,
+.saveButton,
+.deleteButton {
+  height: 36px;
+
+  padding: 0 15px;
+
+  border-radius: 9px;
+
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.cancelButton {
+  border: 1px solid #e1dce4;
+
+  background: #ffffff;
+
+  color: #716b74;
+}
+
+.saveButton {
+  border: 0;
+
+  background: #171717;
+  color: #ffffff;
+}
+
+.saveButton:disabled,
+.deleteButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* ============================================================
+   DELETE
+============================================================ */
+
+.deleteModal {
+  width: min(380px, 100%);
+
+  padding: 24px;
+
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  text-align: center;
+}
+
+.deleteIcon {
+  width: 42px;
+  height: 42px;
+
+  margin: 0 auto 11px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #fff0f2;
+  color: #d75e75;
+}
+
+.deleteModal h2 {
+  margin: 0;
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.deleteModal p {
+  margin: 7px 0 18px;
+
+  color: #89828b;
+
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.deleteButton {
+  border: 0;
+
+  background: #dc6378;
+  color: white;
+}
+
+
+/* ============================================================
+   LOADING / ERROR
+============================================================ */
+
+.loading {
+  padding: 70px 0;
+
+  text-align: center;
+
+  color: #89838c;
+
+  font-size: 11px;
+}
+
+.errorState {
+  max-width: 450px;
+
+  margin: 60px auto;
+  padding: 22px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 6px;
+
+  border: 1px solid #f0dadd;
+  border-radius: 15px;
+
+  background: #fff8f9;
+
+  text-align: center;
+}
+
+.errorState strong {
+  font-size: 12px;
+  font-weight: 550;
+}
+
+.errorState span {
+  color: #8f7d82;
+  font-size: 9px;
+}
+
+.errorState button {
+  margin-top: 8px;
+
+  padding: 8px 14px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: #171717;
+  color: white;
+
+  font-family: inherit;
+  font-size: 9px;
+
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 1180px) {
+  .goalGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .goalCard,
+  .addGoalCard {
+    width: 100%;
+  }
+}
+
+@media (max-width: 850px) {
+  .page {
+    padding: 24px 20px 40px;
+  }
+
+  .goalGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .goalCard,
+  .addGoalCard {
+    min-height: 350px;
+  }
+
+  .goalVisual {
+    height: 145px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .newGoalButton {
+    align-self: flex-start;
+  }
+
+  .twoColumns {
+    grid-template-columns: 1fr;
+  }
+
+  .goalCard,
+  .addGoalCard {
+    height: auto;
+    min-height: 326px;
+  }
+}
+
+/* ============================================================
+   FINAL POLISH OVERRIDES
+   ============================================================ */
+
+/* Smooth, hand-drawn CSS doodles — no text glyphs */
+.doodleOne::before,
+.doodleOne::after,
+.doodleTwo::before,
+.doodleTwo::after,
+.doodleThree::before,
+.doodleThree::after,
+.addDoodleThree::before,
+.addDoodleThree::after,
+.addDoodleTwo::before,
+.addDoodleTwo::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+}
+
+.doodleOne,
+.doodleTwo,
+.doodleThree {
+  width: 16px;
+  height: 16px;
+}
+
+.doodleOne::before,
+.doodleOne::after {
+  left: 7px;
+  top: 1px;
+  width: 2px;
+  height: 14px;
+  background: #f4b900;
+}
+
+.doodleOne::after { transform: rotate(90deg); }
+
+.doodleTwo::before,
+.doodleTwo::after {
+  left: 7px;
+  top: 0;
+  width: 1.8px;
+  height: 16px;
+  background: #795fe4;
+}
+
+.doodleTwo::after { transform: rotate(90deg); }
+
+.doodleThree::before,
+.doodleThree::after {
+  left: 7px;
+  top: 0;
+  width: 1.6px;
+  height: 15px;
+  background: #ed7188;
+}
+
+.doodleThree::after { transform: rotate(90deg); }
+
+.addDoodleTwo::before,
+.addDoodleTwo::after {
+  left: 8px;
+  top: 0;
+  width: 2px;
+  height: 18px;
+  background: #f4b900;
+}
+
+.addDoodleTwo::after { transform: rotate(90deg); }
+
+.addDoodleThree::before,
+.addDoodleThree::after {
+  left: 6px;
+  top: 0;
+  width: 1.7px;
+  height: 14px;
+  background: #795fe4;
+}
+
+.addDoodleThree::after { transform: rotate(90deg); }
+
+/* Consistent lavender footer treatment across every goal */
+.milestone,
+.motivation {
+  background: #f0eaff;
+  border-color: #e5dcfa;
+}
+
+.milestoneIcon {
+  background: #e6dcff;
+  color: #7358df;
+}
+
+.milestone strong {
+  color: #7357dc;
+}
+
+.milestone span,
+.motivationContent span {
+  color: #817a89;
+}
+
+/* ============================================================
+   CUSTOM CALENDAR — class names match Goals.jsx exactly
+   ============================================================ */
+
+.datePickerWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.dateInput {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid #dfd9e2;
+  border-radius: 10px;
+  background: #fff;
+  color: #37323a;
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.dateInput:hover {
+  border-color: #cfc5dc;
+}
+
+.dateInput:focus {
+  outline: none;
+  border-color: #8068e5;
+  box-shadow: 0 0 0 3px rgba(128, 104, 229, 0.08);
+}
+
+.dateInput svg {
+  flex: 0 0 auto;
+  color: #8068e5;
+}
+
+.dateValue { color: #37323a; }
+.datePlaceholder { color: #aaa4ad; }
+
+.calendarPopup {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 1500;
+  width: 320px;
+  padding: 15px;
+  box-sizing: border-box;
+  border: 1px solid #e2dced;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(40, 30, 65, 0.16);
+}
+
+.calendarAccent {
+  position: absolute;
+  left: 18px;
+  top: -1px;
+  width: 45px;
+  height: 3px;
+  border-radius: 0 0 999px 999px;
+  background: #765ce3;
+}
+
+.calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 13px;
+}
+
+.calendarHeader > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.calendarHeader strong {
+  color: #28242d;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.calendarHeader span {
+  color: #9a94a0;
+  font-size: 8px;
+  font-weight: 400;
+}
+
+.calendarNavigation {
+  display: flex;
+  gap: 5px;
+}
+
+.calendarNavigation button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 8px;
+  background: #f0eaff;
+  color: #765ce3;
+  cursor: pointer;
+}
+
+.calendarNavigation button:hover {
+  background: #e7deff;
+}
+
+.weekDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+
+.weekDays span {
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9b95a0;
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.calendarDay {
+  width: 35px;
+  height: 35px;
+  margin: auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #49434d;
+  font-family: inherit;
+  font-size: 9.5px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background .12s ease, color .12s ease, transform .12s ease;
+}
+
+.calendarDay:hover {
+  background: #f0eaff;
+  color: #765ce3;
+  transform: translateY(-1px);
+}
+
+.outsideDay { color: #c5beca; }
+
+.outsideDay:hover {
+  background: #faf8ff;
+  color: #aaa3ad;
+}
+
+.todayDay {
+  box-shadow: inset 0 0 0 1px #cfc2f4;
+  color: #765ce3;
+  font-weight: 500;
+}
+
+.selectedDay {
+  background: #765ce3;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 5px 12px rgba(118, 92, 227, 0.22);
+}
+
+.selectedDay:hover {
+  background: #6c51d5;
+  color: #fff;
+}
+
+.calendarFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 9px;
+  padding-top: 10px;
+  border-top: 1px solid #eee9f2;
+}
+
+.calendarFooter button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 9px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.calendarClear { color: #8e8794; }
+.calendarClear:hover { color: #d75e75; }
+.calendarToday { color: #765ce3; }
+.calendarToday:hover { color: #6046ca; }
+
+/* Keep all primary typography weights consistent */
+.header h1,
+.goalIdentity h2,
+.amountRow strong,
+.modalHeader h2,
+.errorState strong,
+.deleteModal h2,
+.addGoalCard strong,
+.emptyState strong {
+  font-weight: 600;
+}
+
+.tabs button.activeTab,
+.newGoalButton,
+.modalHeader > button,
+.form label,
+.fieldLabel,
+.uploadArea strong,
+.removeImage,
+.cancelButton,
+.saveButton,
+.deleteButton,
+.calendarHeader strong,
+.calendarDay.selectedDay,
+.calendarToday {
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .calendarPopup {
+    width: min(320px, calc(100vw - 70px));
+  }
+}
+
+/* ============================================================
+   GOALS POLISH V3
+   - smoother hand-drawn SVG doodles
+   - clearly visible, consistent lavender footer
+   - calendar opens ABOVE the field to avoid modal overflow
+============================================================ */
+
+/* Smooth SVG doodles */
+.doodleOne,
+.doodleTwo,
+.doodleThree,
+.addDoodleOne,
+.addDoodleTwo,
+.addDoodleThree,
+.motivationDoodle {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.doodleOne {
+  position: absolute;
+  left: 22px;
+  top: 20px;
+  width: 17px;
+  height: 17px;
+  stroke: #f2b900;
+  stroke-width: 2.15;
+  z-index: 5;
+}
+
+.doodleTwo {
+  position: absolute;
+  right: 22px;
+  top: 17px;
+  width: 43px;
+  height: 28px;
+  stroke: #765ce3;
+  stroke-width: 2;
+  z-index: 5;
+}
+
+.doodleThree {
+  position: absolute;
+  right: 34px;
+  bottom: 12px;
+  width: 18px;
+  height: 18px;
+  stroke: #e76d87;
+  stroke-width: 1.8;
+  z-index: 5;
+}
+
+.goalVisualImage .doodleOne,
+.goalVisualImage .doodleTwo,
+.goalVisualImage .doodleThree {
+  display: none;
+}
+
+.addDoodleOne {
+  left: 22px;
+  bottom: 23px;
+  width: 82px;
+  height: 38px;
+  stroke: #e76d87;
+  stroke-width: 2;
+}
+
+.addDoodleTwo {
+  right: 24px;
+  top: 23px;
+  width: 20px;
+  height: 20px;
+  stroke: #f2b900;
+  stroke-width: 2.1;
+}
+
+.addDoodleThree {
+  left: 27px;
+  top: 27px;
+  width: 17px;
+  height: 17px;
+  stroke: #765ce3;
+  stroke-width: 1.9;
+}
+
+/* Make the card footer visibly part of the Waku lavender system */
+.milestone {
+  min-height: 48px;
+  border: 1px solid #dfd3fb;
+  background: #f0eaff;
+  box-shadow: inset 3px 0 0 #a18bea;
+}
+
+.milestoneIcon {
+  background: #e4d9ff;
+  color: #765ce3;
+}
+
+.milestone strong {
+  color: #6f55d6;
+}
+
+.milestone span {
+  color: #7e7788;
+}
+
+/* The page-level motivation footer gets the same lavender treatment */
+.motivation {
+  border: 1px solid #dfd3fb;
+  background: linear-gradient(135deg, #f0eaff 0%, #f7f4ff 100%);
+  box-shadow: 0 5px 18px rgba(118, 92, 227, 0.055);
+}
+
+.motivationShape {
+  background: #e2d8ff;
+}
+
+.motivationDoodle {
+  right: 34px;
+  top: 15px;
+  width: 72px;
+  height: 38px;
+  stroke: #e76d87;
+  stroke-width: 2;
+  opacity: .78;
+}
+
+/* ============================================================
+   USER-FRIENDLY CUSTOM CALENDAR
+   It deliberately opens upward because the Target Date field
+   sits low inside the modal in the current layout.
+============================================================ */
+.datePickerWrapper {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.dateInput {
+  height: 42px;
+  border: 1px solid #dfd9e2;
+  border-radius: 10px;
+  background: #fff;
+  color: #37323a;
+}
+
+.dateInput:hover {
+  border-color: #cfc5dc;
+}
+
+.dateInput:focus-visible {
+  outline: none;
+  border-color: #8068e5;
+  box-shadow: 0 0 0 3px rgba(128, 104, 229, 0.08);
+}
+
+.calendarPopup {
+  top: auto;
+  bottom: calc(100% + 10px);
+  left: 0;
+  width: 304px;
+  padding: 14px;
+  z-index: 2000;
+  border: 1px solid #e2dced;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(40, 30, 65, 0.15);
+  transform-origin: bottom left;
+}
+
+.calendarPopup::after {
+  content: "";
+  position: absolute;
+  left: 28px;
+  bottom: -6px;
+  width: 11px;
+  height: 11px;
+  background: #fff;
+  border-right: 1px solid #e2dced;
+  border-bottom: 1px solid #e2dced;
+  transform: rotate(45deg);
+}
+
+.calendarAccent {
+  height: 3px;
+  width: 48px;
+  left: 18px;
+  top: -1px;
+  background: #765ce3;
+  border-radius: 0 0 999px 999px;
+}
+
+.calendarHeaderDoodle {
+  position: absolute;
+  right: 73px;
+  top: 17px;
+  width: 30px;
+  height: 11px;
+  border-top: 1.6px solid #f2b900;
+  border-radius: 50%;
+  transform: rotate(-12deg);
+  opacity: .7;
+}
+
+.calendarHeader {
+  margin-bottom: 11px;
+}
+
+.calendarHeader strong {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.calendarHeader span {
+  font-size: 8px;
+}
+
+.calendarNavigation button {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #f0eaff;
+  color: #765ce3;
+}
+
+.calendarNavigation button:hover {
+  background: #e7deff;
+}
+
+.weekDays span {
+  height: 25px;
+  color: #9b95a0;
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.calendarGrid {
+  gap: 3px;
+}
+
+.calendarDay {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 9px;
+  color: #49434d;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.calendarDay:hover {
+  background: #f0eaff;
+  color: #765ce3;
+}
+
+.todayDay {
+  box-shadow: inset 0 0 0 1px #cfc2f4;
+  color: #765ce3;
+  font-weight: 500;
+}
+
+.selectedDay,
+.selectedDay:hover {
+  background: #765ce3;
+  color: #fff;
+  box-shadow: 0 5px 12px rgba(118, 92, 227, .22);
+}
+
+.calendarFooter {
+  margin-top: 8px;
+  padding-top: 9px;
+  border-top: 1px solid #eee9f2;
+}
+
+.calendarFooter button {
+  padding: 0;
+}
+
+/* Keep the calendar inside the modal even on smaller screens */
+@media (max-width: 600px) {
+  .calendarPopup {
+    width: min(304px, calc(100vw - 80px));
+  }
+}

@@ -12,6 +12,7 @@ import {
   Plus,
   Search,
   Trash2,
+  Trophy,
   Wallet,
   X,
 } from "lucide-react";
@@ -708,6 +709,7 @@ function Expenses() {
 
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
+  const [milestoneToast, setMilestoneToast] = useState(null);
 
 
   /* =====================================================
@@ -768,7 +770,7 @@ function Expenses() {
       setLoading(true);
       setError("");
 
-      const response = await api.get("/expenses/");
+      const response = await api.get("/");
 
       const expenseData = Array.isArray(response.data)
         ? response.data
@@ -1010,6 +1012,111 @@ if (categories.length === 0 && expenseData.length > 0) {
 
 
   /* =====================================================
+     GAMIFICATION — SPENDING STREAK
+     Uses real expense dates; no hardcoded progress.
+  ===================================================== */
+
+  const spendingStreak = useMemo(() => {
+    const dateSet = new Set(
+      expenses
+        .map((expense) => expense.date?.split("T")[0])
+        .filter(Boolean)
+    );
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let streak = 0;
+    const cursor = new Date(today);
+
+    while (dateSet.has(formatDateValue(cursor))) {
+      streak += 1;
+      cursor.setDate(cursor.getDate() - 1);
+    }
+
+    return streak;
+  }, [expenses]);
+
+  const streakMessage =
+    spendingStreak >= 30
+      ? "🏆 Habit Master — 30 days tracked!"
+      : spendingStreak >= 14
+      ? "🔥 Habit Builder — 14 days strong!"
+      : spendingStreak >= 7
+      ? "🔥 7-Day Streak — great consistency!"
+      : spendingStreak >= 3
+      ? "✨ Getting Consistent — keep it going!"
+      : spendingStreak === 1
+      ? "🌱 Your streak has started today."
+      : "Start your streak by logging an expense today.";
+
+  const streakTarget =
+    spendingStreak >= 30
+      ? 30
+      : spendingStreak >= 14
+      ? 30
+      : spendingStreak >= 7
+      ? 14
+      : spendingStreak >= 3
+      ? 7
+      : 3;
+
+  const streakProgress = Math.min(
+    100,
+    Math.round((spendingStreak / streakTarget) * 100)
+  );
+
+
+  /* =====================================================
+     GAMIFICATION — EXPENSE MILESTONES
+     Lifetime milestones based on real transaction count.
+  ===================================================== */
+
+  const getExpenseMilestone = (count) => {
+    const milestones = {
+      1: {
+        icon: "🌱",
+        title: "First Expense",
+        message: "You have started your spending journey!",
+      },
+      5: {
+        icon: "🌱",
+        title: "Getting Started",
+        message: "You're building a useful spending history.",
+      },
+      10: {
+        icon: "⭐",
+        title: "Money Tracker",
+        message: "10 expenses tracked. You're getting consistent!",
+      },
+      25: {
+        icon: "🔥",
+        title: "Tracking Pro",
+        message: "25 expenses tracked. Great financial awareness!",
+      },
+      50: {
+        icon: "🏆",
+        title: "Finance Champion",
+        message: "50 expenses tracked. You're seriously consistent!",
+      },
+    };
+
+    return milestones[count] || null;
+  };
+
+  const showMilestoneToast = (count) => {
+    const milestone = getExpenseMilestone(count);
+    if (!milestone) return;
+
+    setMilestoneToast(milestone);
+
+    window.setTimeout(() => {
+      setMilestoneToast(null);
+    }, 4500);
+  };
+
+
+  /* =====================================================
      CLEAR DATE FILTER
   ===================================================== */
 
@@ -1145,16 +1252,20 @@ if (categories.length === 0 && expenseData.length > 0) {
       if (editingExpense) {
 
         await api.patch(
-          `/expenses/${editingExpense.id}/`,
+          `/${editingExpense.id}/`,
           payload
         );
 
       } else {
 
         await api.post(
-          "/expenses/",
+          "/",
           payload
         );
+
+        // Milestones apply only to newly created expenses.
+        // Editing an existing expense does not trigger one.
+        showMilestoneToast(expenses.length + 1);
 
       }
 
@@ -1206,7 +1317,7 @@ if (categories.length === 0 && expenseData.length > 0) {
         setDeleting(true);
 
         await api.delete(
-          `/expenses/${deleteExpense.id}/`
+          `/${deleteExpense.id}/`
         );
 
         setDeleteExpense(null);
@@ -1460,6 +1571,94 @@ if (categories.length === 0 && expenseData.length > 0) {
 
 
       {/* =================================================
+          EXPENSE MILESTONE TOAST
+      ================================================= */}
+
+      {milestoneToast && (
+        <div
+          role="status"
+          aria-live="polite"
+          style={{
+            position: "fixed",
+            top: "24px",
+            right: "24px",
+            zIndex: 100000,
+            width: "min(360px, calc(100vw - 32px))",
+            padding: "15px 17px",
+            borderRadius: "18px",
+            background:
+              "linear-gradient(135deg, #FFF8DF 0%, #FFFDF7 58%, #F1EDFF 100%)",
+            border: "1px solid rgba(139,108,255,0.16)",
+            boxShadow: "0 16px 42px rgba(45,35,72,0.16)",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+          }}
+        >
+          <div
+            style={{
+              width: "42px",
+              height: "42px",
+              minWidth: "42px",
+              borderRadius: "13px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "#FFF0B5",
+              fontSize: "21px",
+            }}
+          >
+            {milestoneToast.icon}
+          </div>
+
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+                fontSize: "13px",
+                fontWeight: 800,
+                color: "#302A42",
+              }}
+            >
+              <Trophy size={14} color="#B18400" />
+              {milestoneToast.title}
+            </div>
+
+            <div
+              style={{
+                marginTop: "3px",
+                fontSize: "12px",
+                lineHeight: 1.45,
+                color: "#716B7C",
+              }}
+            >
+              {milestoneToast.message}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setMilestoneToast(null)}
+            aria-label="Dismiss achievement"
+            style={{
+              border: 0,
+              background: "transparent",
+              color: "#8A8295",
+              cursor: "pointer",
+              fontSize: "18px",
+              lineHeight: 1,
+              padding: "2px 4px",
+            }}
+          >
+            ×
+          </button>
+        </div>
+      )}
+
+
+      {/* =================================================
           HERO
       ================================================= */}
 
@@ -1518,6 +1717,153 @@ if (categories.length === 0 && expenseData.length > 0) {
 
         </div>
 
+      </div>
+
+
+      {/* =================================================
+          GAMIFICATION — SPENDING STREAK
+      ================================================= */}
+
+      <div
+        style={{
+          position: "relative",
+          margin: "0 0 22px",
+          padding: "18px 20px",
+          borderRadius: "22px",
+          background: "linear-gradient(135deg, #FFF8DF 0%, #FFFDF7 55%, #F1EDFF 100%)",
+          border: "1px solid rgba(139,108,255,0.14)",
+          boxShadow: "0 10px 30px rgba(61,48,94,0.07)",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            right: "20px",
+            top: "-18px",
+            width: "85px",
+            height: "55px",
+            borderTop: "2px solid #FFBF00",
+            borderRadius: "50%",
+            transform: "rotate(-12deg)",
+            opacity: 0.7,
+          }}
+        />
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "18px",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          <div style={{ minWidth: 0 }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                fontSize: "12px",
+                fontWeight: 800,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#765DDB",
+                marginBottom: "5px",
+              }}
+            >
+              <span style={{ fontSize: "18px", lineHeight: 1 }}>🔥</span>
+              Spending Streak
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                gap: "7px",
+                marginBottom: "3px",
+              }}
+            >
+              <strong
+                style={{
+                  fontSize: "28px",
+                  lineHeight: 1,
+                  color: "#272238",
+                }}
+              >
+                {spendingStreak}
+              </strong>
+              <span style={{ fontSize: "13px", color: "#777185", fontWeight: 600 }}>
+                {spendingStreak === 1 ? "day" : "days"} in a row
+              </span>
+            </div>
+
+            <p
+              style={{
+                margin: 0,
+                color: "#6F687A",
+                fontSize: "13px",
+                lineHeight: 1.45,
+              }}
+            >
+              {streakMessage}
+            </p>
+          </div>
+
+          <div
+            style={{
+              width: "180px",
+              flexShrink: 0,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                fontSize: "11px",
+                fontWeight: 700,
+                color: "#7A7287",
+                marginBottom: "7px",
+              }}
+            >
+              <span>Next milestone</span>
+              <span>{spendingStreak}/{streakTarget}</span>
+            </div>
+
+            <div
+              style={{
+                height: "9px",
+                borderRadius: "999px",
+                background: "#E8E1F8",
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{
+                  height: "100%",
+                  width: `${streakProgress}%`,
+                  borderRadius: "999px",
+                  background: "linear-gradient(90deg, #FFBF00, #8B6CFF)",
+                  transition: "width 0.35s ease",
+                }}
+              />
+            </div>
+
+            <div
+              style={{
+                marginTop: "7px",
+                fontSize: "11px",
+                color: "#8A8295",
+                textAlign: "right",
+              }}
+            >
+              Log an expense each day to keep it alive ✨
+            </div>
+          </div>
+        </div>
       </div>
 
 

@@ -10,16 +10,20 @@ import {
   Receipt,
   HeartPulse,
   Lightbulb,
-  Film,
-  CreditCard,
   X,
   Pencil,
   Trash2,
+  Film,
+  CreditCard,
+  Trophy,
+  Target,
+  AlertTriangle,
+  Flame,
 } from "lucide-react";
 
 import styles from "./Budgets.module.css";
 
-const API_BASE_URL = "http://127.0.0.1:8000/api";
+const API_BASE_URL = "/api";
 
 /* ============================================================
    CATEGORY ICONS
@@ -761,6 +765,111 @@ const Budgets = () => {
     selectedActiveStatus,
     selectedActiveSort,
   ]);
+
+  /* ============================================================
+     BUDGET ACHIEVEMENT
+  ============================================================ */
+
+  const budgetAchievement = useMemo(() => {
+    if (
+      activeTab !== "active" ||
+      budgets.length === 0
+    ) {
+      return null;
+    }
+
+    const totalBudgets = budgets.length;
+
+    const onTrackBudgets = budgets.filter(
+      (budget) =>
+        Number(budget.percentage || 0) <= 75
+    ).length;
+
+    const watchBudgets = budgets.filter(
+      (budget) => {
+        const percentage = Number(
+          budget.percentage || 0
+        );
+
+        return percentage > 75 && percentage <= 90;
+      }
+    ).length;
+
+    const nearLimitBudgets = budgets.filter(
+      (budget) => {
+        const percentage = Number(
+          budget.percentage || 0
+        );
+
+        return percentage > 90 && percentage <= 100;
+      }
+    ).length;
+
+    const exceededBudgets = budgets.filter(
+      (budget) =>
+        Number(budget.percentage || 0) > 100
+    ).length;
+
+    const progress = Math.round(
+      (onTrackBudgets / totalBudgets) * 100
+    );
+
+    if (exceededBudgets > 0) {
+      return {
+        type: "warning",
+        icon: AlertTriangle,
+        title: "Needs Attention",
+        message:
+          exceededBudgets === 1
+            ? "One budget has been exceeded. Keep an eye on your spending."
+            : `${exceededBudgets} budgets have been exceeded. Review your spending.`,
+        progress,
+        count: onTrackBudgets,
+        total: totalBudgets,
+      };
+    }
+
+    if (nearLimitBudgets > 0) {
+      return {
+        type: "near",
+        icon: Flame,
+        title: "Almost at the Limit",
+        message:
+          nearLimitBudgets === 1
+            ? "One budget is almost at its limit. A little caution can keep you on track."
+            : `${nearLimitBudgets} budgets are almost at their limits. Watch your spending.`,
+        progress,
+        count: onTrackBudgets,
+        total: totalBudgets,
+      };
+    }
+
+    if (watchBudgets > 0) {
+      return {
+        type: "watch",
+        icon: Target,
+        title: "Stay on Track",
+        message:
+          watchBudgets === 1
+            ? "One budget needs a little attention this month."
+            : `${watchBudgets} budgets need a little attention this month.`,
+        progress,
+        count: onTrackBudgets,
+        total: totalBudgets,
+      };
+    }
+
+    return {
+      type: "success",
+      icon: Trophy,
+      title: "Budget Champion",
+      message:
+        "All your budgets are currently under control. Great work!",
+      progress: 100,
+      count: onTrackBudgets,
+      total: totalBudgets,
+    };
+  }, [budgets, activeTab]);
 
   /* ============================================================
      TAB CHANGE
@@ -1587,41 +1696,171 @@ const Budgets = () => {
       </div>
 
       {/* ======================================================
-          PRO TIP
+          BUDGET ACHIEVEMENT
       ====================================================== */}
 
-      <div className={styles.tipCard}>
-
-        <div className={styles.tipIcon}>
-          <Lightbulb size={29} />
-        </div>
-
-        <div>
-          <span
-            className={
-              styles.tipLabel
-            }
-          >
-            Pro tip
-          </span>
-
-          <p>
-            You're doing great! Try to
-            keep your spending under
-            budget to reach your
-            financial goals faster.
-          </p>
-        </div>
-
+      {budgetAchievement && (
         <div
-          className={
-            styles.tipDecor
-          }
+          style={{
+            marginTop: "16px",
+            marginBottom: "18px",
+            padding: "20px 22px",
+            borderRadius: "18px",
+            background:
+              budgetAchievement.type === "success"
+                ? "linear-gradient(135deg, #FFF9DF 0%, #FFFDF6 100%)"
+                : budgetAchievement.type === "warning"
+                ? "linear-gradient(135deg, #FFF1F1 0%, #FFF9F9 100%)"
+                : "linear-gradient(135deg, #F4F0FF 0%, #FBFAFF 100%)",
+            border:
+              budgetAchievement.type === "success"
+                ? "1px solid #F4DF91"
+                : budgetAchievement.type === "warning"
+                ? "1px solid #F1CACA"
+                : "1px solid #E3DBFF",
+            boxShadow:
+              "0 8px 24px rgba(76, 58, 120, 0.06)",
+            position: "relative",
+            overflow: "hidden",
+          }}
         >
-          ✦
-        </div>
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              right: "22px",
+              top: "10px",
+              fontSize: "18px",
+              color:
+                budgetAchievement.type === "success"
+                  ? "#F2B900"
+                  : "#8C78E8",
+              transform: "rotate(12deg)",
+              opacity: 0.9,
+            }}
+          >
+            ✦
+          </div>
 
-      </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "14px",
+            }}
+          >
+            <div
+              style={{
+                width: "44px",
+                height: "44px",
+                minWidth: "44px",
+                borderRadius: "14px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background:
+                  budgetAchievement.type === "success"
+                    ? "#FFF0B5"
+                    : budgetAchievement.type === "warning"
+                    ? "#FFE0E0"
+                    : "#E9E2FF",
+              }}
+            >
+              {(() => {
+                const AchievementIcon =
+                  budgetAchievement.icon;
+
+                return (
+                  <AchievementIcon
+                    size={22}
+                    strokeWidth={2}
+                    color={
+                      budgetAchievement.type === "success"
+                        ? "#A57B00"
+                        : budgetAchievement.type === "warning"
+                        ? "#C45B5B"
+                        : "#755FD0"
+                    }
+                  />
+                );
+              })()}
+            </div>
+
+            <div style={{ flex: 1 }}>
+              <div
+                style={{
+                  fontSize: "14px",
+                  fontWeight: 800,
+                  color: "#24202D",
+                  marginBottom: "4px",
+                }}
+              >
+                {budgetAchievement.title}
+              </div>
+
+              <div
+                style={{
+                  fontSize: "12.5px",
+                  color: "#716B7C",
+                  lineHeight: 1.5,
+                  maxWidth: "760px",
+                }}
+              >
+                {budgetAchievement.message}
+              </div>
+
+              <div
+                style={{
+                  marginTop: "13px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                }}
+              >
+                <div
+                  style={{
+                    flex: 1,
+                    height: "7px",
+                    borderRadius: "999px",
+                    background: "#E9E6E0",
+                    overflow: "hidden",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: `${Math.min(
+                        budgetAchievement.progress,
+                        100
+                      )}%`,
+                      height: "100%",
+                      borderRadius: "999px",
+                      background:
+                        budgetAchievement.type === "success"
+                          ? "linear-gradient(90deg, #F3C94E, #FFD96B)"
+                          : budgetAchievement.type === "warning"
+                          ? "#E87878"
+                          : "#9B88EE",
+                      transition: "width 0.35s ease",
+                    }}
+                  />
+                </div>
+
+                <span
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: 700,
+                    color: "#5F5968",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {budgetAchievement.count}/
+                  {budgetAchievement.total} on track
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ======================================================
           CREATE BUDGET MODAL

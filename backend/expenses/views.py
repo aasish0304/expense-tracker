@@ -1,12 +1,25 @@
 from django.utils import timezone
+
 from rest_framework import generics
+from rest_framework.parsers import (
+    MultiPartParser,
+    FormParser,
+    JSONParser,
+)
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Expense, Category, Budget
+from .models import (
+    Expense,
+    Category,
+    Budget,
+    Goal,
+)
+
 from .serializers import (
     ExpenseSerializer,
     CategorySerializer,
     BudgetSerializer,
+    GoalSerializer,
 )
 
 
@@ -124,16 +137,6 @@ class BudgetListCreateView(
             "active"
         )
 
-        # ====================================================
-        # ACTIVE BUDGETS
-        # ====================================================
-        # Active Budgets always shows the current month.
-        #
-        # Example:
-        # Current month = August 2026
-        # Active = August 2026 budgets
-        # ====================================================
-
         if view == "active":
 
             queryset = queryset.filter(
@@ -141,27 +144,9 @@ class BudgetListCreateView(
                 year=current_date.year,
             )
 
-        # ====================================================
-        # BUDGET HISTORY
-        # ====================================================
-        # History returns ALL budgets.
-        #
-        # The frontend can then filter:
-        # Year -> Month -> Category -> Sort
-        #
-        # IMPORTANT:
-        # Do NOT exclude the current month here.
-        # This allows:
-        #
-        # History -> 2026 -> August
-        #
-        # to show the same August budgets currently visible
-        # under Active Budgets.
-        # ====================================================
-
         elif view == "history":
 
-            queryset = queryset
+            pass
 
         return queryset.order_by(
             "-year",
@@ -176,13 +161,9 @@ class BudgetListCreateView(
         serializer.save(
             user=self.request.user,
             month=current_date.month,
-            year=current_date.year
+            year=current_date.year,
         )
 
-
-# ============================================================
-# BUDGET DETAIL
-# ============================================================
 
 class BudgetDetailView(
     generics.RetrieveUpdateDestroyAPIView
@@ -200,4 +181,65 @@ class BudgetDetailView(
             user=self.request.user
         ).select_related(
             "category"
+        )
+
+
+# ============================================================
+# GOALS
+# ============================================================
+
+class GoalListCreateView(
+    generics.ListCreateAPIView
+):
+
+    serializer_class = GoalSerializer
+
+    permission_classes = [
+        IsAuthenticated
+    ]
+
+    # Allow JSON requests as well as image/file uploads.
+    parser_classes = [
+        MultiPartParser,
+        FormParser,
+        JSONParser,
+    ]
+
+    def get_queryset(self):
+
+        return Goal.objects.filter(
+            user=self.request.user
+        ).order_by(
+            "target_date",
+            "-created_at",
+        )
+
+    def perform_create(self, serializer):
+
+        serializer.save(
+            user=self.request.user
+        )
+
+
+class GoalDetailView(
+    generics.RetrieveUpdateDestroyAPIView
+):
+
+    serializer_class = GoalSerializer
+
+    permission_classes = [
+        IsAuthenticated
+    ]
+
+    # Important for PATCH/PUT requests containing an image.
+    parser_classes = [
+        MultiPartParser,
+        FormParser,
+        JSONParser,
+    ]
+
+    def get_queryset(self):
+
+        return Goal.objects.filter(
+            user=self.request.user
         )

@@ -1,16 +1,18 @@
 import axios from "axios";
-import { logoutUser } from "./authService";
 
 const api = axios.create({
-  baseURL: "http://127.0.0.1:8000/api",
+  baseURL: "/api/expenses",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
-// Attach access token to every request
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("access");
 
     if (token) {
+      config.headers = config.headers || {};
       config.headers.Authorization = `Bearer ${token}`;
     }
 
@@ -19,14 +21,12 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Handle unauthorized requests
 api.interceptors.response.use(
   (response) => response,
 
   (error) => {
     if (error.response?.status === 401) {
-      logoutUser();
-      window.location.href = "/";
+      console.error("Authentication failed:", error.response.data);
     }
 
     return Promise.reject(error);

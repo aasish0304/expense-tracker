@@ -1,0 +1,55 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:eu-north-1:523741416022:task-definition/expense-tracker-backend:1",
+    "containerDefinitions": [
+        {
+            "name": "backend",
+            "image": "523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-backend:latest",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "containerPort": 8000,
+                    "hostPort": 8000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "systemControls": []
+        }
+    ],
+    "family": "expense-tracker-backend",
+    "executionRoleArn": "arn:aws:iam::523741416022:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 1,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "MANAGED_INSTANCES",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "512",
+    "memory": "1024",
+    "registeredAt": "2026-08-31T15:44:58.032000+05:30",
+    "registeredBy": "arn:aws:iam::523741416022:root"
+}
