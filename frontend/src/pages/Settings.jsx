@@ -14,7 +14,33 @@ import {
   MessageCircle,
 } from "lucide-react";
 
-import api from "../services/api";
+import axios from "axios";
+
+/*
+ * Authentication endpoints live under /api, not /api/expenses.
+ * Keep the existing services/api.js untouched because the rest of
+ * the application uses /api/expenses for expense-related endpoints.
+ */
+const authApi = axios.create({
+  baseURL: "/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+authApi.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("access");
+
+    if (token) {
+      config.headers = config.headers || {};
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 import styles from "./Settings.module.css";
 
@@ -217,7 +243,7 @@ const Settings = () => {
 
         setProfileLoading(true);
 
-        const response = await api.get(
+        const response = await authApi.get(
           "/auth/profile/"
         );
 
@@ -327,7 +353,7 @@ const Settings = () => {
       setProfileMessage("");
       setProfileError("");
 
-      const response = await api.patch(
+      const response = await authApi.patch(
         "/auth/profile/",
         {
           name: updatedProfile.name,
@@ -606,7 +632,7 @@ const Settings = () => {
 
       setChangingPassword(true);
 
-      const response = await api.post(
+      const response = await authApi.post(
         "/auth/change-password/",
         {
           current_password:
