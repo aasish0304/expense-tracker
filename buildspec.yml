@@ -3,6 +3,12 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - echo "Installing backend dependencies..."
+      - cd backend
+      - pip install -r requirements.txt
+      - echo "Running Django tests..."
+      - python manage.py test
+      - cd ..
       - echo "Logging in to Amazon ECR..."
       - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 523741416022.dkr.ecr.eu-north-1.amazonaws.com
 
@@ -17,10 +23,4 @@ phases:
     commands:
       - echo "Pushing backend image to ECR..."
       - docker push 523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-backend:latest
-      - echo "Creating ECS image definitions..."
-      - printf '[{"name":"backend","imageUri":"523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-backend:latest"}]' > imagedefinitions.json
       - echo "Build completed on $(date)"
-
-artifacts:
-  files:
-    - imagedefinitions.json
