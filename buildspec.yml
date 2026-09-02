@@ -17,4 +17,10 @@ phases:
     commands:
       - echo "Pushing backend image to ECR..."
       - docker push 523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-backend:latest
+      - echo "Creating ECS image definitions..."
+      - printf '[{"name":"backend","imageUri":"523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-backend:latest"}]' > imagedefinitions.json
       - echo "Build completed on $(date)"
+
+artifacts:
+  files:
+    - imagedefinitions.json
