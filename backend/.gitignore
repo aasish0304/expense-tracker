@@ -11,3 +11,5 @@ __pycache__/
 # OS files
 .DS_Store
 Thumbs.db
+db_backup_before_rds.sqlite3
+old_data.json
