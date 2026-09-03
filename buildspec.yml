@@ -7,7 +7,7 @@ phases:
       - cd backend
       - pip install -r requirements.txt
       - echo "Running Django tests..."
-      - python manage.py test
+      - SECRET_KEY="ci-test-secret-key-not-production" python manage.py test
       - cd ..
       - echo "Logging in to Amazon ECR..."
       - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 523741416022.dkr.ecr.eu-north-1.amazonaws.com
