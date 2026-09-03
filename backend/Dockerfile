@@ -25,4 +25,4 @@ COPY . .
 EXPOSE 8000
 
 # Start Django using Gunicorn
-CMD ["gunicorn", "expense_tracker.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && gunicorn expense_tracker.wsgi:application --bind 0.0.0.0:8000"]
