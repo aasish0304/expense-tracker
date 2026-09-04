@@ -765,3 +765,1462 @@
 
   color: #111;
 }
+/* =========================================================
+   NOTIFICATION POPOVER
+========================================================= */
+
+.notificationWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.iconButtonActive {
+  background: #fff4cf;
+  border-color: #e4d9ae;
+}
+
+
+/* =========================================================
+   NOTIFICATION MENU
+========================================================= */
+
+.notificationMenu {
+  position: absolute;
+
+  top: calc(100% + 11px);
+  right: 0;
+
+  width: 365px;
+
+  z-index: 1000;
+
+  overflow: hidden;
+
+  border: 1px solid #e5dfd6;
+  border-radius: 17px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 18px 45px rgba(39, 34, 28, 0.13),
+    0 3px 10px rgba(39, 34, 28, 0.06);
+
+  animation:
+    notificationMenuIn
+    0.16s ease-out;
+}
+
+@keyframes notificationMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =========================================================
+   MENU HEADER
+========================================================= */
+
+.notificationMenuHeader {
+  min-height: 65px;
+
+  padding: 13px 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid #eee9e2;
+
+  background:
+    linear-gradient(
+      110deg,
+      #fff8df,
+      #fffdf8
+    );
+}
+
+.notificationMenuHeader span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #8b6cff;
+
+  font-size: 8px;
+  font-weight: 900;
+
+  letter-spacing: 0.85px;
+}
+
+.notificationMenuHeader strong {
+  display: block;
+
+  color: #302b27;
+
+  font-size: 16px;
+  line-height: 1;
+
+  font-weight: 900;
+}
+
+.notificationCount {
+  width: 28px;
+  height: 28px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+
+  background: #ffbf00;
+
+  color: #29252a;
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   PREVIEW LIST
+========================================================= */
+
+.notificationPreviewList {
+  padding: 6px 8px;
+}
+
+.notificationPreview {
+  width: 100%;
+
+  min-height: 76px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 10px 7px;
+
+  border: 0;
+  border-radius: 11px;
+
+  background: transparent;
+
+  text-align: left;
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    background 0.14s ease;
+}
+
+.notificationPreview:hover {
+  background: #faf8f3;
+}
+
+
+/* =========================================================
+   PREVIEW ICON
+========================================================= */
+
+.notificationPreviewIcon {
+  width: 37px;
+  height: 37px;
+
+  flex: 0 0 37px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+}
+
+.previewbudget {
+  background: #fff1c3;
+  color: #9a7100;
+}
+
+.previewinsight {
+  background: #e9e3ff;
+  color: #765ee2;
+}
+
+.previewgoal {
+  background: #e2f5e9;
+  color: #398156;
+}
+
+
+/* =========================================================
+   PREVIEW CONTENT
+========================================================= */
+
+.notificationPreviewBody {
+  min-width: 0;
+
+  flex: 1;
+}
+
+.notificationPreviewTop {
+  display: flex;
+  align-items: baseline;
+
+  gap: 8px;
+}
+
+.notificationPreviewTop strong {
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: #39322d;
+
+  font-size: 10px;
+  line-height: 1.3;
+
+  font-weight: 900;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notificationPreviewTop span {
+  flex: 0 0 auto;
+
+  color: #aaa198;
+
+  font-size: 7px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.notificationPreviewBody p {
+  margin: 4px 0 0;
+
+  color: #827970;
+
+  font-size: 9px;
+  line-height: 1.4;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+.notificationPreviewArrow {
+  flex: 0 0 auto;
+
+  color: #b5ada5;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.notificationMenuFooter {
+  padding: 9px;
+
+  border-top: 1px solid #eee9e2;
+
+  background: #fffdfa;
+}
+
+.notificationMenuFooter button {
+  width: 100%;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: #ffbf00;
+
+  color: #29252a;
+
+  font-family: inherit;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.14s ease,
+    background 0.14s ease;
+}
+
+.notificationMenuFooter button:hover {
+  background: #f4b500;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 560px) {
+  .notificationMenu {
+    position: fixed;
+
+    top: 69px;
+    right: 10px;
+    left: 10px;
+
+    width: auto;
+
+    max-width: none;
+  }
+}
+/* =========================================================
+   DYNAMIC NOTIFICATION PREVIEW
+========================================================= */
+
+.notificationWrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.iconButtonActive {
+  background: #fff4cf;
+  border-color: #e4d9ae;
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.notificationMenu {
+  position: absolute;
+
+  top: calc(100% + 11px);
+  right: 0;
+
+  width: 360px;
+
+  z-index: 1000;
+
+  overflow: hidden;
+
+  border: 1px solid #e5dfd6;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 18px 42px rgba(39, 34, 28, 0.12),
+    0 3px 10px rgba(39, 34, 28, 0.05);
+
+  animation:
+    notificationMenuIn
+    0.15s ease-out;
+}
+
+@keyframes notificationMenuIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-5px)
+      scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.notificationMenuHeader {
+  min-height: 61px;
+
+  padding: 12px 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid #eee9e2;
+
+  background:
+    linear-gradient(
+      110deg,
+      #fff8df,
+      #fffdf8
+    );
+}
+
+.notificationMenuHeader span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #8b6cff;
+
+  font-size: 7px;
+  font-weight: 900;
+
+  letter-spacing: 0.8px;
+}
+
+.notificationMenuHeader strong {
+  display: block;
+
+  color: #302b27;
+
+  font-size: 15px;
+  line-height: 1;
+
+  font-weight: 900;
+}
+
+.notificationCount {
+  min-width: 26px;
+  height: 26px;
+
+  padding: 0 7px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 8px;
+
+  background: #ffbf00;
+
+  color: #29252a;
+
+  font-size: 9px;
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   PREVIEW LIST
+========================================================= */
+
+.notificationPreviewList {
+  padding: 5px 7px;
+}
+
+.notificationPreview {
+  width: 100%;
+
+  min-height: 73px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 9px 7px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: transparent;
+
+  text-align: left;
+
+  font-family: inherit;
+
+  cursor: pointer;
+}
+
+.notificationPreview:hover {
+  background: #faf8f3;
+}
+
+
+/* =========================================================
+   PREVIEW ICONS
+========================================================= */
+
+.notificationPreviewIcon {
+  width: 36px;
+  height: 36px;
+
+  flex: 0 0 36px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+}
+
+.previewalert {
+  background: #ffe1e6;
+  color: #d44e62;
+}
+
+.previewwarning {
+  background: #fff1bd;
+  color: #9c7600;
+}
+
+.previewinsight {
+  background: #e9e3ff;
+  color: #765ee2;
+}
+
+.previewpositive {
+  background: #e1f4e8;
+  color: #398156;
+}
+
+
+/* =========================================================
+   PREVIEW BODY
+========================================================= */
+
+.notificationPreviewBody {
+  min-width: 0;
+
+  flex: 1;
+}
+
+.notificationPreviewBody strong {
+  display: block;
+
+  overflow: hidden;
+
+  color: #39322d;
+
+  font-size: 9px;
+  line-height: 1.35;
+
+  font-weight: 900;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notificationPreviewBody p {
+  margin: 3px 0 0;
+
+  overflow: hidden;
+
+  color: #827970;
+
+  font-size: 8px;
+  line-height: 1.4;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.notificationPreviewArrow {
+  flex: 0 0 auto;
+
+  color: #b4aba3;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.notificationMenuFooter {
+  padding: 8px;
+
+  border-top: 1px solid #eee9e2;
+
+  background: #fffdfa;
+}
+
+.notificationMenuFooter button {
+  width: 100%;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: #ffbf00;
+
+  color: #29252a;
+
+  font-family: inherit;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+.notificationMenuFooter button:hover {
+  background: #f4b500;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+  .notificationMenu {
+    position: fixed;
+
+    top: 67px;
+    right: 9px;
+    left: 9px;
+
+    width: auto;
+  }
+}
+/* =========================================================
+   WAKU — NOTIFICATION POPOVER
+========================================================= */
+
+.notificationWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+
+/* =========================================================
+   POPUP
+========================================================= */
+
+.notificationPopover {
+  position: absolute;
+
+  top: calc(100% + 12px);
+  right: 0;
+
+  width: 350px;
+
+  background: #fffdf7;
+
+  border: 1px solid #eee7da;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 18px 45px rgba(
+      45,
+      35,
+      72,
+      0.14
+    );
+
+  overflow: hidden;
+
+  z-index: 1000;
+
+  animation: notificationPopupIn 0.18s ease-out;
+}
+
+
+@keyframes notificationPopupIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =========================================================
+   SMALL ARROW
+========================================================= */
+
+.notificationPopover::before {
+  content: "";
+
+  position: absolute;
+
+  top: -7px;
+  right: 18px;
+
+  width: 13px;
+  height: 13px;
+
+  background: #fffdf7;
+
+  border-left: 1px solid #eee7da;
+  border-top: 1px solid #eee7da;
+
+  transform: rotate(45deg);
+
+  z-index: -1;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.notificationPopoverHeader {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 15px 17px 13px;
+
+  background: #fffdf7;
+}
+
+
+.notificationPopoverHeader > div:first-child {
+  min-width: 0;
+}
+
+
+.notificationPopoverTitle {
+  margin: 0;
+
+  color: #2d2348;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  line-height: 1.1;
+}
+
+
+.notificationPopoverSubtitle {
+  margin: 3px 0 0;
+
+  color: #8b6cff;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   HEADER BADGE
+========================================================= */
+
+.notificationPopoverBadge {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 8px;
+
+  background: #ffbf00;
+
+  color: #2d2348;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   NOTIFICATION PREVIEW
+========================================================= */
+
+.notificationPreview {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 11px;
+
+  margin: 0 1px;
+
+  padding: 15px 16px;
+
+  background: #ffffff;
+
+  border-top: 1px solid #eee9df;
+  border-bottom: 1px solid #eee9df;
+}
+
+
+.notificationPreviewIcon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  border-radius: 10px;
+
+  background: #eee8ff;
+
+  color: #8b6cff;
+}
+
+
+.notificationPreviewContent {
+  min-width: 0;
+
+  flex: 1;
+}
+
+
+.notificationPreviewTitle {
+  margin: 0;
+
+  color: #2d2348;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+
+.notificationPreviewText {
+  margin: 3px 0 0;
+
+  color: #777080;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 9.5px;
+
+  line-height: 1.4;
+}
+
+
+.notificationPreviewMeta {
+  margin-top: 5px;
+
+  color: #a29aa7;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 8.5px;
+}
+
+
+/* =========================================================
+   VIEW ALL BUTTON
+========================================================= */
+
+.notificationViewAll {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  width: calc(100% - 16px);
+
+  margin: 8px;
+
+  padding: 9px 12px;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  background: #ffbf00;
+
+  color: #2d2348;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 9.5px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+
+.notificationViewAll:hover {
+  background: #ffc928;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 15px rgba(
+      255,
+      191,
+      0,
+      0.25
+    );
+}
+
+
+.notificationViewAll svg {
+  width: 13px;
+  height: 13px;
+}
+
+
+/* =========================================================
+   DISABLED STATE
+========================================================= */
+
+.notificationDisabled {
+  padding: 18px;
+
+  text-align: center;
+
+  color: #8e8795;
+
+  font-family: "Fredoka", sans-serif;
+
+  font-size: 10px;
+
+  line-height: 1.5;
+}
+
+
+.notificationDisabledIcon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  margin: 0 auto 8px;
+
+  border-radius: 11px;
+
+  background: #f0ece7;
+
+  color: #aaa3ae;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .notificationPopover {
+    position: fixed;
+
+    top: 58px;
+    right: 10px;
+
+    width: min(
+      350px,
+      calc(100vw - 20px)
+    );
+  }
+
+
+  .notificationPopover::before {
+    right: 55px;
+  }
+
+}
+/* =========================================================
+   WAKU NOTIFICATION POPUP
+========================================================= */
+
+.notificationWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+
+.notificationPopover {
+  position: absolute;
+
+  top: calc(100% + 12px);
+  right: -6px;
+
+  width: 360px;
+
+  background: #fffdf7;
+
+  border: 1px solid #eee7da;
+  border-radius: 18px;
+
+  box-shadow:
+    0 18px 45px rgba(45, 35, 72, 0.15);
+
+  overflow: hidden;
+
+  z-index: 1000;
+
+  animation: notificationPopupIn 0.18s ease-out;
+}
+
+
+@keyframes notificationPopupIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+}
+
+
+/* =========================================================
+   POPUP ARROW
+========================================================= */
+
+.notificationPopover::before {
+  content: "";
+
+  position: absolute;
+
+  top: -7px;
+  right: 22px;
+
+  width: 13px;
+  height: 13px;
+
+  background: #fffdf7;
+
+  border-left: 1px solid #eee7da;
+  border-top: 1px solid #eee7da;
+
+  transform: rotate(45deg);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.notificationPopoverHeader {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 17px 14px;
+}
+
+
+.notificationPopoverTitle {
+  margin: 0;
+
+  color: #2d2348;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  line-height: 1.1;
+}
+
+
+.notificationPopoverSubtitle {
+  margin: 3px 0 0;
+
+  color: #8b6cff;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+.notificationPopoverBadge {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 25px;
+  height: 25px;
+
+  padding: 0 7px;
+
+  border-radius: 8px;
+
+  background: #ffbf00;
+
+  color: #2d2348;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+.notificationPreview {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  padding: 16px 17px;
+
+  background: #ffffff;
+
+  border-top: 1px solid #eee9df;
+  border-bottom: 1px solid #eee9df;
+}
+
+
+.notificationPreviewIcon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 35px;
+  height: 35px;
+
+  flex: 0 0 35px;
+
+  border-radius: 11px;
+
+  background: #eee8ff;
+
+  color: #8b6cff;
+}
+
+
+.notificationPreviewContent {
+  min-width: 0;
+
+  flex: 1;
+}
+
+
+.notificationPreviewTitle {
+  margin: 0;
+
+  color: #2d2348;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  line-height: 1.35;
+}
+
+
+.notificationPreviewText {
+  margin: 4px 0 0;
+
+  color: #777080;
+
+  font-size: 9.5px;
+
+  line-height: 1.45;
+}
+
+
+.notificationPreviewMeta {
+  margin-top: 6px;
+
+  color: #aaa3ae;
+
+  font-size: 8.5px;
+}
+
+
+/* =========================================================
+   DYNAMIC NOTIFICATION LIST
+========================================================= */
+
+.notificationList {
+  display: flex;
+  flex-direction: column;
+
+  max-height: 250px;
+
+  overflow-y: auto;
+}
+
+
+.notificationItem {
+  display: flex;
+
+  align-items: flex-start;
+
+  width: 100%;
+
+  gap: 10px;
+
+  padding: 13px 15px;
+
+  border: 0;
+  border-bottom: 1px solid #f1ede7;
+
+  background: #ffffff;
+
+  color: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  transition:
+    background 0.18s ease;
+}
+
+
+.notificationItem:hover {
+  background: #fffaf0;
+}
+
+
+.notificationItemIcon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 33px;
+  height: 33px;
+
+  flex: 0 0 33px;
+
+  border-radius: 10px;
+
+  background: #eee8ff;
+
+  color: #8b6cff;
+}
+
+
+.notificationItemContent {
+  min-width: 0;
+
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.notificationItemContent strong {
+  color: #2d2348;
+
+  font-size: 10.5px;
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+
+.notificationItemContent span {
+  margin-top: 3px;
+
+  color: #777080;
+
+  font-size: 9px;
+
+  line-height: 1.4;
+}
+
+
+.notificationItemContent small {
+  margin-top: 4px;
+
+  color: #aaa3ae;
+
+  font-size: 8px;
+}
+
+
+.notificationItemArrow {
+  margin-top: 8px;
+
+  flex: 0 0 auto;
+
+  color: #aaa3ae;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.notificationEmpty {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 22px 18px;
+
+  text-align: center;
+}
+
+
+.notificationEmptyIcon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  margin-bottom: 8px;
+
+  border-radius: 11px;
+
+  background: #eee8ff;
+
+  color: #8b6cff;
+}
+
+
+.notificationEmpty strong {
+  color: #2d2348;
+
+  font-size: 10px;
+}
+
+
+.notificationEmpty span {
+  margin-top: 3px;
+
+  color: #99929f;
+
+  font-size: 8.5px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.notificationMenuFooter {
+  padding: 8px;
+}
+
+
+.notificationMenuFooter button {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  width: 100%;
+
+  padding: 10px 12px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: #ffbf00;
+
+  color: #2d2348;
+
+  font-family: inherit;
+
+  font-size: 9.5px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+
+.notificationMenuFooter button:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 15px rgba(255, 191, 0, 0.25);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .notificationPopover {
+    position: fixed;
+
+    top: 58px;
+    right: 10px;
+
+    width: min(
+      360px,
+      calc(100vw - 20px)
+    );
+  }
+
+}

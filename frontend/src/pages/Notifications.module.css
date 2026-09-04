@@ -1,0 +1,1283 @@
+/* =========================================================
+   WAKU — NOTIFICATIONS PAGE
+========================================================= */
+
+.page {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 64px);
+  overflow: hidden;
+
+  background: #fffdf7;
+  color: #2d2348;
+
+  font-family: "Fredoka", sans-serif;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content {
+  position: relative;
+  z-index: 2;
+
+  width: min(1280px, calc(100% - 48px));
+
+  margin: 0 auto;
+
+  padding: 24px 0 45px;
+}
+
+
+/* =========================================================
+   BACKGROUND DOODLES
+========================================================= */
+
+.doodleYellow {
+  display: none;
+}
+
+.doodlePurple {
+  position: absolute;
+
+  top: 300px;
+  left: 3%;
+
+  z-index: 0;
+
+  color: #8b6cff;
+
+  font-size: 38px;
+
+  opacity: 0.45;
+
+  transform: rotate(-12deg);
+
+  pointer-events: none;
+}
+
+
+.doodlePink {
+  position: absolute;
+
+  right: 4%;
+  bottom: 85px;
+
+  z-index: 0;
+
+  color: #ff4f91;
+
+  font-size: 40px;
+
+  opacity: 0.6;
+
+  transform: rotate(-10deg);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 26px;
+}
+
+
+.hero > div:first-child {
+  min-width: 0;
+}
+
+
+.eyebrow {
+  margin: 0 0 6px;
+
+  color: #8b6cff;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+
+.hero h1 {
+  margin: 0;
+
+  color: #241b3b;
+
+  font-size: 30px;
+  font-weight: 700;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.04em;
+}
+
+
+.subtitle {
+  margin: 8px 0 0;
+
+  color: #8d8795;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   HERO RIGHT BADGE
+========================================================= */
+
+.headerIcon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 46px;
+  height: 46px;
+
+  flex: 0 0 auto;
+
+  border-radius: 15px;
+
+  background: #fff1c7;
+
+  color: #8b6cff;
+
+  border: 1px solid rgba(
+    255,
+    191,
+    0,
+    0.22
+  );
+
+  box-shadow:
+    0 8px 22px rgba(
+      45,
+      35,
+      72,
+      0.07
+    );
+}
+
+
+/* =========================================================
+   MAIN NOTIFICATION CARD
+========================================================= */
+
+.feedCard {
+  position: relative;
+
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #eee9df;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 12px 35px rgba(
+      45,
+      35,
+      72,
+      0.065
+    );
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.feedHeader {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 21px 25px;
+
+  background: #fffefb;
+
+  border-bottom: 1px solid #f0ece5;
+}
+
+
+.feedHeader h2 {
+  margin: 0;
+
+  color: #2d2348;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  letter-spacing: -0.01em;
+}
+
+
+.feedHeader p {
+  margin: 4px 0 0;
+
+  color: #9a93a0;
+
+  font-size: 10px;
+
+  line-height: 1.45;
+}
+
+
+.feedCount {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 31px;
+  height: 31px;
+
+  padding: 0 9px;
+
+  border-radius: 10px;
+
+  background: #fff2c8;
+
+  color: #806500;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   NOTIFICATION LIST
+========================================================= */
+
+.notificationList {
+  display: flex;
+
+  flex-direction: column;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   NOTIFICATION ROW
+========================================================= */
+
+.notificationCard {
+  display: flex;
+
+  align-items: flex-start;
+
+  width: 100%;
+
+  gap: 16px;
+
+  padding: 20px 25px;
+
+  background: #ffffff;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.notificationCard + .notificationCard {
+  border-top: 1px solid #f1ede7;
+}
+
+
+.notificationCard:hover {
+  background: #fffdf7;
+}
+
+
+/* =========================================================
+   NOTIFICATION ICON
+========================================================= */
+
+.notificationIcon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  border-radius: 13px;
+}
+
+
+/* Different notification types */
+
+.notificationIcon.alert {
+  background: #ffe5ed;
+  color: #ff4f91;
+}
+
+
+.notificationIcon.warning {
+  background: #fff1c9;
+  color: #d49b00;
+}
+
+
+.notificationIcon.positive {
+  background: #e5f7e9;
+  color: #3f9a5c;
+}
+
+
+.notificationIcon.insight {
+  background: #eee8ff;
+  color: #8b6cff;
+}
+
+
+.notificationIcon.default {
+  background: #edf0ff;
+  color: #6671d8;
+}
+
+
+/* =========================================================
+   NOTIFICATION CONTENT
+========================================================= */
+
+.notificationContent {
+  min-width: 0;
+
+  flex: 1;
+}
+
+
+.notificationTitleRow {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+
+.notificationContent h3 {
+  margin: 0;
+
+  color: #2d2348;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  line-height: 1.35;
+}
+
+
+.notificationContent p {
+  margin: 6px 0 0;
+
+  max-width: 800px;
+
+  color: #777080;
+
+  font-size: 11px;
+
+  line-height: 1.55;
+}
+
+
+.notificationTime {
+  flex: 0 0 auto;
+
+  color: #aaa3ae;
+
+  font-size: 9px;
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+
+.notificationDetail {
+  display: inline-flex;
+
+  align-items: center;
+
+  margin-top: 9px;
+
+  padding: 5px 9px;
+
+  border-radius: 7px;
+
+  background: #f5f1ff;
+
+  color: #7864bd;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   EMPTY / DISABLED STATE
+========================================================= */
+
+.emptyCard {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  width: 100%;
+
+  min-height: 170px;
+
+  padding: 30px;
+
+  background: #ffffff;
+
+  border: 1px solid #eee9df;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 12px 35px rgba(
+      45,
+      35,
+      72,
+      0.055
+    );
+}
+
+
+.emptyIcon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  height: 50px;
+
+  flex: 0 0 50px;
+
+  border-radius: 15px;
+
+  background: #eee8ff;
+
+  color: #8b6cff;
+}
+
+
+.emptyCard h3 {
+  margin: 0 0 6px;
+
+  color: #2d2348;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+
+.emptyCard p {
+  margin: 0;
+
+  max-width: 620px;
+
+  color: #8d8795;
+
+  font-size: 11px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   SETTINGS BUTTON
+========================================================= */
+
+.settingsButton {
+  margin-top: 13px;
+
+  padding: 9px 16px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #2d2348;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 10.5px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.settingsButton:hover {
+  background: #8b6cff;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 16px rgba(
+      139,
+      108,
+      255,
+      0.22
+    );
+}
+
+
+/* =========================================================
+   FOOTER MESSAGE
+========================================================= */
+
+.footerNote {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-top: 16px;
+
+  color: #9d96a4;
+
+  font-size: 9.5px;
+
+  text-align: center;
+}
+
+
+.footerNote svg {
+  color: #8b6cff;
+
+  flex: 0 0 auto;
+}
+
+
+/* =========================================================
+   LOADING STATE
+========================================================= */
+
+.loadingState {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 320px;
+
+  padding: 30px;
+
+  text-align: center;
+}
+
+
+.loadingIcon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  margin-bottom: 13px;
+
+  border-radius: 15px;
+
+  background: #fff1c9;
+
+  font-size: 21px;
+}
+
+
+.loadingState strong {
+  color: #2d2348;
+
+  font-size: 13px;
+}
+
+
+.loadingState span {
+  margin-top: 5px;
+
+  color: #99929f;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   ERROR STATE
+========================================================= */
+
+.errorState {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 280px;
+
+  padding: 30px;
+
+  text-align: center;
+}
+
+
+.errorState strong {
+  color: #2d2348;
+
+  font-size: 14px;
+}
+
+
+.errorState span {
+  margin-top: 6px;
+
+  color: #99929f;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .content {
+    width: calc(100% - 32px);
+
+    padding-top: 20px;
+  }
+
+
+  .hero h1 {
+    font-size: 27px;
+  }
+
+
+  .feedHeader {
+    padding: 19px 21px;
+  }
+
+
+  .notificationCard {
+    padding: 18px 21px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .page {
+    min-height: calc(100vh - 56px);
+  }
+
+
+  .content {
+    width: calc(100% - 20px);
+
+    padding: 16px 0 30px;
+  }
+
+
+  .hero {
+    align-items: flex-start;
+
+    margin-bottom: 18px;
+  }
+
+
+  .hero h1 {
+    font-size: 24px;
+  }
+
+
+  .subtitle {
+    font-size: 10.5px;
+  }
+
+
+  .headerIcon {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 13px;
+  }
+
+
+  .feedCard {
+    border-radius: 17px;
+  }
+
+
+  .feedHeader {
+    padding: 16px;
+  }
+
+
+  .feedHeader h2 {
+    font-size: 13px;
+  }
+
+
+  .notificationCard {
+    gap: 12px;
+
+    padding: 16px;
+  }
+
+
+  .notificationIcon {
+    width: 36px;
+    height: 36px;
+
+    flex-basis: 36px;
+
+    border-radius: 11px;
+  }
+
+
+  .notificationTitleRow {
+    display: block;
+  }
+
+
+  .notificationContent h3 {
+    font-size: 12px;
+  }
+
+
+  .notificationContent p {
+    font-size: 10px;
+  }
+
+
+  .notificationTime {
+    display: block;
+
+    margin-top: 5px;
+  }
+
+
+  .emptyCard {
+    align-items: flex-start;
+
+    padding: 22px;
+
+    border-radius: 17px;
+  }
+
+
+  .emptyIcon {
+    width: 42px;
+    height: 42px;
+
+    flex-basis: 42px;
+  }
+
+
+  
+
+
+  .doodlePurple {
+    left: -4px;
+
+    font-size: 27px;
+  }
+
+
+  .doodlePink {
+    right: 0;
+    bottom: 45px;
+
+    font-size: 29px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .content {
+    width: calc(100% - 14px);
+  }
+
+
+  .hero h1 {
+    font-size: 22px;
+  }
+
+
+  .feedHeader {
+    padding: 14px;
+  }
+
+
+  .notificationCard {
+    padding: 14px;
+  }
+
+}
+/* =========================================================
+   HIDE OVERVIEW YELLOW DECORATION
+   Keeps notification popup area clean
+========================================================= */
+
+.doodleYellow {
+  display: none !important;
+}
+
+
+/* If the decoration is inside another wrapper */
+.yellowDoodle {
+  display: none !important;
+}
+
+
+/* Mobile */
+@media (max-width: 650px) {
+  .doodleYellow,
+  .yellowDoodle {
+    display: none !important;
+  }
+}
+/* =========================================================
+   NOTIFICATION TOOLBAR
+========================================================= */
+
+.headerActions {
+  display: flex;
+  align-items: center;
+}
+
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 16px;
+  padding: 13px 16px;
+
+  background: #fffaf0;
+
+  border: 1px solid #eee7da;
+  border-radius: 15px;
+}
+
+
+.toolbar > div:first-child {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+
+  min-width: 0;
+}
+
+
+.toolbar > div:first-child strong {
+  color: #2d2348;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+.toolbar > div:first-child span {
+  color: #9a93a0;
+
+  font-size: 9px;
+}
+
+
+.toolbarActions {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   TOOLBAR BUTTONS
+========================================================= */
+
+.selectButton,
+.clearSelectedButton,
+.clearAllButton {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  min-height: 30px;
+
+  padding: 7px 11px;
+
+  border-radius: 8px;
+
+  font-family: inherit;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+
+.selectButton {
+  border: 1px solid #e5ddf8;
+
+  background: #f4f0ff;
+
+  color: #755fc1;
+}
+
+
+.selectButton:hover {
+  background: #ebe4ff;
+
+  transform: translateY(-1px);
+}
+
+
+.clearSelectedButton {
+  border: 1px solid #eadfca;
+
+  background: #ffffff;
+
+  color: #6e6575;
+}
+
+
+.clearSelectedButton:hover:not(:disabled) {
+  background: #fff7e3;
+
+  color: #8b6cff;
+
+  transform: translateY(-1px);
+}
+
+
+.clearAllButton {
+  border: 1px solid #ffd4df;
+
+  background: #fff1f5;
+
+  color: #e85d83;
+}
+
+
+.clearAllButton:hover:not(:disabled) {
+  background: #ffe5ed;
+
+  transform: translateY(-1px);
+}
+
+
+.selectButton:disabled,
+.clearSelectedButton:disabled,
+.clearAllButton:disabled {
+  opacity: 0.42;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   READ / UNREAD
+========================================================= */
+
+.notificationUnread {
+  background: #ffffff;
+}
+
+
+.notificationRead {
+  background: #fffdf9;
+
+  opacity: 0.72;
+}
+
+
+.notificationRead:hover {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   CHECKBOX
+========================================================= */
+
+.checkbox {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 19px;
+  height: 19px;
+
+  flex: 0 0 19px;
+
+  margin-top: 4px;
+
+  padding: 0;
+
+  border: 1.5px solid #d9d2e1;
+
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+
+.checkbox:hover {
+  border-color: #8b6cff;
+
+  transform: scale(1.04);
+}
+
+
+.checkboxSelected {
+  border-color: #8b6cff;
+
+  background: #8b6cff;
+}
+
+
+/* =========================================================
+   READ LABEL
+========================================================= */
+
+.readLabel {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  margin-top: 8px;
+
+  color: #9c96a2;
+
+  font-size: 8px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.notificationArrow {
+  flex: 0 0 auto;
+
+  margin-top: 8px;
+
+  color: #b0a8b5;
+
+  transition:
+    transform 0.18s ease,
+    color 0.18s ease;
+}
+
+
+.notificationCard:hover
+.notificationArrow {
+  color: #8b6cff;
+
+  transform: translateX(2px);
+}
+
+
+/* =========================================================
+   NOTIFICATION TYPE COLORS
+========================================================= */
+
+.notificationIcon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  border-radius: 13px;
+}
+
+
+.alert {
+  background: #ffe5ed;
+  color: #ff4f91;
+}
+
+
+.warning {
+  background: #fff1c9;
+  color: #d49b00;
+}
+
+
+.positive {
+  background: #e5f7e9;
+  color: #3f9a5c;
+}
+
+
+.insight {
+  background: #eee8ff;
+  color: #8b6cff;
+}
+
+
+.default {
+  background: #edf0ff;
+  color: #6671d8;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .toolbar {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+
+  .toolbarActions {
+    width: 100%;
+  }
+
+
+  .selectButton,
+  .clearSelectedButton,
+  .clearAllButton {
+    flex: 1;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .toolbarActions {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    width: 100%;
+  }
+
+
+  .selectButton {
+    grid-column: 1 / -1;
+  }
+
+
+  .checkbox {
+    width: 18px;
+    height: 18px;
+
+    flex-basis: 18px;
+  }
+
+
+  .notificationIcon {
+    width: 36px;
+    height: 36px;
+
+    flex-basis: 36px;
+
+    border-radius: 11px;
+  }
+
+}
