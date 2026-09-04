@@ -4,7 +4,6 @@ import {
   UserRound,
   ShieldCheck,
   Bell,
-  Coins,
   HelpCircle,
   Info,
   ChevronRight,
@@ -15,14 +14,21 @@ import {
 } from "lucide-react";
 
 import axios from "axios";
+import api from "../services/api";
 
-/*
- * Authentication endpoints live under /api, not /api/expenses.
- * Keep the existing services/api.js untouched because the rest of
- * the application uses /api/expenses for expense-related endpoints.
- */
+import styles from "./Settings.module.css";
+
+
+/* =====================================================
+   AUTH API
+   Profile/password endpoints live under /api/auth/
+   while services/api.js is used for /api/expenses/.
+===================================================== */
+
 const authApi = axios.create({
-  baseURL: "/api",
+  baseURL: import.meta.env.DEV
+    ? "http://localhost:8000/api"
+    : "/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -41,8 +47,6 @@ authApi.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-
-import styles from "./Settings.module.css";
 
 
 /* =====================================================
@@ -83,34 +87,6 @@ const DEFAULT_SETTINGS = {
   currency: "INR",
   language: "English",
 };
-
-
-/* =====================================================
-   CURRENCIES
-===================================================== */
-
-const CURRENCIES = [
-  {
-    id: "INR",
-    symbol: "₹",
-    name: "Indian Rupee",
-  },
-  {
-    id: "USD",
-    symbol: "$",
-    name: "US Dollar",
-  },
-  {
-    id: "EUR",
-    symbol: "€",
-    name: "Euro",
-  },
-  {
-    id: "GBP",
-    symbol: "£",
-    name: "British Pound",
-  },
-];
 
 
 /* =====================================================
@@ -381,6 +357,11 @@ const Settings = () => {
       setForm(updated);
 
       localStorage.setItem(
+        "waku_profile",
+        JSON.stringify(updated)
+      );
+
+      localStorage.setItem(
         "waku_avatar",
         updated.avatar
       );
@@ -391,7 +372,9 @@ const Settings = () => {
       */
 
       window.dispatchEvent(
-        new Event("waku-profile-updated")
+        new CustomEvent("waku-profile-updated", {
+          detail: updated,
+        })
       );
 
       return true;
@@ -502,6 +485,12 @@ const Settings = () => {
     localStorage.setItem(
       "waku_settings",
       JSON.stringify(updatedSettings)
+    );
+
+    window.dispatchEvent(
+      new CustomEvent("waku-settings-updated", {
+        detail: updatedSettings,
+      })
     );
 
   };
@@ -735,20 +724,7 @@ const Settings = () => {
       ? "/avatars/female.png"
       : "/avatars/male.png";
 
-
-  /* =====================================================
-     SELECTED CURRENCY
-  ===================================================== */
-
-  const selectedCurrency =
-    CURRENCIES.find(
-      (currency) =>
-        currency.id ===
-        settings.currency
-    ) || CURRENCIES[0];
-
-
-  /* =====================================================
+/* =====================================================
      CLOSE MODAL
   ===================================================== */
 
@@ -1135,38 +1111,6 @@ const Settings = () => {
 
 
           <Divider />
-
-
-          {/* CURRENCY */}
-
-          <SettingItem
-            icon={
-              <Coins size={16} />
-            }
-            title="Currency"
-            description={
-              selectedCurrency.name
-            }
-            right={
-              <span
-                className={
-                  styles.settingValue
-                }
-              >
-                {
-                  selectedCurrency.symbol
-                }{" "}
-                {
-                  selectedCurrency.id
-                }
-              </span>
-            }
-            onClick={() =>
-              setActiveModal(
-                "currency"
-              )
-            }
-          />
 
 
           <Divider />
@@ -1702,118 +1646,6 @@ const Settings = () => {
             </div>
 
           </form>
-
-        </Modal>
-
-      )}
-
-
-      {/* =================================================
-          CURRENCY MODAL
-      ================================================= */}
-
-      {activeModal === "currency" && (
-
-        <Modal
-          title="Currency"
-          eyebrow="YOUR MONEY"
-          onClose={closeModal}
-        >
-
-          <div
-            className={
-              styles.selectionList
-            }
-          >
-
-            {CURRENCIES.map(
-              (currency) => {
-
-                const selected =
-                  settings.currency ===
-                  currency.id;
-
-
-                return (
-
-                  <button
-                    type="button"
-                    key={
-                      currency.id
-                    }
-                    className={`
-                      ${styles.selectionItem}
-                      ${
-                        selected
-                          ? styles.selectionItemActive
-                          : ""
-                      }
-                    `}
-                    onClick={() => {
-
-                      updateSetting(
-                        "currency",
-                        currency.id
-                      );
-
-                      setActiveModal(
-                        null
-                      );
-
-                    }}
-                  >
-
-                    <span
-                      className={
-                        styles.selectionSymbol
-                      }
-                    >
-                      {
-                        currency.symbol
-                      }
-                    </span>
-
-
-                    <span
-                      className={
-                        styles.selectionText
-                      }
-                    >
-
-                      <strong>
-                        {
-                          currency.id
-                        }
-                      </strong>
-
-                      <small>
-                        {
-                          currency.name
-                        }
-                      </small>
-
-                    </span>
-
-
-                    {selected && (
-
-                      <Check
-                        size={16}
-                        className={
-                          styles.selectionCheck
-                        }
-                      />
-
-                    )}
-
-                  </button>
-
-                );
-
-              }
-            )}
-
-          </div>
 
         </Modal>
 

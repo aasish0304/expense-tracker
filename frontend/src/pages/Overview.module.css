@@ -1,0 +1,2341 @@
+/* =========================================================
+   WAKU OVERVIEW
+========================================================= */
+
+.page {
+  position: relative;
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  background: #fffdf7;
+  color: #2d2348;
+}
+
+
+.content {
+  position: relative;
+  z-index: 2;
+
+  width: min(
+    1380px,
+    calc(100% - 32px)
+  );
+
+  margin: 0 auto;
+
+  padding: 8px 0 0;
+}
+
+
+/* =========================================================
+   DOODLES
+   MATCHES SETTINGS PAGE
+========================================================= */
+
+.doodle {
+  position: absolute;
+
+  z-index: 0;
+
+  pointer-events: none;
+  user-select: none;
+
+  overflow: visible;
+}
+
+
+.doodle path {
+  fill: none;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   TOP RIGHT YELLOW DOODLE
+========================================================= */
+
+.doodleTopRight {
+  top: 42px;
+  right: 2.5%;
+
+  width: 145px;
+  height: 100px;
+
+  opacity: 0.8;
+}
+
+
+.doodleTopRight
+  > path:not(.sparkle) {
+  stroke: #ffbf00;
+  stroke-width: 2.2;
+}
+
+
+.doodleTopRight
+  .sparkle {
+  fill: #ffbf00;
+  stroke: none;
+}
+
+
+/* =========================================================
+   LEFT PURPLE DOODLE
+========================================================= */
+
+.doodleLeft {
+  top: 285px;
+  left: 0.5%;
+
+  width: 120px;
+  height: 90px;
+
+  opacity: 0.48;
+}
+
+
+.doodleLeft > path {
+  stroke: #8b6cff;
+  stroke-width: 2.2;
+}
+
+
+/* =========================================================
+   BOTTOM LEFT
+========================================================= */
+
+.doodleBottomLeft {
+  bottom: 0;
+  left: -4px;
+
+  width: 215px;
+  height: 145px;
+}
+
+
+.doodleBottomLeft
+  .blobYellow {
+  fill: #fff1c9;
+  stroke: none;
+}
+
+
+.doodleBottomLeft
+  .loopPurple {
+  stroke: #8b6cff;
+  stroke-width: 2.2;
+}
+
+
+.doodleBottomLeft
+  .sparklePurple {
+  fill: #8b6cff;
+  stroke: none;
+}
+
+
+/* =========================================================
+   BOTTOM RIGHT
+========================================================= */
+
+.doodleBottomRight {
+  right: -4px;
+  bottom: 0;
+
+  width: 215px;
+  height: 145px;
+}
+
+
+.doodleBottomRight
+  .blobLavender {
+  fill: #e6ddff;
+  stroke: none;
+}
+
+
+.doodleBottomRight
+  .sparkleYellowSmall {
+  fill: #ffbf00;
+  stroke: none;
+}
+
+
+.doodleBottomRight
+  .starPink {
+  fill: none;
+  stroke: #ff4f91;
+  stroke-width: 2;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-bottom: 20px;
+}
+
+
+.eyebrow,
+.cardEyebrow {
+  margin: 0 0 6px;
+
+  color: #8b6cff;
+
+  font-size: 9px;
+  line-height: 1.2;
+
+  font-weight: 600;
+
+  letter-spacing: 1.35px;
+}
+
+
+.hero h1 {
+  margin: 0;
+
+  color: #2d2348;
+
+  font-size: clamp(
+    27px,
+    3vw,
+    38px
+  );
+
+  line-height: 1.08;
+
+  font-weight: 650;
+
+  letter-spacing: -0.9px;
+}
+
+
+.subtitle {
+  margin: 8px 0 0;
+
+  color: #756d86;
+
+  font-size: 12px;
+  line-height: 1.5;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   MONTH PICKER
+========================================================= */
+
+.monthPicker {
+  position: relative;
+
+  flex-shrink: 0;
+}
+
+
+.monthBadge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  min-height: 37px;
+
+  padding: 9px 12px;
+
+  border: 1px solid
+    rgba(
+      139,
+      108,
+      255,
+      0.15
+    );
+
+  border-radius: 13px;
+
+  background: #f3efff;
+
+  color: #5948aa;
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.monthBadge:hover {
+  background: #eee8ff;
+
+  border-color:
+    rgba(
+      139,
+      108,
+      255,
+      0.3
+    );
+
+  transform:
+    translateY(-1px);
+}
+
+
+.monthBadgeActive {
+  background: #ebe4ff;
+
+  border-color:
+    rgba(
+      139,
+      108,
+      255,
+      0.32
+    );
+
+  box-shadow:
+    0 8px 22px
+      rgba(
+        139,
+        108,
+        255,
+        0.12
+      );
+}
+
+
+.monthBadge svg:last-child {
+  transition:
+    transform 0.2s ease;
+}
+
+
+.chevronOpen {
+  transform:
+    rotate(180deg);
+}
+
+
+/* =========================================================
+   MONTH DROPDOWN
+========================================================= */
+
+.monthDropdown {
+  position: absolute;
+
+  top: calc(100% + 9px);
+  right: 0;
+
+  z-index: 50;
+
+  width: 315px;
+
+  padding: 15px;
+
+  border:
+    1px solid
+    rgba(
+      45,
+      35,
+      72,
+      0.08
+    );
+
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 18px 45px
+      rgba(
+        61,
+        48,
+        94,
+        0.14
+      ),
+    0 3px 10px
+      rgba(
+        61,
+        48,
+        94,
+        0.05
+      );
+
+  animation:
+    dropdownIn
+    0.18s ease-out;
+}
+
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-5px)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   DROPDOWN HEADER
+========================================================= */
+
+.monthDropdownHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 2px 2px 13px;
+}
+
+
+.monthDropdownHeader
+  > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.monthDropdownHeader span {
+  color: #948b9b;
+
+  font-size: 8px;
+  font-weight: 650;
+
+  letter-spacing: 1.25px;
+}
+
+
+.monthDropdownHeader strong {
+  color: #2d2348;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+.todayButton {
+  padding: 6px 9px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #fff4cf;
+
+  color: #7a5b00;
+
+  font-family: inherit;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease;
+}
+
+
+.todayButton:hover {
+  background: #ffedaa;
+}
+
+
+/* =========================================================
+   YEAR SELECTOR
+========================================================= */
+
+.yearSelector {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    34px
+    1fr
+    34px;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 8px;
+
+  border-radius: 12px;
+
+  background: #faf8f3;
+}
+
+
+.yearArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 32px;
+
+  padding: 0;
+
+  border:
+    1px solid
+    #ebe6dd;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #5948aa;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+
+.yearArrow:hover:not(:disabled) {
+  background: #f3efff;
+
+  border-color:
+    rgba(
+      139,
+      108,
+      255,
+      0.22
+    );
+
+  transform:
+    translateY(-1px);
+}
+
+
+.yearArrow:disabled {
+  opacity: 0.28;
+
+  cursor: not-allowed;
+}
+
+
+.yearButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  width: 100%;
+  height: 32px;
+
+  padding: 0 9px;
+
+  border:
+    1px solid
+    #e8e2da;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #2d2348;
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+
+.yearButton:hover {
+  background: #f8f5ff;
+
+  border-color:
+    rgba(
+      139,
+      108,
+      255,
+      0.22
+    );
+}
+
+
+.yearButtonActive {
+  border-color:
+    rgba(
+      139,
+      108,
+      255,
+      0.4
+    );
+
+  background: #f6f2ff;
+
+  box-shadow:
+    0 0 0 3px
+      rgba(
+        139,
+        108,
+        255,
+        0.07
+      );
+}
+
+
+/* =========================================================
+   YEAR DROPDOWN
+========================================================= */
+
+.yearDropdown {
+  position: absolute;
+
+  top: calc(100% + 7px);
+
+  left: 47px;
+  right: 47px;
+
+  z-index: 70;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(
+      45,
+      35,
+      72,
+      0.09
+    );
+
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 14px 32px
+      rgba(
+        61,
+        48,
+        94,
+        0.15
+      );
+
+  animation:
+    yearDropdownIn
+    0.16s ease-out;
+}
+
+
+@keyframes yearDropdownIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+.yearDropdownTitle {
+  padding: 8px 10px 7px;
+
+  border-bottom:
+    1px solid
+    #f0edf2;
+
+  color: #9a92a1;
+
+  font-size: 7px;
+  font-weight: 650;
+
+  letter-spacing: 1.15px;
+}
+
+
+.yearList {
+  max-height: 205px;
+
+  overflow-y: auto;
+
+  padding: 5px;
+}
+
+
+.yearList::-webkit-scrollbar {
+  width: 5px;
+}
+
+
+.yearList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.yearList::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+
+  background: #ddd6ee;
+}
+
+
+.yearOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  min-height: 31px;
+
+  padding: 0 9px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #665d72;
+
+  font-family: inherit;
+
+  font-size: 10px;
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+
+.yearOption:hover {
+  background: #f5f1ff;
+
+  color: #5948aa;
+}
+
+
+.yearOptionActive {
+  background: #8b6cff;
+
+  color: #ffffff;
+
+  font-weight: 600;
+}
+
+
+.yearOptionActive:hover {
+  background: #8b6cff;
+
+  color: #ffffff;
+}
+
+
+.yearOptionCurrent:not(
+    .yearOptionActive
+  ) {
+  color: #7a5b00;
+
+  background: #fffaf0;
+}
+
+
+/* =========================================================
+   MONTH GRID
+========================================================= */
+
+.monthGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 7px;
+
+  margin-top: 11px;
+}
+
+
+.monthOption {
+  position: relative;
+
+  min-height: 39px;
+
+  border:
+    1px solid
+    #eeeaf1;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #625970;
+
+  font-family: inherit;
+
+  font-size: 10px;
+  font-weight: 550;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+
+.monthOption:hover {
+  border-color:
+    rgba(
+      139,
+      108,
+      255,
+      0.22
+    );
+
+  background: #f8f5ff;
+
+  color: #5948aa;
+
+  transform:
+    translateY(-1px);
+}
+
+
+.monthOptionActive {
+  border-color: #8b6cff;
+
+  background: #8b6cff;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 5px 14px
+      rgba(
+        139,
+        108,
+        255,
+        0.18
+      );
+}
+
+
+.monthOptionActive:hover {
+  border-color: #8b6cff;
+
+  background: #8b6cff;
+
+  color: #ffffff;
+}
+
+
+.monthOptionCurrent {
+  font-weight: 600;
+}
+
+
+.monthOptionCurrent:not(
+    .monthOptionActive
+  ) {
+  border-color:
+    rgba(
+      255,
+      191,
+      0,
+      0.55
+    );
+
+  background: #fffaf0;
+}
+
+
+.monthOption i {
+  position: absolute;
+
+  top: 5px;
+  right: 6px;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: #ffbf00;
+}
+
+
+.monthOptionActive i {
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   DROPDOWN FOOTER
+========================================================= */
+
+.monthDropdownFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 12px;
+
+  padding: 9px 2px 0;
+
+  border-top:
+    1px solid
+    #f0edf2;
+
+  color: #948b9b;
+
+  font-size: 9px;
+  line-height: 1.4;
+
+  font-weight: 400;
+}
+
+
+.monthDropdownFooter svg {
+  flex-shrink: 0;
+
+  color: #8b6cff;
+}
+
+
+/* =========================================================
+   KPI CARDS
+========================================================= */
+
+.statsGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 13px;
+
+  margin-bottom: 14px;
+}
+
+
+.statCard {
+  position: relative;
+
+  min-height: 136px;
+
+  padding: 17px 18px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(
+      45,
+      35,
+      72,
+      0.055
+    );
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 8px 25px
+      rgba(
+        61,
+        48,
+        94,
+        0.055
+      );
+}
+
+
+.statCard::after {
+  content: "";
+
+  position: absolute;
+
+  right: -24px;
+  bottom: -32px;
+
+  width: 90px;
+  height: 90px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.32
+    );
+}
+
+
+.statCardYellow {
+  background: #fff4cf;
+}
+
+
+.statCardPurple {
+  background: #ede9ff;
+}
+
+
+.statCardPink {
+  background: #ffe5ef;
+}
+
+
+.statCardCream {
+  background: #f7f1e5;
+}
+
+
+.statIcon {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  margin-bottom: 13px;
+
+  border-radius: 11px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.68
+    );
+
+  color: #2d2348;
+}
+
+
+.goalStatIcon {
+  color: #7358df;
+}
+
+
+.statLabel {
+  position: relative;
+  z-index: 2;
+
+  margin-bottom: 4px;
+
+  color: #736a82;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.9px;
+}
+
+
+.statValue {
+  position: relative;
+  z-index: 2;
+
+  display: block;
+
+  color: #2d2348;
+
+  font-size: 23px;
+  line-height: 1.1;
+
+  font-weight: 650;
+
+  letter-spacing: -0.55px;
+}
+
+
+.statHint {
+  position: relative;
+  z-index: 2;
+
+  display: block;
+
+  margin-top: 5px;
+
+  color: #81788e;
+
+  font-size: 10px;
+  line-height: 1.4;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.mainGrid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(320px, 0.65fr);
+
+  gap: 14px;
+
+  margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card {
+  padding: 19px;
+
+  border:
+    1px solid
+    rgba(
+      45,
+      35,
+      72,
+      0.055
+    );
+
+  border-radius: 21px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 8px 28px
+      rgba(
+        61,
+        48,
+        94,
+        0.055
+      );
+}
+
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+
+.cardHeader h2 {
+  margin: 0;
+
+  color: #2d2348;
+
+  font-size: 16px;
+  line-height: 1.2;
+
+  font-weight: 600;
+
+  letter-spacing: -0.15px;
+}
+
+
+.cardEyebrow {
+  margin-bottom: 5px;
+
+  font-size: 8px;
+  font-weight: 600;
+}
+
+
+.trendIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 33px;
+  height: 33px;
+
+  border-radius: 11px;
+
+  background: #fff4cf;
+
+  color: #8b6cff;
+}
+
+
+/* =========================================================
+   SPENDING HERO
+========================================================= */
+
+.spendingHero {
+  display: flex;
+  align-items: baseline;
+
+  gap: 9px;
+
+  margin: 22px 0 16px;
+}
+
+
+.spendingHero strong {
+  color: #2d2348;
+
+  font-size: 29px;
+  line-height: 1;
+
+  font-weight: 650;
+
+  letter-spacing: -0.85px;
+}
+
+
+.spendingHero span {
+  color: #8a8193;
+
+  font-size: 10px;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   DONUT SPENDING STORY
+========================================================= */
+
+.spendingChartArea {
+  display: flex;
+  align-items: center;
+
+  gap: 42px;
+
+  min-height: 190px;
+
+  padding: 4px;
+}
+
+
+.donutWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 178px;
+}
+
+
+.donutChart {
+  position: relative;
+
+  width: 178px;
+  height: 178px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  transform:
+    rotate(-90deg);
+
+  box-shadow:
+    0 8px 20px
+      rgba(
+        61,
+        48,
+        94,
+        0.08
+      );
+}
+
+
+.donutChart::after {
+  content: "";
+
+  position: absolute;
+
+  width: 116px;
+  height: 116px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+}
+
+
+.donutInner {
+  position: relative;
+
+  z-index: 2;
+
+  width: 116px;
+  height: 116px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  transform:
+    rotate(90deg);
+}
+
+
+.donutInner span {
+  margin-bottom: 5px;
+
+  color: #958d9e;
+
+  font-size: 9px;
+  line-height: 1.2;
+
+  font-weight: 500;
+}
+
+
+.donutInner strong {
+  color: #211936;
+
+  font-size: 19px;
+  line-height: 1.1;
+
+  font-weight: 650;
+
+  letter-spacing: -0.5px;
+}
+
+
+.donutInner small {
+  margin-top: 5px;
+
+  color: #aaa2af;
+
+  font-size: 8px;
+  line-height: 1.2;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   CATEGORY LEGEND
+========================================================= */
+
+.categoryLegend {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  min-width: 0;
+}
+
+
+.legendRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  min-height: 36px;
+
+  padding: 5px 0;
+
+  border-bottom:
+    1px solid
+    #f1edf3;
+}
+
+
+.legendRow:last-child {
+  border-bottom: none;
+}
+
+
+.legendInfo {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  min-width: 0;
+}
+
+
+.legendInfo > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+
+  min-width: 0;
+}
+
+
+.legendInfo strong {
+  overflow: hidden;
+
+  color: #383047;
+
+  font-size: 11px;
+  line-height: 1.2;
+
+  font-weight: 550;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+.legendInfo span:not(
+    .legendDot
+  ) {
+  color: #99919e;
+
+  font-size: 9px;
+  line-height: 1.2;
+
+  font-weight: 400;
+}
+
+
+.legendDot {
+  width: 9px;
+  height: 9px;
+
+  flex: 0 0 9px;
+
+  border-radius: 50%;
+}
+
+
+.legendPercentage {
+  flex-shrink: 0;
+
+  color: #51475f;
+
+  font-size: 10px;
+  line-height: 1;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   BUDGET
+========================================================= */
+
+.budgetNumbers {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 10px;
+
+  margin: 24px 0 19px;
+}
+
+
+.budgetNumbers div {
+  padding: 12px;
+
+  border-radius: 13px;
+
+  background: #faf8f3;
+}
+
+
+.budgetNumbers span,
+.budgetNumbers strong {
+  display: block;
+}
+
+
+.budgetNumbers span {
+  margin-bottom: 4px;
+
+  color: #8c8491;
+
+  font-size: 10px;
+
+  font-weight: 400;
+}
+
+
+.budgetNumbers strong {
+  color: #33294b;
+
+  font-size: 15px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progressTrack {
+  width: 100%;
+  height: 9px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #eeeaf1;
+}
+
+
+.progressFill,
+.goalProgressFill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  transition:
+    width 0.45s ease;
+}
+
+
+.progressFill {
+  background:
+    linear-gradient(
+      90deg,
+      #ffbf00 0%,
+      #ffbf00 45%,
+      #8b6cff 100%
+    );
+}
+
+
+.goalProgressFill {
+  background:
+    linear-gradient(
+      90deg,
+      #ff4f91,
+      #8b6cff
+    );
+}
+
+
+.progressFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 8px;
+
+  color: #8c8491;
+
+  font-size: 9px;
+  line-height: 1.4;
+
+  font-weight: 450;
+}
+
+
+/* =========================================================
+   LOWER GRID
+========================================================= */
+
+.lowerGrid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(320px, 0.65fr);
+
+  gap: 14px;
+}
+
+
+.sideStack {
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.viewButton,
+.textButton {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 4px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #755fe0;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 9px;
+
+  font-weight: 600;
+}
+
+
+.viewButton:hover,
+.textButton:hover {
+  color: #523bb8;
+}
+
+
+.textButton {
+  margin-top: 17px;
+
+  padding: 0;
+}
+
+
+/* =========================================================
+   TRANSACTIONS
+========================================================= */
+
+.transactionList {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 15px;
+}
+
+
+.transactionRow {
+  display: grid;
+
+  grid-template-columns:
+    38px
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 11px 0;
+
+  border-bottom:
+    1px solid
+    #f1edf3;
+}
+
+
+.transactionRow:last-child {
+  border-bottom: none;
+}
+
+
+.transactionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 11px;
+
+  background: #faf6e9;
+
+  font-size: 15px;
+}
+
+
+.transactionDetails {
+  min-width: 0;
+}
+
+
+.transactionDetails strong,
+.transactionDetails span {
+  display: block;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+.transactionDetails strong {
+  color: #383047;
+
+  font-size: 10px;
+
+  font-weight: 550;
+}
+
+
+.transactionDetails span {
+  margin-top: 3px;
+
+  color: #918896;
+
+  font-size: 9px;
+  line-height: 1.45;
+
+  font-weight: 400;
+}
+
+
+.transactionRight {
+  text-align: right;
+}
+
+
+.transactionRight strong,
+.transactionRight span {
+  display: block;
+}
+
+
+.transactionRight strong {
+  color: #3b304c;
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+
+.transactionRight span {
+  margin-top: 3px;
+
+  color: #9b929f;
+
+  font-size: 9px;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   GOAL CARD
+========================================================= */
+
+.goalCard {
+  padding: 19px;
+
+  border:
+    1px solid
+    rgba(
+      139,
+      108,
+      255,
+      0.13
+    );
+
+  border-radius: 21px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff8df 0%,
+      #fffdf7 56%,
+      #f1edff 100%
+    );
+
+  box-shadow:
+    0 8px 28px
+      rgba(
+        61,
+        48,
+        94,
+        0.055
+      );
+}
+
+
+.goalIconLarge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 11px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.72
+    );
+
+  color: #7358df;
+}
+
+
+.goalAmounts {
+  display: flex;
+  align-items: baseline;
+
+  gap: 6px;
+
+  margin: 20px 0 12px;
+}
+
+
+.goalAmounts strong {
+  color: #2d2348;
+
+  font-size: 22px;
+
+  font-weight: 650;
+}
+
+
+.goalAmounts span {
+  color: #918897;
+
+  font-size: 10px;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   INSIGHT
+========================================================= */
+
+.insightCard {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 11px;
+
+  padding: 16px 17px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      79,
+      145,
+      0.12
+    );
+
+  border-radius: 19px;
+
+  background: #fff0f5;
+}
+
+
+.insightIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 31px;
+  height: 31px;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #ff4f91;
+}
+
+
+.insightCard strong {
+  display: block;
+
+  color: #3c304c;
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+
+.insightCard p {
+  margin: 5px 0 0;
+
+  color: #7f7181;
+
+  font-size: 10px;
+
+  line-height: 1.55;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.emptyInline {
+  padding: 25px 10px;
+
+  text-align: center;
+
+  color: #918896;
+
+  font-size: 10px;
+
+  line-height: 1.55;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   FOOTER
+   NO HORIZONTAL COLOR BAR
+========================================================= */
+
+.footer {
+  position: relative;
+
+  width: 100%;
+
+  margin-top: 28px;
+
+  padding: 0 4px 18px;
+
+  background: transparent;
+}
+
+
+.footerContent {
+  width: 100%;
+
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  padding: 12px 0 0;
+}
+
+
+.footerBrand {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  white-space: nowrap;
+}
+
+
+.footerBrand strong {
+  color: #171329;
+
+  font-size: 13px;
+  line-height: 1;
+
+  font-weight: 700;
+
+  letter-spacing: -0.3px;
+}
+
+
+.footerBrand span {
+  color: #8f8897;
+
+  font-size: 10px;
+  line-height: 1.4;
+
+  font-weight: 400;
+}
+
+
+.footerMeta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 18px;
+
+  color: #99919e;
+
+  font-size: 10px;
+  line-height: 1.4;
+
+  font-weight: 400;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loadingState,
+.errorState {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 420px;
+
+  padding: 40px;
+
+  text-align: center;
+}
+
+
+.loadingIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  height: 50px;
+
+  margin-bottom: 15px;
+
+  border-radius: 16px;
+
+  background: #fff4cf;
+
+  font-size: 23px;
+}
+
+
+.loadingState strong,
+.errorState strong {
+  color: #3b304d;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+.loadingState span,
+.errorState span {
+  margin-top: 5px;
+
+  color: #8d8492;
+
+  font-size: 11px;
+
+  font-weight: 400;
+}
+
+
+.errorState {
+  margin: 20px;
+
+  min-height: 220px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      79,
+      145,
+      0.15
+    );
+
+  border-radius: 20px;
+
+  background: #fff0f5;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+  .statsGrid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .mainGrid,
+  .lowerGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .content {
+    width: calc(100% - 24px);
+  }
+
+
+  .hero {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .monthPicker {
+    width: 100%;
+  }
+
+
+  .monthBadge {
+    align-self: flex-start;
+  }
+
+
+  .monthDropdown {
+    left: 0;
+    right: auto;
+
+    width: min(
+      315px,
+      calc(100vw - 32px)
+    );
+  }
+
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .statCard {
+    min-height: 125px;
+  }
+
+
+  .card,
+  .goalCard {
+    padding: 16px;
+
+    border-radius: 18px;
+  }
+
+
+  .spendingHero {
+    flex-direction: column;
+
+    gap: 3px;
+  }
+
+
+  .spendingChartArea {
+    gap: 24px;
+  }
+
+
+  .donutWrapper {
+    flex-basis: 145px;
+  }
+
+
+  .donutChart {
+    width: 145px;
+    height: 145px;
+  }
+
+
+  .donutChart::after {
+    width: 96px;
+    height: 96px;
+  }
+
+
+  .donutInner {
+    width: 96px;
+    height: 96px;
+  }
+
+
+  .donutInner strong {
+    font-size: 16px;
+  }
+
+
+  .transactionRow {
+    grid-template-columns:
+      36px
+      minmax(0, 1fr)
+      auto;
+  }
+
+
+  .footerContent {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+
+  .footerBrand {
+    flex-wrap: wrap;
+
+    white-space: normal;
+  }
+
+
+  .footerMeta {
+    justify-content: flex-start;
+
+    flex-wrap: wrap;
+
+    gap: 8px 14px;
+
+    white-space: normal;
+  }
+
+
+  .doodleTopRight {
+    right: -35px;
+  }
+
+
+  .doodleLeft {
+    left: -35px;
+  }
+
+
+  .doodleBottomLeft {
+    left: -55px;
+  }
+
+
+  .doodleBottomRight {
+    right: -55px;
+  }
+
+
+  .yearDropdown {
+    left: 42px;
+    right: 42px;
+  }
+}
+
+
+@media (max-width: 520px) {
+  .spendingChartArea {
+    flex-direction: column;
+
+    align-items: center;
+  }
+
+
+  .donutWrapper {
+    flex-basis: auto;
+  }
+
+
+  .categoryLegend {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 420px) {
+  .monthDropdown {
+    width: calc(
+      100vw - 24px
+    );
+  }
+
+
+  .monthGrid {
+    gap: 5px;
+  }
+
+
+  .monthOption {
+    min-height: 36px;
+  }
+
+
+  .yearDropdown {
+    left: 38px;
+    right: 38px;
+  }
+}
