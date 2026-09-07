@@ -29,8 +29,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    "expense-tracker-alb-1355521908.eu-north-1.elb.amazonaws.com",
 ]
-
 
 # =====================================================
 # APPLICATION DEFINITION
