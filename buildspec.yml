@@ -15,15 +15,26 @@ phases:
   build:
     commands:
       - echo "Build started on $(date)"
+
       - echo "Building backend Docker image..."
       - docker build -t expense-tracker-backend:latest ./backend
       - docker tag expense-tracker-backend:latest 523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-backend:latest
+
+      - echo "Building frontend Docker image..."
+      - docker build -t expense-tracker-frontend:latest ./frontend
+      - docker tag expense-tracker-frontend:latest 523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-frontend:latest
 
   post_build:
     commands:
       - echo "Pushing backend image to ECR..."
       - docker push 523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-backend:latest
-      - printf '[{"name":"backend","imageUri":"523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-backend:latest"}]' > imagedefinitions.json
+
+      - echo "Pushing frontend image to ECR..."
+      - docker push 523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-frontend:latest
+
+      - echo "Creating imagedefinitions.json..."
+      - printf '[{"name":"backend","imageUri":"523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-backend:latest"},{"name":"frontend","imageUri":"523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-frontend:latest"}]' > imagedefinitions.json
+
       - echo "Build completed on $(date)"
 
 artifacts:
