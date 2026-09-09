@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   UserRound,
@@ -30,8 +30,32 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const [isGenderOpen, setIsGenderOpen] = useState(false);
+  const genderDropdownRef = useRef(null);
+
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+  /* ================================
+     CLOSE GENDER DROPDOWN OUTSIDE
+  ================================= */
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        genderDropdownRef.current &&
+        !genderDropdownRef.current.contains(event.target)
+      ) {
+        setIsGenderOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   /* ================================
      PASSWORD REQUIREMENTS
@@ -61,19 +85,14 @@ const Register = () => {
     switch (score) {
       case 1:
         return "Very Weak";
-
       case 2:
         return "Weak";
-
       case 3:
         return "Moderate";
-
       case 4:
         return "Strong";
-
       case 5:
         return "Very Strong";
-
       default:
         return "";
     }
@@ -91,6 +110,36 @@ const Register = () => {
 
     setErrorMessage("");
     setSuccessMessage("");
+  };
+
+  /* ================================
+     HANDLE GENDER
+  ================================= */
+
+  const handleGenderSelect = (gender) => {
+    setFormData({
+      ...formData,
+      gender,
+    });
+
+    setIsGenderOpen(false);
+    setErrorMessage("");
+    setSuccessMessage("");
+  };
+
+  const getGenderLabel = () => {
+    switch (formData.gender) {
+      case "male":
+        return "Male";
+      case "female":
+        return "Female";
+      case "other":
+        return "Other";
+      case "prefer_not_to_say":
+        return "Prefer not to say";
+      default:
+        return "Select your gender";
+    }
   };
 
   /* ================================
@@ -123,7 +172,6 @@ const Register = () => {
       setErrorMessage(
         "Password must contain 8+ characters, uppercase, lowercase, a number, and a symbol."
       );
-
       return;
     }
 
@@ -131,7 +179,6 @@ const Register = () => {
 
     if (formData.password !== formData.confirm_password) {
       setErrorMessage("Passwords do not match.");
-
       return;
     }
 
@@ -318,44 +365,156 @@ const Register = () => {
                   Gender
                 </label>
 
-                <div className="input-icon-wrapper">
+                <div
+                  className={`gender-dropdown ${
+                    isGenderOpen ? "open" : ""
+                  }`}
+                  ref={genderDropdownRef}
+                >
 
-                  <UsersRound
-                    className="input-icon"
-                    size={18}
-                    strokeWidth={1.8}
-                  />
-
-                  <select
-                    className="auth-input with-icon gender-select"
-                    id="gender"
-                    name="gender"
-                    value={formData.gender}
-                    onChange={handleChange}
-                    required
+                  <button
+                    type="button"
+                    className="gender-dropdown-trigger"
+                    onClick={() =>
+                      setIsGenderOpen(!isGenderOpen)
+                    }
+                    aria-haspopup="listbox"
+                    aria-expanded={isGenderOpen}
+                    aria-label="Select your gender"
                   >
-                    <option value="" disabled>
-                      Select your gender
-                    </option>
 
-                    <option value="male">
-                      Male
-                    </option>
+                    <UsersRound
+                      className="input-icon"
+                      size={18}
+                      strokeWidth={1.8}
+                    />
 
-                    <option value="female">
-                      Female
-                    </option>
+                    <span
+                      className={
+                        formData.gender
+                          ? "gender-selected"
+                          : "gender-placeholder"
+                      }
+                    >
+                      {getGenderLabel()}
+                    </span>
 
-                    <option value="other">
-                      Other
-                    </option>
+                    <svg
+                      className="gender-chevron"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M6 9L12 15L18 9"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
 
-                    <option value="prefer_not_to_say">
-                      Prefer not to say
-                    </option>
-                  </select>
+                  </button>
+
+                  {isGenderOpen && (
+                    <div
+                      className="gender-dropdown-menu"
+                      role="listbox"
+                    >
+
+                      <button
+                        type="button"
+                        className={`gender-option ${
+                          formData.gender === "male"
+                            ? "selected"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          handleGenderSelect("male")
+                        }
+                        role="option"
+                        aria-selected={
+                          formData.gender === "male"
+                        }
+                      >
+                        Male
+                      </button>
+
+                      <button
+                        type="button"
+                        className={`gender-option ${
+                          formData.gender === "female"
+                            ? "selected"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          handleGenderSelect("female")
+                        }
+                        role="option"
+                        aria-selected={
+                          formData.gender === "female"
+                        }
+                      >
+                        Female
+                      </button>
+
+                      <button
+                        type="button"
+                        className={`gender-option ${
+                          formData.gender === "other"
+                            ? "selected"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          handleGenderSelect("other")
+                        }
+                        role="option"
+                        aria-selected={
+                          formData.gender === "other"
+                        }
+                      >
+                        Other
+                      </button>
+
+                      <button
+                        type="button"
+                        className={`gender-option ${
+                          formData.gender ===
+                          "prefer_not_to_say"
+                            ? "selected"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          handleGenderSelect(
+                            "prefer_not_to_say"
+                          )
+                        }
+                        role="option"
+                        aria-selected={
+                          formData.gender ===
+                          "prefer_not_to_say"
+                        }
+                      >
+                        Prefer not to say
+                      </button>
+
+                    </div>
+                  )}
 
                 </div>
+
+                {/* Hidden field preserves form semantics */}
+
+                <input
+                  type="hidden"
+                  id="gender"
+                  name="gender"
+                  value={formData.gender}
+                  required
+                  readOnly
+                />
 
               </div>
 
