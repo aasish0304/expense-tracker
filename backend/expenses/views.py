@@ -1,3 +1,5 @@
+from django.db.models import Q, Sum, F, Value, DecimalField
+from django.db.models.functions import Coalesce
 from django.utils import timezone
 
 from rest_framework import generics
@@ -128,6 +130,24 @@ class BudgetListCreateView(
             user=self.request.user
         ).select_related(
             "category"
+        ).annotate(
+            spent_amount=Coalesce(
+                Sum(
+                    "category__expenses__amount",
+                    filter=Q(
+                        category__expenses__user=F("user"),
+                        category__expenses__date__year=F("year"),
+                        category__expenses__date__month=F("month"),
+                    ),
+                ),
+                Value(
+                    0,
+                    output_field=DecimalField(
+                        max_digits=12,
+                        decimal_places=2,
+                    ),
+                ),
+            )
         )
 
         current_date = timezone.localdate()

@@ -229,16 +229,11 @@ class BudgetSerializer(serializers.ModelSerializer):
 
     def _get_spent(self, obj):
 
-        total = Expense.objects.filter(
-            user=obj.user,
-            category=obj.category,
-            date__year=obj.year,
-            date__month=obj.month,
-        ).aggregate(
-            total=Sum("amount")
-        )["total"]
-
-        return total or Decimal("0.00")
+        return getattr(
+            obj,
+            "spent_amount",
+            Decimal("0.00"),
+        )
 
     def get_spent(self, obj):
 
@@ -282,7 +277,6 @@ class BudgetSerializer(serializers.ModelSerializer):
             return "Warning"
 
         return "Healthy"
-
 
 # ============================================================
 # GOAL
