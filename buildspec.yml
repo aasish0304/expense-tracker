@@ -33,7 +33,7 @@ phases:
       - docker push 523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-frontend:latest
 
       - echo "Creating imagedefinitions.json..."
-      - printf '[{"name":"backend","imageUri":"523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-backend:latest"},{"name":"frontend","imageUri":"523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-frontend:latest"}]' > imagedefinitions.json
+      - printf '[{"name":"backend","imageUri":"523741416022.dkr.ecr.eu-north-1.amazonaws.com/expense-tracker-backend:latest"}]' > imagedefinitions.json
 
       - echo "Build completed on $(date)"
 
