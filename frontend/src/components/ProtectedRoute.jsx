@@ -1,9 +1,8 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import api from "../services/api";
+import axios from "axios";
 import { isTokenValid } from "../services/authService";
-
 
 const ProtectedRoute = ({ adminOnly = false }) => {
 
@@ -30,8 +29,15 @@ const ProtectedRoute = ({ adminOnly = false }) => {
 
       try {
 
-        const response = await api.get(
-          "/auth/profile/"
+        const token = localStorage.getItem("access");
+
+        const response = await axios.get(
+          "/api/auth/profile/",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
 
         /*
