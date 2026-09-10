@@ -15,7 +15,7 @@ import {
 import api from "../services/api";
 
 import styles from "./Admin.module.css";
-
+import axios from "axios";
 
 const RoleDropdown = ({
   user,
@@ -237,9 +237,16 @@ const Admin = () => {
       setLoading(true);
       setError("");
 
+      const token = localStorage.getItem("access");
+
       const response =
-        await api.get(
-          "/auth/admin/users/"
+        await axios.get(
+          "/api/auth/admin/users/",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
 
       setUsers(
@@ -347,10 +354,17 @@ const Admin = () => {
         setError("");
         setSuccessMessage("");
 
+        const token = localStorage.getItem("access");
+
         const response =
-          await api.patch(
-            `/auth/admin/users/${user.id}/`,
-            changes
+          await axios.patch(
+            `/api/auth/admin/users/${user.id}/`,
+            changes,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
           );
 
         const updatedUser =
