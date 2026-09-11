@@ -1281,3 +1281,84 @@
   }
 
 }
+/* =========================================================
+   Notification popover only
+   ========================================================= */
+
+.notification-dropdown {
+  background: #ffffff !important;
+  border: 1px solid #e8e4dc !important;
+  box-shadow: 0 14px 35px rgba(45, 39, 31, 0.14) !important;
+}
+
+/* Header of notification box */
+.notification-dropdown .notification-header {
+  background: #ffffff !important;
+  border-bottom: 1px solid #eeeae4 !important;
+}
+
+/* Header title and subtitle */
+.notification-dropdown .notification-header h3,
+.notification-dropdown .notification-header p {
+  color: #292522 !important;
+}
+
+/* Small icon/button in the top-right of the notification box */
+.notification-dropdown .notification-header button,
+.notification-dropdown .notification-header .notification-icon {
+  background: #f1edff !important;
+  color: #7464c5 !important;
+  border: none !important;
+}
+
+/* Notification rows */
+.notification-dropdown .notification-item {
+  background: #ffffff !important;
+  border-bottom: 1px solid #eeeae4 !important;
+}
+
+.notification-dropdown .notification-item:hover {
+  background: #faf9ff !important;
+}
+
+/* Notification row icons */
+.notification-dropdown .notification-item .notification-item-icon,
+.notification-dropdown .notification-item .icon-box {
+  background: #f1edff !important;
+  color: #7464c5 !important;
+}
+
+/* Notification text */
+.notification-dropdown .notification-item h4,
+.notification-dropdown .notification-item strong {
+  color: #302b38 !important;
+}
+
+.notification-dropdown .notification-item p,
+.notification-dropdown .notification-item span {
+  color: #77717d !important;
+}
+
+/* Right arrow */
+.notification-dropdown .notification-item svg {
+  color: #aaa4b0 !important;
+}
+
+/* Bottom action button */
+.notification-dropdown .view-all-notifications,
+.notification-dropdown .notification-footer button {
+  background: #7464c5 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+.notification-dropdown .view-all-notifications:hover,
+.notification-dropdown .notification-footer button:hover {
+  background: #6253b5 !important;
+}
+
+/* Remove yellow sparkle beside the popover, if present */
+.notification-dropdown + .notification-sparkle,
+.notification-sparkle {
+  display: none !important;
+}

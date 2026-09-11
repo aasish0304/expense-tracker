@@ -2224,3 +2224,8 @@
   }
 
 }
+/* Remove only the yellow notification count box */
+.notificationPopoverBadge,
+.notificationCount {
+  display: none !important;
+}

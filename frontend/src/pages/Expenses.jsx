@@ -1258,11 +1258,31 @@ if (categories.length === 0 && expenseData.length > 0) {
 
       } else {
 
-        await api.post(
-          "/",
-          payload
-        );
+        const expenseResponse = await api.post(
+  "/",
+  payload
+);
 
+const createdExpenseId = expenseResponse.data.id;
+        try {
+          await fetch(
+            "https://0tf58lq5ag.execute-api.eu-north-1.amazonaws.com/notifications/budget-check",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                expense_id: createdExpenseId,
+              }),
+            }
+          );
+        } catch (notificationError) {
+          console.error(
+            "Budget notification check failed:",
+            notificationError
+          );
+        }
         // Milestones apply only to newly created expenses.
         // Editing an existing expense does not trigger one.
         showMilestoneToast(expenses.length + 1);
